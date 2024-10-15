@@ -27,8 +27,9 @@
 		00DD6C922CBBFA4500E523B1 /* Exceptions for "HelloSwiftUI" folder in "HelloSwftUITests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Apps/OnThisDay/OnThisDay.swift,
 				Foundation/FileManager/FileManagerDemo.swift,
+				SubApps/OnThisDay/OnThisDay.swift,
+				SubApps/OnThisDay/OnThisDayView.swift,
 			);
 			target = 00DD6C862CBBF8E000E523B1 /* HelloSwftUITests */;
 		};
