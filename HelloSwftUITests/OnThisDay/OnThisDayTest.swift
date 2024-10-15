@@ -10,10 +10,11 @@ import Testing
 
 struct OnThisDayTest {
 
-    @Test func canDecodeFromData() async throws {
+    @Test func testDecodingFromData() async throws {
 
-        let data: Data! = onThisDayFixture.data(using: .utf8)
-        let day = try OnThisDay.decodeFrom(data: data)
+        let data = Data(onThisDayFixture.utf8)
+
+        let day = try OnThisDay.decode(from: data)
         #expect(day.info == "OnThisDay API")
         #expect(day.date == "October_14")
 
