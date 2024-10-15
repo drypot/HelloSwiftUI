@@ -66,6 +66,14 @@ struct OnThisDay: Decodable {
         }
     }
 
+    // enum 밸류 루프 돌리려면 CaseIterable 필요하다.
+
+    enum EventType: String, CaseIterable {
+        case events = "Events"
+        case births = "Births"
+        case deaths = "Deaths"
+    }
+    
     struct Event: Decodable, Identifiable {
         let id = UUID()
         let text: String

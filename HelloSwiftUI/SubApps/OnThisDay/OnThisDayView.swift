@@ -8,9 +8,14 @@
 import SwiftUI
 
 struct OnThisDayView: View {
+
+    typealias EventType = OnThisDay.EventType
+
+    @State private var eventType: EventType? = .events
+
     var body: some View {
         NavigationView {
-            Text("Fake sidebar")
+            SidebarView(selection: $eventType)
             Text("Fake details")
         }
         .frame(
