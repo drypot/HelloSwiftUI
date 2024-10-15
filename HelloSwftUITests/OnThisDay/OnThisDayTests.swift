@@ -1,5 +1,5 @@
 //
-//  OnThisDayTest.swift
+//  OnThisDayTests.swift
 //  HelloSwftUITests
 //
 //  Created by Kyuhyun Park on 10/13/24.
@@ -8,7 +8,7 @@
 import Foundation
 import Testing
 
-struct OnThisDayTest {
+struct OnThisDayTests {
 
     @Test func testDecodingFromData() async throws {
 

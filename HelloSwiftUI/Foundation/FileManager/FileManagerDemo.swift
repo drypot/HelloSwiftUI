@@ -7,19 +7,13 @@
 
 import Foundation
 
-func makeDownloadURL(fileName: String) -> URL? {
-    let fileManager = FileManager.default
-    do {
-        let downloadsFolder = try fileManager.url(
-            for: .downloadsDirectory,
-            in: .userDomainMask,
-            appropriateFor: nil,
-            create: true)
-        let jsonFile = downloadsFolder.appendingPathComponent(fileName)
-        return jsonFile
-    } catch {
-        print(error)
-        return nil
-    }
+func makeDownloadURL(fileName: String) throws -> URL? {
+    let downloadsURL = try FileManager.default.url(
+        for: .downloadsDirectory,
+        in: .userDomainMask,
+        appropriateFor: nil,
+        create: true
+    )
+    return downloadsURL.appendingPathComponent(fileName)
 }
 
