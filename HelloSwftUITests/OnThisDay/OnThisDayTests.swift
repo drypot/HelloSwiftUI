@@ -12,7 +12,7 @@ struct OnThisDayTests {
 
     @Test func testDecodingFromData() async throws {
 
-        let data = Data(onThisDayFixture.utf8)
+        let data = try! Fixture.data(basePath: #file, relativePath: "Fixtures/OnThisDayFixture.json")
 
         let day = try OnThisDay.decode(from: data)
         #expect(day.info == "OnThisDay API")
