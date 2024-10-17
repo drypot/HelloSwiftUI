@@ -22,6 +22,7 @@ struct HelloSwiftUIApp: App {
 
         DemoWindowGroup { NavigationViewDemoView() }
 
+        DemoWindowGroup { StateObjectDemoView() }
         DemoWindowGroup { EnvironmentObjectDemoView() }
 
         DemoWindowGroup { TaskDemoView() }
