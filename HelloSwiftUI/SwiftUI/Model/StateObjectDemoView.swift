@@ -26,18 +26,20 @@ struct StateObjectDemoView: View {
 
             GroupBox {
                 Text("State")
-                    .font(.title2)
-                HStack {
+                    .font(.title3)
+                    .padding(4)
+
+                VStack {
                     Button("Increment") {
                         counter += 1
                     }
                     Text("\(counter)")
-                }
-                HStack {
-                    TextField("Enter your name", text: $name)
+
+                    TextField("name", text: $name)
                         .textFieldStyle(.roundedBorder)
                     Text(name.isEmpty ? "---" : name)
                 }
+                .padding(4)
             }
 
             BindingSubView(counter: $counter, name: $name)
@@ -46,22 +48,25 @@ struct StateObjectDemoView: View {
 
             GroupBox {
                 Text("StateObject")
-                    .font(.title2)
-                HStack {
+                    .font(.title3)
+                    .padding(4)
+
+                VStack {
                     Button("Increment") {
                         model.counter += 1
                     }
                     Text("\(model.counter)")
-                }
-                HStack {
-                    TextField("Enter your name", text: $model.name)
+
+                    TextField("name", text: $model.name)
                         .textFieldStyle(.roundedBorder)
                     Text(model.name.isEmpty ? "---" : model.name)
                 }
+                .padding(4)
             }
 
             ObservedSubView(model: model)
         }
+        .frame(minWidth: 330, minHeight: 650, alignment: .top)
         .padding()
     }
 
@@ -72,18 +77,20 @@ struct StateObjectDemoView: View {
         var body: some View {
             GroupBox {
                 Text("Binding SubView")
-                    .font(.title2)
-                HStack {
+                    .font(.title3)
+                    .padding(4)
+
+                VStack {
                     Button("Increment") {
                         counter += 1
                     }
                     Text("\(counter)")
-                }
-                HStack {
-                    TextField("Enter your name", text: $name)
+
+                    TextField("name", text: $name)
                         .textFieldStyle(.roundedBorder)
                     Text(name.isEmpty ? "---" : name)
                 }
+                .padding(4)
             }
         }
     }
@@ -94,18 +101,20 @@ struct StateObjectDemoView: View {
         var body: some View {
             GroupBox {
                 Text("ObservedObject SubView")
-                    .font(.title2)
-                HStack {
+                    .font(.title3)
+                    .padding(4)
+
+                VStack {
                     Button("Increment") {
                         model.counter += 1
                     }
                     Text("\(model.counter)")
-                }
-                HStack {
-                    TextField("Enter your name", text: $model.name)
+
+                    TextField("name", text: $model.name)
                         .textFieldStyle(.roundedBorder)
                     Text(model.name.isEmpty ? "---" : model.name)
                 }
+                .padding(4)
             }
         }
     }
