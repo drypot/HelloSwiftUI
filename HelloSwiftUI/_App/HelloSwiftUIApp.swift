@@ -14,12 +14,16 @@ struct HelloSwiftUIApp: App {
             DemoListView()
         }
 
-        DemoWindowGroup { NavigationViewDemoView() }
         DemoWindowGroup { ButtonDemoView() }
         DemoWindowGroup { LinkDemoView() }
         DemoWindowGroup { ForEachDemoView() }
         DemoWindowGroup { ListDemoView() }
         DemoWindowGroup { ListEditDemoView() }
+
+        DemoWindowGroup { NavigationViewDemoView() }
+
+        DemoWindowGroup { EnvironmentObjectDemoView() }
+
         DemoWindowGroup { TaskDemoView() }
         DemoWindowGroup { OnThisDayView() }
     }
