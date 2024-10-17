@@ -8,10 +8,26 @@
 import SwiftUI
 
 struct LinkDemoView: View {
+
+    let list = [
+        ("Open Safari", "https://www.apple.com/safari/"),
+        ("RaySoda", "http://raysoda.com/")
+    ]
+
     var body: some View {
         VStack {
-            Link("Open Safari", destination: URL(string: "https://www.apple.com/safari/")!)
-            Link("RaySoda", destination: URL(string: "http://raysoda.com/")!)
+            ForEach(list, id: \.0) { tuple in
+                let title = tuple.0
+                let url = URL(string: tuple.1)!
+                Link(title, destination: url)
+                    .onHover { inside in
+                        if inside {
+                            NSCursor.pointingHand.push()
+                        } else {
+                            NSCursor.pop()
+                        }
+                    }
+            }
         }
 
     }
