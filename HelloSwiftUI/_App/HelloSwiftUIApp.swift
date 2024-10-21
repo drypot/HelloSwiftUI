@@ -9,78 +9,58 @@ import SwiftUI
 
 @main
 struct HelloSwiftUIApp: App {
+
+    static var demoBuilders = [AnyView]()
+
     var body: some Scene {
-        WindowGroup("SwiftUI Demo List") {
-            DemoListView()
+        WindowGroup("SwiftUI Demo") {
+            DemoList()
         }
 
-        DemoWindowGroup { ButtonDemo() }
-        DemoWindowGroup { LinkDemo() }
+        WindowGroup("WindowGroup Demo", id: "WindowGroup Demo") {
+            Text("WindowGroup Demo")
+        }
 
-        DemoWindowGroup { ForEachDemo() }
-        DemoWindowGroup { ListDemo() }
-        DemoWindowGroup { ListEditDemo() }
-        DemoWindowGroup { GridViewDemo() }
-        DemoWindowGroup { GridViewDividerDemo() }
-
-        DemoWindowGroup { NavigationViewDemo() }
-
-        DemoWindowGroup { StateObjectDemo() }
-        DemoWindowGroup { EnvironmentObjectDemo() }
-
-        DemoWindowGroup { TaskDemo() }
-        DemoWindowGroup { OnThisDayView() }
+        Window("Window Demo", id: "Window Demo") {
+            Text("Window Demo")
+        }
     }
 }
 
-struct DemoListView: View {
+
+struct DemoList: View {
 
     var body: some View {
-        VStack(alignment: .leading) {
-
-//            ForEach(DemoWindowGroupList.contentViewNames.indices, id: \.self) { index in
-//                let typeName = DemoWindowGroupList.contentViewNames[index]
-//                Button(typeName) {
-//                    openWindow(id: typeName)
-//                }
-//            }
-
-            OpenDemoWindow("ButtonDemo")
-            OpenDemoWindow("LinkDemo")
-            Spacer()
-            OpenDemoWindow("ForEachDemo")
-            OpenDemoWindow("ListDemo")
-            OpenDemoWindow("ListEditDemo")
-            OpenDemoWindow("GridViewDemo")
-            OpenDemoWindow("GridViewDividerDemo")
-            Spacer()
-            OpenDemoWindow("NavigationViewDemo")
-            Spacer()
-            OpenDemoWindow("StateObjectDemo")
-            OpenDemoWindow("EnvironmentObjectDemo")
-            Spacer()
-            OpenDemoWindow("TaskDemo")
-            OpenDemoWindow("OnThisDay")
-
-        }
-        .frame(minWidth: 200, alignment: .top)
-        .padding()
-    }
-}
-
-struct OpenDemoWindow: View {
-    @Environment(\.openWindow) private var openWindow
-//    @Environment(\.dismissWindow) private var dismissWindow
-
-    let contentTypeName: String
-
-    init(_ contentTypeName: String) {
-        self.contentTypeName = contentTypeName
-    }
-
-    var body: some View {
-        Button(contentTypeName) {
-            openWindow(id: contentTypeName)
+        NavigationSplitView {
+            List() {
+                Section {
+                    NavigationLink("Button") { ButtonDemo() }
+                    NavigationLink("Link") { LinkDemo() }
+                }
+                Section {
+                    NavigationLink("ForEach") { ForEachDemo() }
+                    NavigationLink("List") { ListDemo() }
+                    NavigationLink("ListEdit") { ListEditDemo() }
+                    NavigationLink("GridView") { GridViewDemo() }
+                    NavigationLink("GridViewDivider") { GridViewDividerDemo() }
+                    NavigationLink("LazyGridView") { LazyGridViewDemo() }
+                }
+                Section {
+                    //NavigationLink("NavigationView") { NavigationViewDemo() }
+                    NavigationLink("Window") { WindowDemo() }
+                }
+                Section {
+                    NavigationLink("StateObject") { StateObjectDemo() }
+                    NavigationLink("EnvironmentObject") { EnvironmentObjectDemo() }
+                }
+                Section {
+                    NavigationLink("Task") { TaskDemo() }
+                    NavigationLink("OnThisDay") { OnThisDayView() }
+                }
+            }
+        } detail: {
+            Text("Choose anything from the sidebar")
         }
     }
+
 }

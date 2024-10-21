@@ -86,7 +86,6 @@ struct GridViewDemo: View {
             }
             .padding()
         }
-        .frame(minHeight: 900)
     }
 }
 

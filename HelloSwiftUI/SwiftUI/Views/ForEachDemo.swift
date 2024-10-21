@@ -26,16 +26,28 @@ struct ForEachDemo: View {
 
     var body: some View {
         HStack(alignment: .top, spacing: 15) {
+
             VStack(alignment: .leading) {
                 ForEach(fruits, id: \.self) { fruit in
                     Text(fruit)
                 }
             }
+            Divider()
+
+            VStack(alignment: .leading) {
+                ForEach(fruits.indices, id: \.self) { index in
+                    Text(fruits[index])
+                }
+            }
+            Divider()
+
             VStack(alignment: .leading, spacing: 10) {
                 ForEach(0..<5) { index in
                     Text("Index: \(index)")
                 }
             }
+            Divider()
+
             VStack(alignment: .leading, spacing: 15) {
                 ForEach(items) { item in
                     Text(item.name)

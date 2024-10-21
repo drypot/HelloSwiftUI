@@ -9,46 +9,34 @@ import SwiftUI
 
 struct NavigationViewDemo: View {
 
-    let fruits = ["Apple", "Banana", "Orange"]
+    let products = ["Product1", "Product2", "Product3"]
 
     var body: some View {
         NavigationView {
-            List(fruits, id: \.self) { fruit in
-                NavigationLink(destination: DetailView(item: fruit)) {
-                    Text(fruit)
+            List(products, id: \.self) { product in
+                NavigationLink(destination: DetailView(product: product)) {
+                    Text(product)
                 }
             }
-            .listStyle(.sidebar)
-            .frame(minWidth: 150)
 
-            DetailView(item: nil)
+            Text("NavigationView is deprecated")
         }
-        .toolbar {
-            ToolbarItem(placement: .navigation) {
-                Button(action: toggleSidebar) {
-                    Image(systemName: "sidebar.left")
-                }
-            }
-        }
-    }
-
-    private func toggleSidebar() {
-        NSApp.keyWindow?.firstResponder?.tryToPerform(#selector(NSSplitViewController.toggleSidebar(_:)), with: nil)
     }
 
     struct DetailView: View {
-        let item: String?
+        let parts = ["Part1", "Part2", "Part3"]
+        let product: String
+
         var body: some View {
-            Group {
-                if let item {
-                    VStack {
-                        Text("Details about \(item)")
+            NavigationView {
+                List(parts, id: \.self) { part in
+                    NavigationLink(destination: Text(part)) {
+                        Text(part)
                     }
-                } else {
-                    Text("Select an item")
                 }
+
+                Text("Select a part")
             }
-            .frame(minWidth: 600, maxHeight: 600)
         }
     }
 }
