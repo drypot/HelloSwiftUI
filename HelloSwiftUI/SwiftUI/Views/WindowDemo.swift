@@ -13,10 +13,10 @@ struct WindowDemo: View {
 //    @Environment(\.dismissWindow) private var dismissWindow
 
     var body: some View {
-        Button("Open WindowGroup") {
+        Button("Open WindowGroup Scene") {
             openWindow(id: "WindowGroup Demo")
         }
-        Button("Open Window") {
+        Button("Open Window Scene") {
             openWindow(id: "Window Demo")
         }
     }

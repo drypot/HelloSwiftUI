@@ -44,6 +44,7 @@ struct DemoList: View {
                     NavigationLink("GridView") { GridViewDemo() }
                     NavigationLink("GridViewDivider") { GridViewDividerDemo() }
                     NavigationLink("LazyGridView") { LazyGridViewDemo() }
+                    NavigationLink("LazyGridView 2") { LazyGridViewDemo2() }
                 }
                 Section {
                     //NavigationLink("NavigationView") { NavigationViewDemo() }
