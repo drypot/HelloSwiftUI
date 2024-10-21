@@ -1,5 +1,5 @@
 //
-//  TaskTestView.swift
+//  TaskDemo.swift
 //  HelloSwiftUI
 //
 //  Created by Kyuhyun Park on 6/6/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TaskDemoView: View {
+struct TaskDemo: View {
 
     @State private var counter = Counter()
 
@@ -48,5 +48,5 @@ fileprivate func someAsync() async {
 }
 
 #Preview {
-    TaskDemoView()
+    TaskDemo()
 }

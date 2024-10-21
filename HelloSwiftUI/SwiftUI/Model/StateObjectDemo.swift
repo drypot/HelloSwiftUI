@@ -1,5 +1,5 @@
 //
-//  StateObjectDemoView.swift
+//  StateObjectDemo.swift
 //  HelloSwiftUI
 //
 //  Created by Kyuhyun Park on 10/17/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct StateObjectDemoView: View {
+struct StateObjectDemo: View {
 
     class Model: ObservableObject {
         @Published var counter = 0
@@ -121,5 +121,5 @@ struct StateObjectDemoView: View {
 }
 
 #Preview {
-    StateObjectDemoView()
+    StateObjectDemo()
 }

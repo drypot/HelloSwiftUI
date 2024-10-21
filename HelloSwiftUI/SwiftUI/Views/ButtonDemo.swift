@@ -1,5 +1,5 @@
 //
-//  ButtonDemoView.swift
+//  ButtonDemo.swift
 //  HelloSwiftUI
 //
 //  Created by Kyuhyun Park on 10/13/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ButtonDemoView: View {
+struct ButtonDemo: View {
     var body: some View {
         VStack(alignment: .leading) {
             Button("Button") {
@@ -62,5 +62,5 @@ struct ButtonDemoView: View {
 }
 
 #Preview {
-    ButtonDemoView()
+    ButtonDemo()
 }

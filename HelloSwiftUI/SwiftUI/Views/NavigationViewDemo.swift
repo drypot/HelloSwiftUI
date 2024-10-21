@@ -1,5 +1,5 @@
 //
-//  NavigationViewDemoView.swift
+//  NavigationViewDemo.swift
 //  HelloSwiftUI
 //
 //  Created by Kyuhyun Park on 10/17/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NavigationViewDemoView: View {
+struct NavigationViewDemo: View {
 
     let fruits = ["Apple", "Banana", "Orange"]
 
@@ -54,5 +54,5 @@ struct NavigationViewDemoView: View {
 }
 
 #Preview {
-    NavigationViewDemoView()
+    NavigationViewDemo()
 }

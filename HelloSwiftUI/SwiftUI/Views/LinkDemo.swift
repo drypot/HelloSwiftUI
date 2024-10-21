@@ -1,5 +1,5 @@
 //
-//  LinkDemoView.swift
+//  LinkDemo.swift
 //  HelloSwiftUI
 //
 //  Created by Kyuhyun Park on 10/17/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LinkDemoView: View {
+struct LinkDemo: View {
 
     let list = [
         ("Open Safari", "https://www.apple.com/safari/"),
@@ -34,5 +34,5 @@ struct LinkDemoView: View {
 }
 
 #Preview {
-    LinkDemoView()
+    LinkDemo()
 }

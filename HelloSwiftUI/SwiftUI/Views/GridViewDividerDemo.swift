@@ -1,5 +1,5 @@
 //
-//  GridViewDemoView.swift
+//  GridViewDividerDemo.swift
 //  HelloSwiftUI
 //
 //  Created by Kyuhyun Park on 10/21/24.
@@ -10,7 +10,7 @@ import SwiftUI
 // https://rohit-13.medium.com/exploring-the-swiftuis-grid-view-lazyvgrid-griditem-and-grid-gridrow-888fca958b0f
 
 
-struct GridViewDividerDemoView: View {
+struct GridViewDividerDemo: View {
     var body: some View {
         VStack {
             Grid {
@@ -59,5 +59,5 @@ struct GridViewDividerDemoView: View {
 }
 
 #Preview {
-    GridViewDemoView()
+    GridViewDemo()
 }

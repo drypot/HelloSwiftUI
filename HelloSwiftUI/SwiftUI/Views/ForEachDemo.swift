@@ -1,5 +1,5 @@
 //
-//  ForEachDemoView.swift
+//  ForEachDemo.swift
 //  HelloSwiftUI
 //
 //  Created by Kyuhyun Park on 10/17/24.
@@ -9,7 +9,7 @@ import SwiftUI
 
 // ForEach allows you to iterate over collections or ranges to create multiple views dynamically.
 
-struct ForEachDemoView: View {
+struct ForEachDemo: View {
 
     let fruits = ["Apple", "Banana", "Orange"]
 
@@ -48,5 +48,5 @@ struct ForEachDemoView: View {
 }
 
 #Preview {
-    ForEachDemoView()
+    ForEachDemo()
 }

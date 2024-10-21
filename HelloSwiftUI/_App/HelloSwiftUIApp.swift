@@ -14,21 +14,21 @@ struct HelloSwiftUIApp: App {
             DemoListView()
         }
 
-        DemoWindowGroup { ButtonDemoView() }
-        DemoWindowGroup { LinkDemoView() }
+        DemoWindowGroup { ButtonDemo() }
+        DemoWindowGroup { LinkDemo() }
 
-        DemoWindowGroup { ForEachDemoView() }
-        DemoWindowGroup { ListDemoView() }
-        DemoWindowGroup { ListEditDemoView() }
-        DemoWindowGroup { GridViewDemoView() }
-        DemoWindowGroup { GridViewDividerDemoView() }
+        DemoWindowGroup { ForEachDemo() }
+        DemoWindowGroup { ListDemo() }
+        DemoWindowGroup { ListEditDemo() }
+        DemoWindowGroup { GridViewDemo() }
+        DemoWindowGroup { GridViewDividerDemo() }
 
-        DemoWindowGroup { NavigationViewDemoView() }
+        DemoWindowGroup { NavigationViewDemo() }
 
-        DemoWindowGroup { StateObjectDemoView() }
-        DemoWindowGroup { EnvironmentObjectDemoView() }
+        DemoWindowGroup { StateObjectDemo() }
+        DemoWindowGroup { EnvironmentObjectDemo() }
 
-        DemoWindowGroup { TaskDemoView() }
+        DemoWindowGroup { TaskDemo() }
         DemoWindowGroup { OnThisDayView() }
     }
 }
@@ -37,35 +37,38 @@ struct DemoListView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
+
 //            ForEach(DemoWindowGroupList.contentViewNames.indices, id: \.self) { index in
 //                let typeName = DemoWindowGroupList.contentViewNames[index]
 //                Button(typeName) {
 //                    openWindow(id: typeName)
 //                }
 //            }
-            OpenDemoButton("ButtonDemoView")
-            OpenDemoButton("LinkDemoView")
+
+            OpenDemoWindow("ButtonDemo")
+            OpenDemoWindow("LinkDemo")
             Spacer()
-            OpenDemoButton("ForEachDemoView")
-            OpenDemoButton("ListDemoView")
-            OpenDemoButton("ListEditDemoView")
-            OpenDemoButton("GridViewDemoView")
-            OpenDemoButton("GridViewDividerDemoView")
+            OpenDemoWindow("ForEachDemo")
+            OpenDemoWindow("ListDemo")
+            OpenDemoWindow("ListEditDemo")
+            OpenDemoWindow("GridViewDemo")
+            OpenDemoWindow("GridViewDividerDemo")
             Spacer()
-            OpenDemoButton("NavigationViewDemoView")
+            OpenDemoWindow("NavigationViewDemo")
             Spacer()
-            OpenDemoButton("StateObjectDemoView")
-            OpenDemoButton("EnvironmentObjectDemoView")
+            OpenDemoWindow("StateObjectDemo")
+            OpenDemoWindow("EnvironmentObjectDemo")
             Spacer()
-            OpenDemoButton("TaskDemoView")
-            OpenDemoButton("OnThisDayView")
+            OpenDemoWindow("TaskDemo")
+            OpenDemoWindow("OnThisDay")
+
         }
         .frame(minWidth: 200, alignment: .top)
         .padding()
     }
 }
 
-struct OpenDemoButton: View {
+struct OpenDemoWindow: View {
     @Environment(\.openWindow) private var openWindow
 //    @Environment(\.dismissWindow) private var dismissWindow
 

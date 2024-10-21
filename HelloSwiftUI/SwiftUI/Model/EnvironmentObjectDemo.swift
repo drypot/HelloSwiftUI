@@ -1,5 +1,5 @@
 //
-//  EnvironmentObjectDemoView.swift
+//  EnvironmentObjectDemo.swift
 //  HelloSwiftUI
 //
 //  Created by Kyuhyun Park on 10/17/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EnvironmentObjectDemoView: View {
+struct EnvironmentObjectDemo: View {
 
     class UserSettings: ObservableObject {
         @Published var username: String = "Unknown"
@@ -37,5 +37,5 @@ struct EnvironmentObjectDemoView: View {
 }
 
 #Preview {
-    EnvironmentObjectDemoView()
+    EnvironmentObjectDemo()
 }

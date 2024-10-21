@@ -1,5 +1,5 @@
 //
-//  ListDemoView.swift
+//  ListDemo.swift
 //  HelloSwiftUI
 //
 //  Created by Kyuhyun Park on 10/17/24.
@@ -9,7 +9,7 @@ import SwiftUI
 
 // List is a view that displays a scrollable list of items arranged in a single column.
 
-struct ListDemoView: View {
+struct ListDemo: View {
 
     let fruits = ["Apple", "Banana", "Orange"]
 
@@ -113,6 +113,6 @@ struct ListDemoView: View {
 }
 
 #Preview {
-    ListDemoView()
+    ListDemo()
 }
 
