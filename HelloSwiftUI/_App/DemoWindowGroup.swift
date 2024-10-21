@@ -8,20 +8,21 @@
 import SwiftUI
 
 struct DemoWindowGroupList {
-    static var typeNames: [String] = []
+    static var contentViewNames: [String] = []
 }
 
 struct DemoWindowGroup<ContentView: View>: Scene {
     let content: ContentView
-    var typeName: String { String(describing: ContentView.self) }
+    let contentViewName: String
 
     init(@ViewBuilder content: () -> ContentView) {
         self.content = content()
-        DemoWindowGroupList.typeNames.append(typeName)
+        self.contentViewName =  String(describing: ContentView.self)
+        DemoWindowGroupList.contentViewNames.append(contentViewName)
     }
 
     var body: some Scene {
-        WindowGroup(typeName, id: typeName) {
+        WindowGroup(contentViewName, id: contentViewName) {
             content
         }
     }
