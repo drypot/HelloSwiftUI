@@ -15,7 +15,7 @@ struct LinkDemo: View {
     ]
 
     var body: some View {
-        VStack {
+        VStack(spacing: 25) {
             ForEach(list, id: \.0) { tuple in
                 let title = tuple.0
                 let url = URL(string: tuple.1)!
@@ -27,6 +27,10 @@ struct LinkDemo: View {
                             NSCursor.pop()
                         }
                     }
+            }
+            Button("Open RaySoda") {
+                guard let url = URL(string: "http://raysoda.com/") else { return }
+                NSWorkspace.shared.open(url)
             }
         }
 
