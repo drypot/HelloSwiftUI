@@ -25,13 +25,6 @@ struct HelloSwiftUIApp: App {
             Text("Window Demo")
         }
 
-        WindowGroup("Menu Demo", id: "Menu Demo") {
-            MenuDemo()
-        }
-        .commands {
-            MenuSample()
-        }
-
         WindowGroup("NavigationSplitView Demo", id: "NavigationSplitView Demo") {
             NavigationSplitViewDemo()
         }
@@ -39,6 +32,14 @@ struct HelloSwiftUIApp: App {
         WindowGroup("NavigationSplitView Demo 2", id: "NavigationSplitView Demo 2") {
             NavigationSplitViewDemo2()
         }
+
+        WindowGroup("Command Demo", id: "Command Demo") {
+            CommandDemo()
+        }
+        .commands {
+            CommandSample()
+        }
+
     }
 }
 
@@ -54,14 +55,14 @@ struct OpenOtherWindows: View {
         Button("Open Window Scene") {
             openWindow(id: "Window Demo")
         }
-        Button("Open Menu Demo") {
-            openWindow(id: "Menu Demo")
-        }
         Button("Open NavigationSplitView Demo") {
             openWindow(id: "NavigationSplitView Demo")
         }
         Button("Open NavigationSplitView Demo 2") {
             openWindow(id: "NavigationSplitView Demo 2")
+        }
+        Button("Open Command Demo") {
+            openWindow(id: "Command Demo")
         }
     }
 }
@@ -69,14 +70,16 @@ struct OpenOtherWindows: View {
 struct DemoList: View {
 
     var body: some View {
-        return NavigationSplitView {
+        NavigationSplitView {
             List {
                 Section {
-                    NavigationLink("Other Windows") { OpenOtherWindows() }
+                    NavigationLink("Open Windows") { OpenOtherWindows() }
                 }
                 Section {
                     NavigationLink("Button") { ButtonDemo() }
                     NavigationLink("Link") { LinkDemo() }
+                    NavigationLink("Menu") { MenuDemo() }
+                    NavigationLink("Context Menu") { ContextMenuDemo() }
                 }
                 Section {
                     NavigationLink("ForEach") { ForEachDemo() }

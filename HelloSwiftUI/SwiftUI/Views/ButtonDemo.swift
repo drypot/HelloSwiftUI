@@ -14,41 +14,57 @@ struct ButtonDemo: View {
                 print("clicked")
             }
 
-            Button ("Button automatic") {
+            Button("Button with SystemImage", systemImage: "2.square.fill") {
                 print("clicked")
             }
-            .buttonStyle(.automatic)
 
-            Button ("Button plain") {
+            Button {
                 print("clicked")
+            } label: {
+                Text("Button with Label")
             }
-            .buttonStyle(.plain)
 
-            Button ("Button bordered") {
+            Button {
                 print("clicked")
+            } label: {
+                Label("Button with Label and Image", systemImage: "2.circle")
             }
-            .buttonStyle(.bordered)
-
-            Button ("Button borderedProminent") {
-                print("clicked")
-            }
-            .buttonStyle(.borderedProminent)
-
-            Button ("Button borderless") {
-                print("clicked")
-            }
-            .buttonStyle(.borderless)
 
             Button {
                 print("clicked")
             } label: {
                 HStack {
-                    Text("Button Customized")
+                    Text("Button HStack")
                     Image(systemName: "square.and.arrow.down.fill")
                 }
             }
 
-            Button ("Button modified") {
+            Button ("Button Style Automatic") {
+                print("clicked")
+            }
+            .buttonStyle(.automatic)
+
+            Button ("Button Style Plain") {
+                print("clicked")
+            }
+            .buttonStyle(.plain)
+
+            Button ("Button Style Bordered") {
+                print("clicked")
+            }
+            .buttonStyle(.bordered)
+
+            Button ("Button Style BorderedProminent") {
+                print("clicked")
+            }
+            .buttonStyle(.borderedProminent)
+
+            Button ("Button Style Borderless") {
+                print("clicked")
+            }
+            .buttonStyle(.borderless)
+
+            Button ("Button Modified") {
                 print("clicked")
             }
             .frame(width: 200, height: 40)

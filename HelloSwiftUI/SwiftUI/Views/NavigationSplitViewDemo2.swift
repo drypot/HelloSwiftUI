@@ -15,6 +15,7 @@ struct NavigationSplitViewDemo2: View {
                 NavigationLink("Category 1", value: "Category 1")
                 NavigationLink("Category 2", value: "Category 2")
             }
+            .listStyle(.sidebar)
             .navigationDestination(for: String.self) { category in
                 CategoryView(category: category)
             }
@@ -34,6 +35,7 @@ struct NavigationSplitViewDemo2: View {
                 NavigationLink("\(category) Item 1", value: "\(category) Item 1")
                 NavigationLink("\(category) Item 2", value: "\(category) Item 2")
             }
+            .listStyle(.sidebar)
             .navigationDestination(for: String.self) { item in
                 DetailView(item: item)
             }

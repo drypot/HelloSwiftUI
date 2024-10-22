@@ -7,31 +7,49 @@
 
 import SwiftUI
 
-struct MenuSample: Commands {
-    var body: some Commands {
-        EmptyCommands()
-    }
-}
-
 struct MenuDemo: View {
-    @State private var selectedItem: String?
-
-    let items = ["Item 1", "Item 2", "Item 3"]
 
     var body: some View {
-        NavigationSplitView {
-            List(items, id:\.self, selection: $selectedItem) { item in
-                Text(item)
+        HStack {
+            Menu("Options") {
+                Button("Option 1", action: clicked)
+
+                Button(action: clicked) {
+                    Label("Option 2", systemImage: "2.circle")
+                }
+
+                Menu("More Options") {
+                    Button("Option 3", action: clicked)
+                    Button("Option 4", action: clicked)
+                }
             }
-            .navigationTitle("Items")
-        } detail: {
-            if let selectedItem {
-                Text("Detail for \(selectedItem)")
-            } else {
-                Text("Select an item")
+            .frame(minWidth: 150, maxWidth: 200)
+
+            Divider()
+
+            Menu {
+                Button("Option 1", action: clicked)
+
+                Button(action: clicked) {
+                    Label("Option 2", systemImage: "2.circle")
+                }
+
+                Menu("More Options") {
+                    Button("Option 3", action: clicked)
+                    Button("Option 4", action: clicked)
+                }
+            } label: {
+                Label("Options 2", systemImage: "ellipsis.circle")
             }
+            .frame(minWidth: 150, maxWidth: 200)
+
         }
     }
+
+    func clicked() {
+        print("menu clicked")
+    }
+
 }
 
 #Preview {
