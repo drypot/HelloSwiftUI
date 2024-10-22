@@ -14,7 +14,7 @@ struct HelloSwiftUIApp: App {
 
     var body: some Scene {
         WindowGroup("SwiftUI Demo") {
-            DemoList()
+            DemoNavigator()
                 .onAppear {
                     DisplayMode.changeDisplayMode(to: displayMode)
                 }
@@ -45,45 +45,28 @@ struct HelloSwiftUIApp: App {
             NavigationSplitViewDemo2()
         }
 
-    }
-}
-
-struct OpenWindows: View {
-
-    @Environment(\.openWindow) private var openWindow
-
-    // 같은 @AppStorage 변수 선언은 여러 스트럭쳐에 나와도 상관이 없다.
-    // 어차피 UserDefaults 가 소스라서.
-    @AppStorage("showTotals") var showTotals: Bool = true
-
-    var body: some View {
-        VStack {
-            Spacer()
-
-            Button("Open WindowGroup Scene") {
-                openWindow(id: "WindowGroup Demo")
-            }
-            Button("Open Window Scene") {
-                openWindow(id: "Window Demo")
-            }
-            Button("Open NavigationSplitView Demo") {
-                openWindow(id: "NavigationSplitView Demo")
-            }
-            Button("Open NavigationSplitView Demo 2") {
-                openWindow(id: "NavigationSplitView Demo 2")
-            }
-            Spacer()
-
-            Text("Custom Menu / Show Totals: \(showTotals)")
-            Spacer()
+        WindowGroup("NavigationSplitView Demo 3", id: "NavigationSplitView Demo 3") {
+            NavigationSplitViewDemo3()
         }
+
     }
 }
 
-struct DemoList: View {
+struct DemoNavigator: View {
 
     var body: some View {
         NavigationSplitView {
+            DemoList()
+        } detail: {
+            OpenWindows()
+        }
+        .toolbar {
+            CustomToolbar()
+        }
+    }
+
+    struct DemoList: View {
+        var body: some View {
             List {
                 Section {
                     NavigationLink("Open Windows") { OpenWindows() }
@@ -116,9 +99,41 @@ struct DemoList: View {
                     NavigationLink("OnThisDay") { OnThisDayView() }
                 }
             }
-        } detail: {
-            OpenWindows()
         }
     }
+}
 
+struct OpenWindows: View {
+
+    @Environment(\.openWindow) private var openWindow
+
+    // 같은 @AppStorage 변수 선언은 여러 스트럭쳐에 나와도 상관이 없다.
+    // 어차피 UserDefaults 가 소스라서.
+    @AppStorage("showTotals") var showTotals: Bool = true
+
+    var body: some View {
+        VStack {
+            Spacer()
+
+            Button("Open WindowGroup Scene") {
+                openWindow(id: "WindowGroup Demo")
+            }
+            Button("Open Window Scene") {
+                openWindow(id: "Window Demo")
+            }
+            Button("Open NavigationSplitView Demo") {
+                openWindow(id: "NavigationSplitView Demo")
+            }
+            Button("Open NavigationSplitView Demo 2") {
+                openWindow(id: "NavigationSplitView Demo 2")
+            }
+            Button("Open NavigationSplitView Demo 3") {
+                openWindow(id: "NavigationSplitView Demo 3")
+            }
+            Spacer()
+
+            Text("Custom Menu / Show Totals: \(showTotals)")
+            Spacer()
+        }
+    }
 }

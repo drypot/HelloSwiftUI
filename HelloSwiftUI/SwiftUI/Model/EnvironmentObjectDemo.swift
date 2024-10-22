@@ -10,26 +10,33 @@ import SwiftUI
 struct EnvironmentObjectDemo: View {
 
     class UserSettings: ObservableObject {
-        @Published var username: String = "Unknown"
+        @Published var counter: Int = 0
     }
 
     var settings = UserSettings()
 
     var body: some View {
-        SubView()
-            .environmentObject(settings)
+        VStack {
+            SubView()
+            SubView2()
+        }
+        .environmentObject(settings)
     }
 
     struct SubView: View {
         @EnvironmentObject var settings: UserSettings
 
         var body: some View {
-            VStack {
-                Text("Username: \(settings.username)")
+            Text("Counter: \(settings.counter)")
+        }
+    }
 
-                Button("Change Username") {
-                    settings.username = "Jane Doe"
-                }
+    struct SubView2: View {
+        @EnvironmentObject var settings: UserSettings
+
+        var body: some View {
+            Button("Increment") {
+                settings.counter += 1
             }
         }
     }

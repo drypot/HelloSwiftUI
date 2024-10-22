@@ -9,49 +9,33 @@ import SwiftUI
 
 struct NavigationSplitViewDemo2: View {
 
+    let items = ["Item 1", "Item 2", "Item 3"]
+    let subItems = ["SubItem A", "SubItem B"]
+
+    @State private var selectedItem: String?
+    @State private var selectedSubItem: String?
+
     var body: some View {
         NavigationSplitView {
-            List {
-                NavigationLink("Category 1", value: "Category 1")
-                NavigationLink("Category 2", value: "Category 2")
+            List(items, id:\.self, selection: $selectedItem) { item in
+                NavigationLink(item, value: item)
             }
-            .listStyle(.sidebar)
-            .navigationDestination(for: String.self) { category in
-                CategoryView(category: category)
-            }
-            .navigationTitle("Sidebar")
+            .navigationTitle("Main Items")
         } content: {
-            ContentUnavailableView("Select an element from the sidebar", systemImage: "doc.text.image.fill")
+            List(subItems, id:\.self, selection: $selectedSubItem) { subItem in
+                NavigationLink(subItem, value: subItem)
+            }
+            .navigationTitle("Sub Items")
         } detail: {
-            ContentUnavailableView("Select an element from the list", systemImage: "doc.text.image.fill")
-        }
-    }
-
-    struct CategoryView: View {
-        let category: String
-
-        var body: some View {
-            List {
-                NavigationLink("\(category) Item 1", value: "\(category) Item 1")
-                NavigationLink("\(category) Item 2", value: "\(category) Item 2")
+            if let selectedItem, let selectedSubItem {
+                Text("Detail for \(selectedItem) + \(selectedSubItem)")
+            } else {
+                Text("...")
             }
-            .navigationDestination(for: String.self) { item in
-                DetailView(item: item)
-            }
-            .navigationTitle("Content")
-        }
-    }
-
-    struct DetailView: View {
-        let item: String
-
-        var body: some View {
-            Text("Details for \(item)")
-                .navigationTitle("Detail")
         }
     }
 }
 
 #Preview {
-    NavigationSplitViewDemo2()
+    NavigationSplitViewDemo()
 }

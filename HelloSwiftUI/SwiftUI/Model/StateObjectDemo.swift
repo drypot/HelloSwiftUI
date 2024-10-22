@@ -30,14 +30,14 @@ struct StateObjectDemo: View {
                     .padding(4)
 
                 VStack {
+                    Text("\(counter)")
                     Button("Increment") {
                         counter += 1
                     }
-                    Text("\(counter)")
 
+                    Text(name.isEmpty ? "---" : name)
                     TextField("name", text: $name)
                         .textFieldStyle(.roundedBorder)
-                    Text(name.isEmpty ? "---" : name)
                 }
                 .padding(4)
             }
@@ -52,21 +52,21 @@ struct StateObjectDemo: View {
                     .padding(4)
 
                 VStack {
+                    Text("\(model.counter)")
                     Button("Increment") {
                         model.counter += 1
                     }
-                    Text("\(model.counter)")
 
+                    Text(model.name.isEmpty ? "---" : model.name)
                     TextField("name", text: $model.name)
                         .textFieldStyle(.roundedBorder)
-                    Text(model.name.isEmpty ? "---" : model.name)
                 }
                 .padding(4)
             }
 
             ObservedSubView(model: model)
         }
-        .frame(minWidth: 330, minHeight: 650, alignment: .top)
+        .frame(minWidth: 330, maxWidth: 400, minHeight: 650, maxHeight: .infinity, alignment: .top)
         .padding()
     }
 
@@ -81,14 +81,14 @@ struct StateObjectDemo: View {
                     .padding(4)
 
                 VStack {
+                    Text("\(counter)")
                     Button("Increment") {
                         counter += 1
                     }
-                    Text("\(counter)")
 
+                    Text(name.isEmpty ? "---" : name)
                     TextField("name", text: $name)
                         .textFieldStyle(.roundedBorder)
-                    Text(name.isEmpty ? "---" : name)
                 }
                 .padding(4)
             }
@@ -105,14 +105,14 @@ struct StateObjectDemo: View {
                     .padding(4)
 
                 VStack {
+                    Text("\(model.counter)")
                     Button("Increment") {
                         model.counter += 1
                     }
-                    Text("\(model.counter)")
 
+                    Text(model.name.isEmpty ? "---" : model.name)
                     TextField("name", text: $model.name)
                         .textFieldStyle(.roundedBorder)
-                    Text(model.name.isEmpty ? "---" : model.name)
                 }
                 .padding(4)
             }
