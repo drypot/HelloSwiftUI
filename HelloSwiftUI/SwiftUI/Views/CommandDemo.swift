@@ -7,18 +7,52 @@
 
 import SwiftUI
 
-struct CommandSample: Commands {
+struct CustomCommands: Commands {
+
+    @AppStorage("showTotals") var showTotals = true
+    @AppStorage("displayMode") var displayMode = DisplayMode.auto
+
     var body: some Commands {
-        EmptyCommands()
+
+        // 새로운 최상단 메뉴 항목을 만들 때
+        CommandMenu("Custom") {
+            Button("Do Action 1") {
+                print("Action 1 triggered")
+            }
+            .keyboardShortcut("1", modifiers: [.command])
+
+            Button("Do Action 2") {
+                print("Action 2 triggered")
+            }
+            .keyboardShortcut("2", modifiers: [.command, .shift])
+
+            Divider()
+
+            Toggle(isOn: $showTotals) {
+                Text("Show Totals")
+            }
+            .keyboardShortcut("t", modifiers: .command)
+
+            Divider()
+
+            Picker("Appearance", selection: $displayMode) {
+                ForEach(DisplayMode.allCases, id: \.self) {
+                    Text($0.rawValue)
+                        .tag($0)
+                }
+            }
+        }
+
+        // 기본 메뉴 틀에서 적당한 곳에 나만의 메뉴 항목을 삽입할 때.
+        CommandGroup(before: .help) {
+            Button("Do Action 3") {
+                print("Action 3 triggered")
+            }
+            .keyboardShortcut("/", modifiers: [.command])
+        }
+
+        //EmptyCommands()
+
     }
 }
 
-struct CommandDemo: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-#Preview {
-    CommandDemo()
-}

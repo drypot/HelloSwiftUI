@@ -10,11 +10,23 @@ import SwiftUI
 @main
 struct HelloSwiftUIApp: App {
 
-    static var demoBuilders = [AnyView]()
+    @AppStorage("displayMode") var displayMode = DisplayMode.auto
 
     var body: some Scene {
         WindowGroup("SwiftUI Demo") {
             DemoList()
+                .onAppear {
+                    DisplayMode.changeDisplayMode(to: displayMode)
+                }
+                .onChange(of: displayMode) { oldValue, newValue in
+                    DisplayMode.changeDisplayMode(to: newValue)
+                }
+        }
+        .commands {
+            SidebarCommands()
+            ToolbarCommands()
+
+            CustomCommands()
         }
 
         WindowGroup("WindowGroup Demo", id: "WindowGroup Demo") {
@@ -33,36 +45,37 @@ struct HelloSwiftUIApp: App {
             NavigationSplitViewDemo2()
         }
 
-        WindowGroup("Command Demo", id: "Command Demo") {
-            CommandDemo()
-        }
-        .commands {
-            CommandSample()
-        }
-
     }
 }
 
-struct OpenOtherWindows: View {
+struct OpenWindows: View {
 
     @Environment(\.openWindow) private var openWindow
-    //    @Environment(\.dismissWindow) private var dismissWindow
+
+    // 같은 @AppStorage 변수 선언은 여러 스트럭쳐에 나와도 상관이 없다.
+    // 어차피 UserDefaults 가 소스라서.
+    @AppStorage("showTotals") var showTotals: Bool = true
 
     var body: some View {
-        Button("Open WindowGroup Scene") {
-            openWindow(id: "WindowGroup Demo")
-        }
-        Button("Open Window Scene") {
-            openWindow(id: "Window Demo")
-        }
-        Button("Open NavigationSplitView Demo") {
-            openWindow(id: "NavigationSplitView Demo")
-        }
-        Button("Open NavigationSplitView Demo 2") {
-            openWindow(id: "NavigationSplitView Demo 2")
-        }
-        Button("Open Command Demo") {
-            openWindow(id: "Command Demo")
+        VStack {
+            Spacer()
+
+            Button("Open WindowGroup Scene") {
+                openWindow(id: "WindowGroup Demo")
+            }
+            Button("Open Window Scene") {
+                openWindow(id: "Window Demo")
+            }
+            Button("Open NavigationSplitView Demo") {
+                openWindow(id: "NavigationSplitView Demo")
+            }
+            Button("Open NavigationSplitView Demo 2") {
+                openWindow(id: "NavigationSplitView Demo 2")
+            }
+            Spacer()
+
+            Text("Custom Menu / Show Totals: \(showTotals)")
+            Spacer()
         }
     }
 }
@@ -73,13 +86,17 @@ struct DemoList: View {
         NavigationSplitView {
             List {
                 Section {
-                    NavigationLink("Open Windows") { OpenOtherWindows() }
+                    NavigationLink("Open Windows") { OpenWindows() }
                 }
                 Section {
                     NavigationLink("Button") { ButtonDemo() }
                     NavigationLink("Link") { LinkDemo() }
                     NavigationLink("Menu") { MenuDemo() }
                     NavigationLink("Context Menu") { ContextMenuDemo() }
+                }
+                Section {
+                    Text("Badge Sample")
+                        .badge(123)
                 }
                 Section {
                     NavigationLink("ForEach") { ForEachDemo() }
@@ -100,7 +117,7 @@ struct DemoList: View {
                 }
             }
         } detail: {
-            OpenOtherWindows()
+            OpenWindows()
         }
     }
 

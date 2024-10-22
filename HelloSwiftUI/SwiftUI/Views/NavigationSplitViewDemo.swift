@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NavigationSplitViewDemo: View {
 
-    @State private var selectedItem: String?
+    @State private var selectedItem: String? = "Item 1"
     @State private var selectedSubItem: String?
 
     let items = ["Item 1", "Item 2", "Item 3"]
