@@ -27,3 +27,18 @@ enum DisplayMode: String, CaseIterable {
         }
     }
 }
+
+struct DisplayModePicker: View {
+
+    @AppStorage("displayMode") var displayMode = DisplayMode.auto
+
+    var body: some View {
+        Picker("Appearance", selection: $displayMode) {
+            ForEach(DisplayMode.allCases, id: \.self) {
+                Text($0.rawValue)
+                    .tag($0)
+            }
+        }
+    }
+
+}

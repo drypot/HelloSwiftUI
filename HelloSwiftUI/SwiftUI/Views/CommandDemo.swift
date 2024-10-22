@@ -10,7 +10,6 @@ import SwiftUI
 struct CustomCommands: Commands {
 
     @AppStorage("showTotals") var showTotals = true
-    @AppStorage("displayMode") var displayMode = DisplayMode.auto
 
     var body: some Commands {
 
@@ -35,12 +34,7 @@ struct CustomCommands: Commands {
 
             Divider()
 
-            Picker("Appearance", selection: $displayMode) {
-                ForEach(DisplayMode.allCases, id: \.self) {
-                    Text($0.rawValue)
-                        .tag($0)
-                }
-            }
+            DisplayModePicker()
         }
 
         // 기본 메뉴 틀에서 적당한 곳에 나만의 메뉴 항목을 삽입할 때.
