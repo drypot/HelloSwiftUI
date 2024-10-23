@@ -84,6 +84,7 @@ struct DemoNavigator: View {
                     NavigationLink("Link") { LinkDemo() }
                     NavigationLink("Menu") { MenuDemo() }
                     NavigationLink("Context Menu") { ContextMenuDemo() }
+                    NavigationLink("DatePicker") { DatePickerDemo() }
                 }
                 Section {
                     Text("Badge Sample")
@@ -108,6 +109,7 @@ struct DemoNavigator: View {
                     NavigationLink("OnThisDay") { OnThisDayView() }
                 }
             }
+            .frame(minWidth: 180)
         }
     }
 }
