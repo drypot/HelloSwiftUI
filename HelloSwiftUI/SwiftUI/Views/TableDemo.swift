@@ -23,9 +23,11 @@ struct TableDemo: View {
         Person(name: "Baby", age: 7, city: "Seoul"),
     ]
 
-    @State private var sortOrder: [KeyPathComparator<Person>] = [
-        .init(\.name, order: .forward)
-    ]
+    @State private var sortOrder = [KeyPathComparator(\Person.name)]
+
+//    @State private var sortOrder: [KeyPathComparator<Person>] = [
+//        .init(\.name, order: .forward)
+//    ]
 
     @State private var selected: Set<UUID> = []
 
@@ -34,6 +36,9 @@ struct TableDemo: View {
             TableColumn("Name", value: \.name)
             TableColumn("Age", value: \.age) { Text("\($0.age)") }
             TableColumn("City", value: \.city)
+        }
+        .onAppear {
+            people.sort(using: sortOrder)
         }
         .onChange(of: sortOrder) { oldOrder, newOrder in
             people.sort(using: newOrder)

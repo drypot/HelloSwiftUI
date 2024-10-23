@@ -49,11 +49,9 @@ struct UseDisplayModeModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .onAppear {
-                print("appear")
                 DisplayMode.changeDisplayMode(to: displayMode)
             }
             .onChange(of: displayMode) { oldValue, newValue in
-                print("change")
                 DisplayMode.changeDisplayMode(to: newValue)
             }
     }
