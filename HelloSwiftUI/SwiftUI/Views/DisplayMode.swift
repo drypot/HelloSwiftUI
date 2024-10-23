@@ -42,7 +42,7 @@ struct DisplayModePicker: View {
 
 }
 
-struct DisplayModeModifier: ViewModifier {
+struct UseDisplayModeModifier: ViewModifier {
 
     @AppStorage("displayMode") var displayMode = DisplayMode.auto
 
@@ -63,7 +63,7 @@ struct DisplayModeModifier: ViewModifier {
 extension View {
 
     func useDisplayMode() -> some View {
-        self.modifier(DisplayModeModifier())
+        self.modifier(UseDisplayModeModifier())
     }
 
 }
