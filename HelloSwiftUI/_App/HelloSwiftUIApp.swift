@@ -44,15 +44,29 @@ struct HelloSwiftUIApp: App {
 
 struct DemoNavigator: View {
 
+    // 같은 @AppStorage 변수 선언은 여러 스트럭쳐에 나와도 상관이 없다.
+    // 어차피 UserDefaults 가 소스라서.
+    @AppStorage("showTotals") var showTotals: Bool = true
+
+    @State private var searchText = ""
+
     var body: some View {
         NavigationSplitView {
             DemoList()
         } detail: {
+            Spacer()
+
             OpenWindows()
+            Spacer()
+
+            Text("Show Totals: \(showTotals)")
+            Text("Search Text: \(searchText)")
+            Spacer()
         }
         .toolbar {
             CustomToolbar()
         }
+        .searchable(text: $searchText)
     }
 
     struct DemoList: View {
@@ -97,14 +111,8 @@ struct OpenWindows: View {
 
     @Environment(\.openWindow) private var openWindow
 
-    // 같은 @AppStorage 변수 선언은 여러 스트럭쳐에 나와도 상관이 없다.
-    // 어차피 UserDefaults 가 소스라서.
-    @AppStorage("showTotals") var showTotals: Bool = true
-
     var body: some View {
         VStack {
-            Spacer()
-
             Button("Open WindowGroup Scene") {
                 openWindow(id: "WindowGroup Demo")
             }
@@ -120,10 +128,6 @@ struct OpenWindows: View {
             Button("Open NavigationSplitView Demo 3") {
                 openWindow(id: "NavigationSplitView Demo 3")
             }
-            Spacer()
-
-            Text("Custom Menu / Show Totals: \(showTotals)")
-            Spacer()
         }
     }
 }
