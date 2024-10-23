@@ -39,6 +39,10 @@ struct HelloSwiftUIApp: App {
             NavigationSplitViewDemo3()
         }
 
+        WindowGroup("SceneStorage Demo", id: "SceneStorage Demo") {
+            SceneStorageDemo()
+        }
+
     }
 }
 
@@ -93,6 +97,7 @@ struct DemoNavigator: View {
                     NavigationLink("GridViewDivider") { GridViewDividerDemo() }
                     NavigationLink("LazyGridView") { LazyGridViewDemo() }
                     NavigationLink("LazyGridView 2") { LazyGridViewDemo2() }
+                    NavigationLink("Table") { TableDemo() }
                 }
                 Section {
                     NavigationLink("StateObject") { StateObjectDemo() }
@@ -127,6 +132,9 @@ struct OpenWindows: View {
             }
             Button("Open NavigationSplitView Demo 3") {
                 openWindow(id: "NavigationSplitView Demo 3")
+            }
+            Button("Open SceneStorage Demo") {
+                openWindow(id: "SceneStorage Demo")
             }
         }
     }
