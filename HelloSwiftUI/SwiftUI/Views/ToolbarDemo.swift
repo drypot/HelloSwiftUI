@@ -7,7 +7,17 @@
 
 import SwiftUI
 
+// 툴바 편집 기능은 다음에 정말 필요하면.
+// 다행이 그리 복잡해 보이진 않는다.
+
 struct CustomToolbar: ToolbarContent {
+
+    enum ViewMode: Int {
+        case grid
+        case table
+    }
+
+    @State private var viewMode: ViewMode = .grid
 
     var body: some ToolbarContent {
 
@@ -15,35 +25,39 @@ struct CustomToolbar: ToolbarContent {
             Button(action: clicked) {
                 Label("Menu", systemImage: "line.horizontal.3")
             }
-            .help("Help 1")
         }
 
         ToolbarItem(placement: .principal) {
             Button(action: clicked) {
                 Label("Write", systemImage: "square.and.pencil")
             }
-            .help("Help 2")
         }
 
         ToolbarItem(placement: .status) {
             Button(action: clicked) {
                 Label("iCloud", systemImage: "icloud")
             }
-            .help("Help 2")
+        }
+
+        ToolbarItem(id: "viewMode", placement: .status) {
+            Picker("View Mode", selection: $viewMode) {
+                Label("Grid", systemImage: "square.grid.3x2").tag(ViewMode.grid)
+                Label("Table", systemImage: "tablecells").tag(ViewMode.table)
+            }
+            .pickerStyle(.segmented)
+            .help("Switch between Grid and Table")
         }
 
         ToolbarItem(placement: .primaryAction) {
             Button(action: clicked) {
                 Label("Download", systemImage: "square.and.arrow.down")
             }
-            .help("Help 2")
         }
 
         ToolbarItem {
             Button(action: clicked) {
                 Label("Add", systemImage: "plus")
             }
-            .help("Help 2")
         }
 
         ToolbarItemGroup {
