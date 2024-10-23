@@ -23,9 +23,6 @@ struct HelloSwiftUIApp: App {
                 }
         }
         .commands {
-            SidebarCommands()
-            ToolbarCommands()
-
             CustomCommands()
         }
 

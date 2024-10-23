@@ -13,6 +13,9 @@ struct CustomCommands: Commands {
 
     var body: some Commands {
 
+        SidebarCommands()
+        ToolbarCommands()
+
         // 새로운 최상단 메뉴 항목을 만들 때
         CommandMenu("Custom") {
             Button("Do Action 1") {
