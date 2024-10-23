@@ -10,17 +10,10 @@ import SwiftUI
 @main
 struct HelloSwiftUIApp: App {
 
-    @AppStorage("displayMode") var displayMode = DisplayMode.auto
-
     var body: some Scene {
         WindowGroup("SwiftUI Demo") {
             DemoNavigator()
-                .onAppear {
-                    DisplayMode.changeDisplayMode(to: displayMode)
-                }
-                .onChange(of: displayMode) { oldValue, newValue in
-                    DisplayMode.changeDisplayMode(to: newValue)
-                }
+                .useDisplayMode()
         }
         .commands {
             CustomCommands()

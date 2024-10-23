@@ -14,7 +14,6 @@ enum DisplayMode: String, CaseIterable {
 
     static func changeDisplayMode(to mode: DisplayMode) {
         @AppStorage("displayMode") var displayMode = DisplayMode.auto
-
         displayMode = mode
 
         switch mode {
@@ -39,6 +38,32 @@ struct DisplayModePicker: View {
                     .tag($0)
             }
         }
+    }
+
+}
+
+struct DisplayModeModifier: ViewModifier {
+
+    @AppStorage("displayMode") var displayMode = DisplayMode.auto
+
+    func body(content: Content) -> some View {
+        content
+            .onAppear {
+                print("appear")
+                DisplayMode.changeDisplayMode(to: displayMode)
+            }
+            .onChange(of: displayMode) { oldValue, newValue in
+                print("change")
+                DisplayMode.changeDisplayMode(to: newValue)
+            }
+    }
+
+}
+
+extension View {
+
+    func useDisplayMode() -> some View {
+        self.modifier(DisplayModeModifier())
     }
 
 }
