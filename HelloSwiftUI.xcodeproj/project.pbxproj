@@ -28,11 +28,6 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Foundation/FileManager/FileManagerDemo.swift,
-				SubApps/OnThisDay/EventView.swift,
-				SubApps/OnThisDay/OnThisDay.swift,
-				SubApps/OnThisDay/OnThisDayView.swift,
-				SubApps/OnThisDay/SampleEvent.swift,
-				SubApps/OnThisDay/SidebarView.swift,
 			);
 			target = 00DD6C862CBBF8E000E523B1 /* HelloSwftUITests */;
 		};

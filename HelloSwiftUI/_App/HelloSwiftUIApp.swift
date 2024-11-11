@@ -61,7 +61,7 @@ struct DemoNavigator: View {
             Spacer()
         }
         .toolbar {
-            CustomToolbar()
+            CustomToolbar() // ToolbarDemo
         }
         .searchable(text: $searchText)
     }
@@ -76,35 +76,41 @@ struct DemoNavigator: View {
                     NavigationLink("NavigationSplitView") { NavigationSplitViewDemoLauncher() }
                 }
                 Section {
+                    NavigationLink("StateObject") { StateObjectDemo() }
+                    NavigationLink("EnvironmentObject") { EnvironmentObjectDemo() }
+                    NavigationLink("SceneObject") { SceneStorageDemoLauncher() }
+                }
+                Section {
+                    NavigationLink("Text") { TextDemo() }
                     NavigationLink("Button") { ButtonDemo() }
                     NavigationLink("Link") { LinkDemo() }
                     NavigationLink("Menu") { MenuDemo() }
-                    NavigationLink("Context Menu") { ContextMenuDemo() }
-                    NavigationLink("Command") { CommandDemo() }
                     NavigationLink("DatePicker") { DatePickerDemo() }
+                }
+                Section {
+                    NavigationLink("Command") { CommandDemo() }
+                    NavigationLink("Context Menu") { ContextMenuDemo() }
+                }
+                Section {
+                    NavigationLink("ForEach") { ForEachDemo() }
+                    NavigationLink("List") { ListDemo() }
+                    NavigationLink("ListEdit") { ListEditDemo() }
+                }
+                Section {
+                    NavigationLink("GridView") { GridViewDemo() }
+                    NavigationLink("GridViewDivider") { GridViewDividerDemo() }
+                    NavigationLink("LazyGridView") { LazyGridViewDemo() }
+                    NavigationLink("LazyGridView 2") { LazyGridViewDemo2() }
+                }
+                Section {
+                    NavigationLink("Table") { TableDemo() }
                 }
                 Section {
                     Text("Badge Sample")
                         .badge(123)
                 }
                 Section {
-                    NavigationLink("ForEach") { ForEachDemo() }
-                    NavigationLink("List") { ListDemo() }
-                    NavigationLink("ListEdit") { ListEditDemo() }
-                    NavigationLink("GridView") { GridViewDemo() }
-                    NavigationLink("GridViewDivider") { GridViewDividerDemo() }
-                    NavigationLink("LazyGridView") { LazyGridViewDemo() }
-                    NavigationLink("LazyGridView 2") { LazyGridViewDemo2() }
-                    NavigationLink("Table") { TableDemo() }
-                }
-                Section {
-                    NavigationLink("StateObject") { StateObjectDemo() }
-                    NavigationLink("EnvironmentObject") { EnvironmentObjectDemo() }
-                    NavigationLink("SceneObject") { SceneStorageDemoLauncher() }
-                }
-                Section {
                     NavigationLink("Task") { TaskDemo() }
-                    NavigationLink("OnThisDay") { OnThisDayView() }
                 }
             }
             .frame(minWidth: 180)
