@@ -7,6 +7,16 @@
 
 import SwiftUI
 
+struct CommandDemo: View {
+
+    // 같은 @AppStorage 변수 선언은 여러 스트럭쳐에 나와도 상관이 없다.
+    // 어차피 UserDefaults 가 소스라서.
+    @AppStorage("showTotals") var showTotals: Bool = true
+
+    var body: some View {
+        Text("Show Totals: \(showTotals)")
+    }
+}
 struct CustomCommands: Commands {
 
     @AppStorage("showTotals") var showTotals = true
