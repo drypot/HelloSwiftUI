@@ -48,17 +48,13 @@ struct HelloSwiftUIApp: App {
 
 struct DemoNavigator: View {
 
-    @State private var searchText = ""
+    @State var searchText = ""
 
     var body: some View {
         NavigationSplitView {
             DemoList()
         } detail: {
-            Spacer()
-            Text("Select demo")
-            Spacer().frame(height: 20)
-            Text("Search Text: \(searchText)")
-            Spacer()
+            TestingView()
         }
         .toolbar {
             CustomToolbar() // ToolbarDemo
@@ -69,6 +65,9 @@ struct DemoNavigator: View {
     struct DemoList: View {
         var body: some View {
             List {
+                Section {
+                    NavigationLink("Testing") { TestingView() }
+                }
                 Section {
                     NavigationLink("Window") { WindowDemoLauncher() }
                 }
@@ -117,4 +116,5 @@ struct DemoNavigator: View {
             .frame(minWidth: 180)
         }
     }
+
 }

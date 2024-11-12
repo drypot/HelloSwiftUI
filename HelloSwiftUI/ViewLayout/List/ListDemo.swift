@@ -10,36 +10,108 @@ import SwiftUI
 // https://developer.apple.com/documentation/swiftui/lists
 // List displays a one-dimensional vertical collection of views.
 
+// ForEach 는 루프 하나로 끝나지만,
+// List 안에는 ForEach 여러 개를 넣을 수도 있고 비 루프 콤포넌트도 넣을 수 있어서 서로 다르다.
+
 struct ListDemo: View {
 
-    let demoList = ["List 1", "List 2", "List 3", "List 9"]
+    let demoList = [
+        "List 1", "List 2", "List 3",
+        "List 8", "List 9",
+    ]
 
     @State var currentDemo = "List 1"
 
     var body: some View {
-        HStack(spacing: 18) {
+        HStack {
             List(demoList, id:\.self, selection: $currentDemo) { demo in
                 Text(demo)
             }
             .frame(maxWidth: 200)
 
-            VStack {
-                switch currentDemo {
-                case "List 1": ListDemo1()
-                case "List 2": Text("Content 2")
-                case "List 3": Text("Content 3")
-                case "List 9": ListDemo9()
-                default: Text("Invalid Demo")
-                }
+            switch currentDemo {
+            case "List 1": ListDemo1()
+            case "List 2": ListDemo2()
+            case "List 3": ListDemo3()
+            case "List 8": ListDemo8()
+            case "List 9": ListDemo9()
+            default: Text("Invalid Selection")
             }
-            .frame(minWidth: 200, maxWidth: .infinity)
-
         }
     }
 
 }
 
+// https://developer.apple.com/documentation/swiftui/list
+
 struct ListDemo1: View {
+    var body: some View {
+        List {
+            Text("first")
+            Text("second")
+            Text("third")
+        }
+    }
+}
+
+struct ListDemo2: View {
+
+    struct Ocean: Identifiable {
+        let name: String
+        let id = UUID()
+    }
+
+    let oceans = [
+        Ocean(name: "Pacific"),
+        Ocean(name: "Atlantic"),
+        Ocean(name: "Indian"),
+        Ocean(name: "Southern"),
+        Ocean(name: "Arctic")
+    ]
+
+    var body: some View {
+        List(oceans) {
+            Text($0.name)
+        }
+    }
+    
+}
+
+struct ListDemo3: View {
+
+    struct Ocean: Identifiable, Hashable {
+        let name: String
+        let id = UUID()
+    }
+
+    private var oceans = [
+        Ocean(name: "Pacific"),
+        Ocean(name: "Atlantic"),
+        Ocean(name: "Indian"),
+        Ocean(name: "Southern"),
+        Ocean(name: "Arctic")
+    ]
+
+    @State private var multiSelection = Set<UUID>()
+
+    var body: some View {
+        List(oceans, selection: $multiSelection) {
+            Text($0.name)
+        }
+
+        List {
+            ForEach(oceans) { ocean in
+                if multiSelection.contains(ocean.id) {
+                    Text(ocean.name)
+                }
+            }
+        }
+    }
+}
+
+// https://developer.apple.com/documentation/swiftui/displaying-data-in-lists
+
+struct ListDemo8: View {
 
     struct Person: Identifiable {
         let id = UUID()
