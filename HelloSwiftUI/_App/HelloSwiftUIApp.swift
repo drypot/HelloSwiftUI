@@ -82,6 +82,7 @@ struct DemoNavigator: View {
                 }
                 Section {
                     NavigationLink("Text") { TextDemo() }
+                    NavigationLink("TextField") { TextFieldDemo() }
                     NavigationLink("Button") { ButtonDemo() }
                     NavigationLink("Link") { LinkDemo() }
                     NavigationLink("Menu") { MenuDemo() }
