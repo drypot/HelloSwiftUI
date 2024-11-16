@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TestingView: View {
     var body: some View {
-        ListDemo()
+        TaskDemo()
     }
 }
 
