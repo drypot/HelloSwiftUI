@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SceneStorageDemoLauncher: View {
+struct SceneStorageDemo: View {
 
     @Environment(\.openWindow) private var openWindow
 
@@ -21,7 +21,7 @@ struct SceneStorageDemoLauncher: View {
     }
 }
 
-struct SceneStorageDemo: View {
+struct SceneStorageDemoContent: View {
 
     @SceneStorage("sceneMessage") var message: String = ""
 
@@ -34,5 +34,5 @@ struct SceneStorageDemo: View {
 }
 
 #Preview {
-    SceneStorageDemo()
+    SceneStorageDemoContent()
 }

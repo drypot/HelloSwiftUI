@@ -37,5 +37,5 @@ struct NavigationSplitViewDemo2: View {
 }
 
 #Preview {
-    NavigationSplitViewDemo()
+    NavigationSplitViewDemo1()
 }

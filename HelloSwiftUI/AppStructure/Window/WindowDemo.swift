@@ -1,5 +1,5 @@
 //
-//  WindowDemoLauncher.swift
+//  WindowDemo.swift
 //  HelloSwiftUI
 //
 //  Created by Kyuhyun Park on 11/12/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct WindowDemoLauncher: View {
+struct WindowDemo: View {
 
     @Environment(\.openWindow) private var openWindow
 

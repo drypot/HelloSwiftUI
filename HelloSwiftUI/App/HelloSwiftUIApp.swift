@@ -28,7 +28,7 @@ struct HelloSwiftUIApp: App {
         }
 
         WindowGroup("NavigationSplitView Demo", id: "NavigationSplitView Demo") {
-            NavigationSplitViewDemo()
+            NavigationSplitViewDemo1()
         }
 
         WindowGroup("NavigationSplitView Demo 2", id: "NavigationSplitView Demo 2") {
@@ -40,7 +40,7 @@ struct HelloSwiftUIApp: App {
         }
 
         WindowGroup("SceneStorage Demo", id: "SceneStorage Demo") {
-            SceneStorageDemo()
+            SceneStorageDemoContent()
         }
 
     }
@@ -69,16 +69,16 @@ struct DemoNavigator: View {
                     NavigationLink("Testing") { TestingView() }
                 }
                 Section {
-                    NavigationLink("Window") { WindowDemoLauncher() }
+                    NavigationLink("Window") { WindowDemo() }
                 }
                 Section {
-                    NavigationLink("NavigationSplitView") { NavigationSplitViewDemoLauncher() }
+                    NavigationLink("NavigationSplitView") { NavigationSplitViewDemo() }
                 }
                 Section {
                     NavigationLink("StateObject") { StateObjectDemo() }
                     NavigationLink("StateLifeCylce") { StateLifeCylceDemo() }
                     NavigationLink("EnvironmentObject") { EnvironmentObjectDemo() }
-                    NavigationLink("SceneObject") { SceneStorageDemoLauncher() }
+                    NavigationLink("SceneObject") { SceneStorageDemo() }
                 }
                 Section {
                     NavigationLink("Text") { TextDemo() }

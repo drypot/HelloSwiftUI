@@ -2,34 +2,27 @@
 //  NavigationSplitViewDemo.swift
 //  HelloSwiftUI
 //
-//  Created by Kyuhyun Park on 10/23/24.
+//  Created by Kyuhyun Park on 11/12/24.
 //
 
 import SwiftUI
 
 struct NavigationSplitViewDemo: View {
 
-    let items = ["Item 1", "Item 2", "Item 3"]
-
-    @State private var selectedItem: String?
+    @Environment(\.openWindow) private var openWindow
 
     var body: some View {
-        NavigationSplitView {
-            List(items, id:\.self, selection: $selectedItem) { item in
-                NavigationLink(item, value: item)
+        VStack {
+            Button("Open NavigationSplitView Demo") {
+                openWindow(id: "NavigationSplitView Demo")
             }
-            .navigationTitle("Items")
-        } detail: {
-            if let selectedItem {
-                Text("Detail for \(selectedItem)")
-            } else {
-                Text("...")
+            Button("Open NavigationSplitView Demo 2") {
+                openWindow(id: "NavigationSplitView Demo 2")
+            }
+            Button("Open NavigationSplitView Demo 3") {
+                openWindow(id: "NavigationSplitView Demo 3")
             }
         }
     }
-
 }
 
-#Preview {
-    NavigationSplitViewDemo()
-}
