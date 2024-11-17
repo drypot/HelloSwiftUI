@@ -76,6 +76,7 @@ struct DemoNavigator: View {
                 }
                 Section {
                     NavigationLink("StateObject") { StateObjectDemo() }
+                    NavigationLink("StateLifeCylce") { StateLifeCylceDemo() }
                     NavigationLink("EnvironmentObject") { EnvironmentObjectDemo() }
                     NavigationLink("SceneObject") { SceneStorageDemoLauncher() }
                 }
