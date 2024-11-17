@@ -11,18 +11,20 @@ import SwiftUI
 
 struct StateLifeCylceDemo: View {
 
-    @State var showSub2 = true
+    @State var isShowingSub2 = true
 
     var body: some View {
         VStack {
             HStack {
                 SubView(name: "Sub 1")
-                if showSub2 {
+                if isShowingSub2 {
                     SubView(name: "Sub 2")
+                } else {
+                    BlankSubView()
                 }
             }
             Button("toggle Sub 2") {
-                showSub2.toggle()
+                isShowingSub2.toggle()
             }
         }
     }
@@ -49,6 +51,14 @@ struct StateLifeCylceDemo: View {
         }
     }
 
+    struct BlankSubView: View {
+        var body: some View {
+            Rectangle()
+                .fill(.separator)
+                .frame(width: 200, height: 200)
+                .cornerRadius(10)
+        }
+    }
 }
 
 #Preview {

@@ -54,7 +54,7 @@ struct DemoNavigator: View {
         NavigationSplitView {
             DemoList()
         } detail: {
-            TestingView()
+            DefaultView()
         }
         .toolbar {
             CustomToolbar() // ToolbarDemo
@@ -66,7 +66,7 @@ struct DemoNavigator: View {
         var body: some View {
             List {
                 Section {
-                    NavigationLink("Testing") { TestingView() }
+                    NavigationLink("Default") { DefaultView() }
                 }
                 Section {
                     NavigationLink("Window") { WindowDemo() }
