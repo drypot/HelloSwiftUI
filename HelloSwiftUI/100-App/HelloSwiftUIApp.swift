@@ -49,7 +49,7 @@ struct HelloSwiftUIApp: App {
             Text("Window Demo")
         }
 
-        WindowGroup("NavigationSplitView Demo", id: "NavigationSplitView Demo") {
+        WindowGroup("NavigationSplitView Demo1", id: "NavigationSplitView Demo1") {
             NavigationSplitViewDemo1()
         }
 

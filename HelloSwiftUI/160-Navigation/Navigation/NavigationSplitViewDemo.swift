@@ -13,8 +13,8 @@ struct NavigationSplitViewDemo: View {
 
     var body: some View {
         VStack {
-            Button("Open NavigationSplitView Demo") {
-                openWindow(id: "NavigationSplitView Demo")
+            Button("Open NavigationSplitView Demo1") {
+                openWindow(id: "NavigationSplitView Demo1")
             }
             Button("Open NavigationSplitView Demo 2") {
                 openWindow(id: "NavigationSplitView Demo 2")
