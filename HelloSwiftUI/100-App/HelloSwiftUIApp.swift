@@ -18,10 +18,11 @@ struct HelloSwiftUIApp: App {
 
     @NSApplicationDelegateAdaptor var appDelegate: AppDelegate
     @StateObject var appState = AppState()
+    @Environment(\.scenePhase) var scenePhase
 
     var body: some Scene {
 
-        // 아랙 각종 Scene 인스턴스들은 View 트리의 루트를 갖는다.
+        // 각종 Scene 들은 View 트리의 루트가 된다.
 
         WindowGroup("SwiftUI Demo") {
             DemoNavigator()
@@ -29,6 +30,9 @@ struct HelloSwiftUIApp: App {
         }
         .commands {
             CustomCommands()
+        }
+        .onChange(of: scenePhase) { oldScenePhase, newScenePhase in
+            print("scenePhase: \(scenePhase)")
         }
 
         WindowGroup("WindowGroup Demo", id: "WindowGroup Demo") {
