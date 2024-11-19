@@ -35,6 +35,12 @@ struct HelloSwiftUIApp: App {
             print("scenePhase: \(scenePhase)")
         }
 
+        #if os(macOS)
+        Settings {
+            SettingsView()
+        }
+        #endif
+
         WindowGroup("WindowGroup Demo", id: "WindowGroup Demo") {
             Text("WindowGroup Demo")
         }
