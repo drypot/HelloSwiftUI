@@ -20,7 +20,6 @@ struct EnvironmentObjectDemo: View {
             SubView()
             SubView2()
         }
-        .environmentObject(settings)
     }
 
     struct SubView: View {

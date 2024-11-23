@@ -49,16 +49,8 @@ struct HelloSwiftUIApp: App {
             Text("Window Demo")
         }
 
-        WindowGroup("NavigationSplitView Demo1", id: "NavigationSplitView Demo1") {
-            NavigationSplitViewDemo1()
-        }
-
-        WindowGroup("NavigationSplitView Demo 2", id: "NavigationSplitView Demo 2") {
-            NavigationSplitViewDemo2()
-        }
-
-        WindowGroup("NavigationSplitView Demo 3", id: "NavigationSplitView Demo 3") {
-            NavigationSplitViewDemo3()
+        WindowGroup("NavigationSplitViewDemo", id: "NavigationSplitViewDemo") {
+            NavigationSplitViewDemo()
         }
 
         WindowGroup("SceneStorage Demo", id: "SceneStorage Demo") {
@@ -94,14 +86,14 @@ struct DemoNavigator: View {
                     NavigationLink("Window") { WindowDemo() }
                 }
                 Section {
-                    NavigationLink("NavigationSplitView") { NavigationSplitViewDemo() }
+                    NavigationLink("NavigationSplitView") { NavigationSplitViewDemoPlaceholder() }
                 }
                 Section {
                     NavigationLink("StateObject") { StateObjectDemo() }
                     NavigationLink("StateLifeCylce") { StateLifeCylceDemo() }
                     NavigationLink("EnvironmentObject") { EnvironmentObjectDemo() }
                     NavigationLink("SceneObject") { SceneStorageDemo() }
-                    NavigationLink("Observation") { ObservationDemo() }
+                    NavigationLink("Observable") { ObservableDemo() }
                 }
                 Section {
                     NavigationLink("Text") { TextDemo() }

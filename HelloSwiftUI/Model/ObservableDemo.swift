@@ -1,5 +1,5 @@
 //
-//  ObservationDemo.swift
+//  ObservableDemo.swift
 //  HelloSwiftUI
 //
 //  Created by Kyuhyun Park on 11/19/24.
@@ -11,7 +11,7 @@ import SwiftUI
 // https://developer.apple.com/documentation/swiftui/managing-model-data-in-your-app
 // https://developer.apple.com/documentation/swiftui/migrating-from-the-observable-object-protocol-to-the-observable-macro
 
-struct ObservationDemo: View {
+struct ObservableDemo: View {
 
     // @Observable
     @Observable class Model {
@@ -53,6 +53,7 @@ struct ObservationDemo: View {
     struct SubView: View {
         // model 프로퍼티를 읽기만 한다면 @Bindable 필요 없는데
         // TextField 에서 넘길 바인딩을 만들어야 해서 @Bindable 붙여 준다.
+        // @Bindable 과 @Binding 을 헷갈리지 말자;
         @Bindable var model: Model
 
         var body: some View {
