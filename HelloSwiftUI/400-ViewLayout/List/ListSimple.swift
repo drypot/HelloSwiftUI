@@ -10,11 +10,23 @@ import SwiftUI
 // https://developer.apple.com/documentation/swiftui/list
 
 struct ListSimple: View {
+
+    struct Item: Identifiable {
+        let id = UUID()
+        let name: String
+    }
+
+    let items = [
+        Item(name: "Item 1"),
+        Item(name: "Item 2"),
+        Item(name: "Item 3")
+    ]
+
     var body: some View {
         List {
-            Text("first")
-            Text("second")
-            Text("third")
+            ForEach(items) { item in
+                Text(item.name)
+            }
         }
     }
 }

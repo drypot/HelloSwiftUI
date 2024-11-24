@@ -62,21 +62,13 @@ struct HelloSwiftUIApp: App {
 
 struct DemoNavigator: View {
 
-    struct Demo: Identifiable, Hashable {
+    struct Demo: Identifiable, Hashable, IDHashable {
         let id = UUID()
         let label: String
         let view: AnyView
-
-        static func == (lhs: Self, rhs: Self) -> Bool {
-            return lhs.id == rhs.id
-        }
-
-        func hash(into hasher: inout Hasher) {
-            hasher.combine(id)
-        }
     }
 
-    struct DemoSection: Identifiable, Hashable {
+    struct DemoSection: Identifiable, Hashable, IDHashable {
         let id = UUID()
         let label: String
         let demoList: [Demo]
@@ -133,9 +125,14 @@ struct DemoNavigator: View {
         DemoSection(
             label: "List",
             demoList: [
+                Demo(label: "List Simple", view: AnyView(ListSimple())),
+                Demo(label: "List Styles", view: AnyView(ListStyles())),
+                Demo(label: "List Selection", view: AnyView(ListSelection())),
+                Demo(label: "List with Section", view: AnyView(ListWithSection())),
+                Demo(label: "List Hierarchical", view: AnyView(ListHierarchical())),
+                Demo(label: "List Edit", view: AnyView(ListEditDemo())),
                 Demo(label: "ForEach", view: AnyView(ForEachDemo())),
-                Demo(label: "List", view: AnyView(ListDemo())),
-                Demo(label: "ListEdit", view: AnyView(ListEditDemo())),
+                Demo(label: "LazyVStack", view: AnyView(LazyVStackDemo())),
             ]
         ),
         DemoSection(
@@ -161,8 +158,8 @@ struct DemoNavigator: View {
         ),
     ]
 
-    @State var selectedSection = Self.demoSections[0]
-    @State var selectedDemo = Self.demoSections[0].demoList[0]
+    @State var selectedSection = Self.demoSections[6]
+    @State var selectedDemo = Self.demoSections[6].demoList[0]
 
     @State var searchText = ""
 

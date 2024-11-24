@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ListHierarchical: View {
 
-    struct FileItem: Hashable, Identifiable, CustomStringConvertible {
+    struct FileItem: Identifiable, Hashable, IDHashable, CustomStringConvertible {
         var id = UUID()
         var name: String
         var children: [FileItem]? = nil
@@ -23,71 +23,56 @@ struct ListHierarchical: View {
         }
     }
 
-    let fileHierarchyData: [FileItem] = [
-        FileItem(
-            name: "users",
-            children: [
-                FileItem(
-                    name: "user1234",
-                    children: [
-                        FileItem(
-                            name: "Photos",
-                            children: [
-                                FileItem(name: "photo001.jpg"),
-                                FileItem(name: "photo002.jpg")
-                            ]
-                        ),
-                        FileItem(
-                            name: "Movies",
-                            children: [FileItem(name: "movie001.mp4")]
-                        ),
-                        FileItem(
-                            name: "Documents",
-                            children: []
-                        )
-                    ]
-                ),
-                FileItem(
-                    name: "newuser",
-                    children: [
-                        FileItem(name: "Documents", children: [])
-                    ]
-                )
-            ]
-        ),
+    static let fileTree: [FileItem] = [
+        FileItem(name: "users", children: [
+            FileItem(name: "user1234", children: [
+                FileItem(name: "Photos", children: [
+                    FileItem(name: "photo001.jpg"),
+                    FileItem(name: "photo002.jpg")
+                ]),
+                FileItem( name: "Movies", children: [
+                    FileItem(name: "movie001.mp4")
+                ]),
+                FileItem(name: "Documents", children: [])
+            ]),
+            FileItem(name: "newuser", children: [
+                FileItem(name: "Documents", children: [])
+            ])
+        ]),
         FileItem(name: "private", children: nil)
     ]
 
-    // 이런 것은 현업에선 모델로.
-    var fileNames: [UUID: String] {
-        var fileNames = [UUID: String]()
+    static var fileNames = {
+        var fileNames = [FileItem.ID: String]()
 
-        func forEach(_ fileItem: FileItem) {
-            fileNames[fileItem.id] = fileItem.name
-            if let children = fileItem.children {
+        func forEach(_ file: FileItem) {
+            fileNames[file.id] = file.name
+            if let children = file.children {
                 for child in children {
                     forEach(child)
                 }
             }
         }
 
-        for fileItem in fileHierarchyData {
-            forEach(fileItem)
+        for file in fileTree {
+            forEach(file)
         }
 
         return fileNames
-    }
+    }()
 
-    @State private var singleSelection: UUID?
+    @State private var selectedFile: FileItem.ID?
 
     var body: some View {
-        List(fileHierarchyData, children: \.children, selection: $singleSelection) { item in
-            Text(item.description)
-        }
+        HStack {
+            List(Self.fileTree, children: \.children, selection: $selectedFile) { file in
+                Text(file.description)
+            }
 
-        List {
-            if let singleSelection {
-                Text(fileNames[singleSelection]!)
+            List {
+                if let selectedFile {
+                    Text(Self.fileNames[selectedFile]!)
+                }
             }
         }
     }

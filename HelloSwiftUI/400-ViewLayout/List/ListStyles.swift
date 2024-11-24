@@ -10,58 +10,60 @@ import SwiftUI
 struct ListStyles: View {
 
     var body: some View {
-        VStack {
-            List {
-                Text("Row 1")
-                Text("Row 2")
-                Text("Row 3")
-                Text("default")
+        HStack {
+            VStack {
+                List {
+                    Text("Row 1")
+                    Text("Row 2")
+                    Text("Row 3")
+                    Text("default")
+                }
+                
+                List {
+                    Text("Row 1")
+                    Text("Row 2")
+                    Text("Row 3")
+                    Text(".bordered")
+                }
+                .listStyle(.bordered)
+                
+                List {
+                    Text("Row 1")
+                    Text("Row 2")
+                    Text("Row 3")
+                    Text(".inset")
+                }
+                .listStyle(.inset)
             }
-
-            List {
-                Text("Row 1")
-                Text("Row 2")
-                Text("Row 3")
-                Text(".bordered")
+            
+            VStack {
+                List {
+                    Text("Row 1")
+                    Text("Row 2")
+                    Text("Row 3")
+                    Text(".plain")
+                }
+                .listStyle(.plain)
+                
+                List {
+                    Text("Row 1")
+                    Text("Row 2")
+                    Text("Row 3")
+                    Text(".sidebar")
+                }
+                .listStyle(.sidebar)
             }
-            .listStyle(.bordered)
-
-            List {
-                Text("Row 1")
-                Text("Row 2")
-                Text("Row 3")
-                Text(".inset")
-            }
-            .listStyle(.inset)
-        }
-
-        VStack {
-            List {
-                Text("Row 1")
-                Text("Row 2")
-                Text("Row 3")
-                Text(".plain")
-            }
-            .listStyle(.plain)
-
-            List {
-                Text("Row 1")
-                Text("Row 2")
-                Text("Row 3")
-                Text(".sidebar")
-            }
-            .listStyle(.sidebar)
-        }
-
-        VStack {
-            List {
-                Text("Row 1")
-                    .listRowSeparator(.hidden)
-                Text("Row 2")
-                    .listRowSeparator(.hidden)
-                Text("Row 3")
-                    .listRowSeparator(.hidden)
-                Text(".listRowSeparator(.hidden)")
+            
+            VStack {
+                List {
+                    Text("Row 1")
+                        .listRowSeparator(.hidden)
+                    Text("Row 2")
+                        .listRowSeparator(.hidden)
+                    Text("Row 3")
+                        .listRowSeparator(.hidden)
+                    Text(".listRowSeparator(.hidden)")
+                }
             }
         }
     }
