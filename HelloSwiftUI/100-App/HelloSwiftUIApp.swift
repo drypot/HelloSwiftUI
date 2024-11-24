@@ -76,12 +76,6 @@ struct DemoNavigator: View {
 
     static let demoSections = [
         DemoSection(
-            label: "Default",
-            demoList: [
-                Demo(label: "Default", view: AnyView(DefaultView())),
-            ]
-        ),
-        DemoSection(
             label: "Window",
             demoList: [
                 Demo(label: "Window", view: AnyView(WindowDemo())),
@@ -151,6 +145,12 @@ struct DemoNavigator: View {
             ]
         ),
         DemoSection(
+            label: "Grouping",
+            demoList: [
+                Demo(label: "Group", view: AnyView(GroupDemo())),
+            ]
+        ),
+        DemoSection(
             label: "Task",
             demoList: [
                 Demo(label: "Task", view: AnyView(TaskDemo())),
@@ -158,8 +158,8 @@ struct DemoNavigator: View {
         ),
     ]
 
-    @State var selectedSection = Self.demoSections[6]
-    @State var selectedDemo = Self.demoSections[6].demoList[0]
+    @State var selectedSection = Self.demoSections[8]
+    @State var selectedDemo = Self.demoSections[8].demoList[0]
 
     @State var searchText = ""
 
