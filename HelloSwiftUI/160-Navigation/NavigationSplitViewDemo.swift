@@ -18,17 +18,17 @@ struct NavigationSplitViewDemo: View {
         case anyTypesByValue = "Any Types by Value"
     }
 
-    struct Product: Identifiable, Hashable {
+    struct Product: Identifiable, Hashable, IDHashable {
         let id = UUID()
         let name: String
     }
 
-    struct Part: Identifiable, Hashable {
+    struct Part: Identifiable, Hashable, IDHashable {
         let id = UUID()
         let name: String
     }
 
-    struct Box: Identifiable, Hashable {
+    struct Box: Identifiable, Hashable, IDHashable {
         let id = UUID()
         let name: String
     }

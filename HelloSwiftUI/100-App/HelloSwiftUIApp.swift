@@ -130,6 +130,12 @@ struct DemoNavigator: View {
             ]
         ),
         DemoSection(
+            label: "Custom List",
+            demoList: [
+                Demo(label: "Custom List", view: AnyView(CustomListDemo())),
+            ]
+        ),
+        DemoSection(
             label: "Grid",
             demoList: [
                 Demo(label: "GridView", view: AnyView(GridViewDemo())),
@@ -159,15 +165,28 @@ struct DemoNavigator: View {
         ),
     ]
 
-    @State var selectedSection = Self.demoSections[8]
-    @State var selectedDemo = Self.demoSections[8].demoList[1]
+    @State var selectedSection = Self.demoSections[6]
+    @State var selectedDemo = Self.demoSections[6].demoList[0]
 
     @State var searchText = ""
 
+    @State var isExpanded = true
+
     var body: some View {
         NavigationSplitView {
-            List(Self.demoSections, selection: $selectedSection) { section in
-                NavigationLink(section.label, value: section)
+            List(selection: $selectedSection) {
+                ForEach(Self.demoSections) { section in
+                    NavigationLink(section.label, value: section)
+                }
+                Section {
+                    Text("Badge")
+                        .badge(36)
+                }
+                Section("Expandable", isExpanded: $isExpanded) {
+                    Text("Item 1")
+                    Text("Item 2")
+                    Text("Item 3")
+                }
             }
             .onChange(of: selectedSection) { oldValue, newValue in
                 selectedDemo = newValue.demoList[0]
