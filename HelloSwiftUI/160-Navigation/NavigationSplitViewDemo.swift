@@ -38,7 +38,7 @@ struct NavigationSplitViewDemo: View {
         case box(id: Box.ID)
     }
 
-    class Storage {
+    struct Storage {
         let products: [Product]
         let parts: [Product.ID: [Part]]
         let boxes: [Box]

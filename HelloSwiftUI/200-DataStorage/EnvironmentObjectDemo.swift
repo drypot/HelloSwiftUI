@@ -9,21 +9,22 @@ import SwiftUI
 
 struct EnvironmentObjectDemo: View {
 
-    class UserSettings: ObservableObject {
-        @Published var counter: Int = 0
+    @Observable class UserSettings {
+        var counter: Int = 0
     }
 
-    var settings = UserSettings()
+    @State var settings = UserSettings()
 
     var body: some View {
         VStack {
             SubView()
             SubView2()
         }
+        .environment(settings)
     }
 
     struct SubView: View {
-        @EnvironmentObject var settings: UserSettings
+        @Environment(UserSettings.self) var settings
 
         var body: some View {
             Text("Counter: \(settings.counter)")
@@ -31,7 +32,7 @@ struct EnvironmentObjectDemo: View {
     }
 
     struct SubView2: View {
-        @EnvironmentObject var settings: UserSettings
+        @Environment(UserSettings.self) var settings
 
         var body: some View {
             Button("Increment") {

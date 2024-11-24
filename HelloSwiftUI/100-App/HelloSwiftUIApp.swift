@@ -62,76 +62,129 @@ struct HelloSwiftUIApp: App {
 
 struct DemoNavigator: View {
 
+    struct Demo: Identifiable, Hashable {
+        let id = UUID()
+        let label: String
+        let view: AnyView
+
+        static func == (lhs: Self, rhs: Self) -> Bool {
+            return lhs.id == rhs.id
+        }
+
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(id)
+        }
+    }
+
+    struct DemoSection: Identifiable, Hashable {
+        let id = UUID()
+        let label: String
+        let demoList: [Demo]
+    }
+
+    static let demoSections = [
+        DemoSection(
+            label: "Default",
+            demoList: [
+                Demo(label: "Default", view: AnyView(DefaultView())),
+            ]
+        ),
+        DemoSection(
+            label: "Window",
+            demoList: [
+                Demo(label: "Window", view: AnyView(WindowDemo())),
+            ]
+        ),
+        DemoSection(
+            label: "Navigation",
+            demoList: [
+                Demo(label: "NavigationSplitView", view: AnyView(NavigationSplitViewDemoPlaceholder())),
+                Demo(label: "TabView", view: AnyView(TabViewDemo())),
+            ]
+        ),
+        DemoSection(
+            label: "DataStorage",
+            demoList: [
+                Demo(label: "StateObject", view: AnyView(StateObjectDemo())),
+                Demo(label: "StateLifeCylce", view: AnyView(StateLifeCylceDemo())),
+                Demo(label: "EnvironmentObject", view: AnyView(EnvironmentObjectDemo())),
+                Demo(label: "SceneObject", view: AnyView(SceneStorageDemo())),
+                Demo(label: "Observable", view: AnyView(ObservableDemo())),
+            ]
+        ),
+        DemoSection(
+            label: "View",
+            demoList: [
+                Demo(label: "Text", view: AnyView(TextDemo())),
+                Demo(label: "TextField", view: AnyView(TextFieldDemo())),
+                Demo(label: "Button", view: AnyView(ButtonDemo())),
+                Demo(label: "Link", view: AnyView(LinkDemo())),
+                Demo(label: "Menu", view: AnyView(MenuDemo())),
+                Demo(label: "DatePicker", view: AnyView(DatePickerDemo())),
+            ]
+        ),
+        DemoSection(
+            label: "Command",
+            demoList: [
+                Demo(label: "Command", view: AnyView(CommandDemo())),
+                Demo(label: "Context Menu", view: AnyView(ContextMenuDemo())),
+            ]
+        ),
+        DemoSection(
+            label: "List",
+            demoList: [
+                Demo(label: "ForEach", view: AnyView(ForEachDemo())),
+                Demo(label: "List", view: AnyView(ListDemo())),
+                Demo(label: "ListEdit", view: AnyView(ListEditDemo())),
+            ]
+        ),
+        DemoSection(
+            label: "Grid",
+            demoList: [
+                Demo(label: "GridView", view: AnyView(GridViewDemo())),
+                Demo(label: "GridViewDivider", view: AnyView(GridViewDividerDemo())),
+                Demo(label: "LazyGridView", view: AnyView(LazyGridViewDemo())),
+                Demo(label: "LazyGridView2", view: AnyView(LazyGridViewDemo2())),
+            ]
+        ),
+        DemoSection(
+            label: "Table",
+            demoList: [
+                Demo(label: "Table", view: AnyView(TableDemo())),
+            ]
+        ),
+        DemoSection(
+            label: "Task",
+            demoList: [
+                Demo(label: "Task", view: AnyView(TaskDemo())),
+            ]
+        ),
+    ]
+
+    @State var selectedSection = Self.demoSections[0]
+    @State var selectedDemo = Self.demoSections[0].demoList[0]
+
     @State var searchText = ""
 
     var body: some View {
         NavigationSplitView {
-            DemoList()
+            List(Self.demoSections, selection: $selectedSection) { section in
+                NavigationLink(section.label, value: section)
+            }
+            .onChange(of: selectedSection) { oldValue, newValue in
+                selectedDemo = newValue.demoList[0]
+            }
+        } content: {
+            List(selectedSection.demoList, selection: $selectedDemo) { demo in
+                NavigationLink(demo.label, value: demo)
+            }
         } detail: {
-            DefaultView()
+            selectedDemo.view
         }
         .toolbar {
             CustomToolbar() // ToolbarDemo
         }
         .searchable(text: $searchText)
-    }
-
-    struct DemoList: View {
-        var body: some View {
-            List {
-                Section {
-                    NavigationLink("Default") { DefaultView() }
-                }
-                Section {
-                    NavigationLink("Window") { WindowDemo() }
-                }
-                Section {
-                    NavigationLink("NavigationSplitView") { NavigationSplitViewDemoPlaceholder() }
-                    NavigationLink("TabView") { TabViewDemo() }
-                }
-                Section {
-                    NavigationLink("StateObject") { StateObjectDemo() }
-                    NavigationLink("StateLifeCylce") { StateLifeCylceDemo() }
-                    NavigationLink("EnvironmentObject") { EnvironmentObjectDemo() }
-                    NavigationLink("SceneObject") { SceneStorageDemo() }
-                    NavigationLink("Observable") { ObservableDemo() }
-                }
-                Section {
-                    NavigationLink("Text") { TextDemo() }
-                    NavigationLink("TextField") { TextFieldDemo() }
-                    NavigationLink("Button") { ButtonDemo() }
-                    NavigationLink("Link") { LinkDemo() }
-                    NavigationLink("Menu") { MenuDemo() }
-                    NavigationLink("DatePicker") { DatePickerDemo() }
-                }
-                Section {
-                    NavigationLink("Command") { CommandDemo() }
-                    NavigationLink("Context Menu") { ContextMenuDemo() }
-                }
-                Section {
-                    NavigationLink("ForEach") { ForEachDemo() }
-                    NavigationLink("List") { ListDemo() }
-                    NavigationLink("ListEdit") { ListEditDemo() }
-                }
-                Section {
-                    NavigationLink("GridView") { GridViewDemo() }
-                    NavigationLink("GridViewDivider") { GridViewDividerDemo() }
-                    NavigationLink("LazyGridView") { LazyGridViewDemo() }
-                    NavigationLink("LazyGridView 2") { LazyGridViewDemo2() }
-                }
-                Section {
-                    NavigationLink("Table") { TableDemo() }
-                }
-                Section {
-                    Text("Badge Sample")
-                        .badge(123)
-                }
-                Section {
-                    NavigationLink("Task") { TaskDemo() }
-                }
-            }
-            .frame(minWidth: 180)
-        }
     }
 
 }
