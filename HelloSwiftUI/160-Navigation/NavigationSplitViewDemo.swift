@@ -80,6 +80,8 @@ struct NavigationSplitViewDemo: View {
     var body: some View {
         switch demoType {
         case .byID:
+            // id 로 상태관리하고 나머지는 수작업.
+            // 좀 난잡해 지긴 하지만 유연성이 좋다.
             NavigationSplitView {
                 List(Self.storage.products, selection: $selectedProductID) { product in
                     Text(product.name)
@@ -96,9 +98,8 @@ struct NavigationSplitViewDemo: View {
                 let parts = Self.storage.parts[product.id]!.filter { selectedPartIDs.contains($0.id) }
                 PartsDetail(parts: parts)
             }
+            .navigationTitle(demoType.rawValue)
 
-        // NavigationLink 에 ViewBuilder 바로 붙이는 건
-        // 루프 돌리기 적합하지 않은 링크 셋 구성에나 유용할 것 같다.
         case .byLink:
             NavigationSplitView {
                 let product = Self.storage.products[0]
@@ -110,6 +111,8 @@ struct NavigationSplitViewDemo: View {
                 let product = Self.storage.products[0]
                 let parts = Self.storage.parts[product.id]!
                 List {
+                    // NavigationLink 에 ViewBuilder 바로 붙일 수 있다.
+                    // 루프 돌리기 적합하지 않은 링크 셋 구성에 사용.
                     NavigationLink(parts[0].name) { PartDetail(part: parts[0]) }
                     NavigationLink(parts[1].name) { PartDetail(part: parts[1]) }
                     NavigationLink(parts[2].name) { PartDetail(part: parts[2]) }
@@ -117,9 +120,14 @@ struct NavigationSplitViewDemo: View {
             } detail: {
                 Spacer()
             }
+            .navigationTitle(demoType.rawValue)
 
         case .byValue:
             NavigationSplitView {
+                // NavigationLink 가 List 안에 있을 경우,
+                // NavigationLink 링크 클릭시 NavigationLink value 값을
+                // List selection 바인딩 변수에 넣어준다고 한다.
+                // 전반적으로 이 방식이 제일 이뻐보인다.
                 List(Self.storage.products, selection: $selectedProduct) { product in
                     NavigationLink(product.name, value: product)
                 }
@@ -139,8 +147,14 @@ struct NavigationSplitViewDemo: View {
             } detail: {
                 PartsDetail(parts: Array(selectedParts))
             }
+            .navigationTitle(demoType.rawValue)
 
         case .withDestination:
+            // List selection 변수와 상관없이
+            // NavigationLink value 와
+            // value 를 받는 navigationDestination 조합으로 사용할 수도 있다.
+            // 첫번째 컬럼에 로직이 너무 몰린다.
+            // SplitView 보다는 StackView 에 더 어울리는 것 같다.
             NavigationSplitView {
                 List(Self.storage.products, selection: $selectedProductID) { product in
                     NavigationLink(product.name, value: product)
@@ -160,6 +174,7 @@ struct NavigationSplitViewDemo: View {
             } detail: {
                 Spacer()
             }
+            .navigationTitle(demoType.rawValue)
 
         case .anyTypesByID:
             NavigationSplitView {
@@ -201,6 +216,7 @@ struct NavigationSplitViewDemo: View {
                     BoxDetail(box: box)
                 }
             }
+            .navigationTitle(demoType.rawValue)
 
         case .anyTypesByValue:
             NavigationSplitView {
@@ -236,6 +252,7 @@ struct NavigationSplitViewDemo: View {
             } detail: {
                 Spacer()
             }
+            .navigationTitle(demoType.rawValue)
 
         }
         
