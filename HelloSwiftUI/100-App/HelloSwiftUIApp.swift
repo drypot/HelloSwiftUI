@@ -87,6 +87,7 @@ struct DemoNavigator: View {
                 }
                 Section {
                     NavigationLink("NavigationSplitView") { NavigationSplitViewDemoPlaceholder() }
+                    NavigationLink("TabView") { TabViewDemo() }
                 }
                 Section {
                     NavigationLink("StateObject") { StateObjectDemo() }
