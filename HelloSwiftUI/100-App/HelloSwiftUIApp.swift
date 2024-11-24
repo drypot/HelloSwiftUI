@@ -120,10 +120,10 @@ struct DemoNavigator: View {
             label: "List",
             demoList: [
                 Demo(label: "List Simple", view: AnyView(ListSimple())),
-                Demo(label: "List Styles", view: AnyView(ListStyles())),
-                Demo(label: "List Selection", view: AnyView(ListSelection())),
-                Demo(label: "List with Section", view: AnyView(ListWithSection())),
+                Demo(label: "List Loop", view: AnyView(ListLoop())),
+                Demo(label: "List Section", view: AnyView(ListSection())),
                 Demo(label: "List Hierarchical", view: AnyView(ListHierarchical())),
+                Demo(label: "List Styles", view: AnyView(ListStyles())),
                 Demo(label: "List Edit", view: AnyView(ListEditDemo())),
                 Demo(label: "ForEach", view: AnyView(ForEachDemo())),
                 Demo(label: "LazyVStack", view: AnyView(LazyVStackDemo())),
@@ -148,6 +148,7 @@ struct DemoNavigator: View {
             label: "Grouping",
             demoList: [
                 Demo(label: "Group", view: AnyView(GroupDemo())),
+                Demo(label: "Section", view: AnyView(SectionDemo())),
             ]
         ),
         DemoSection(
@@ -159,7 +160,7 @@ struct DemoNavigator: View {
     ]
 
     @State var selectedSection = Self.demoSections[8]
-    @State var selectedDemo = Self.demoSections[8].demoList[0]
+    @State var selectedDemo = Self.demoSections[8].demoList[1]
 
     @State var searchText = ""
 

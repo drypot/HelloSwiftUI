@@ -1,5 +1,5 @@
 //
-//  ListWithSection.swift
+//  ListSection.swift
 //  HelloSwiftUI
 //
 //  Created by Kyuhyun Park on 11/14/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ListWithSection: View {
+struct ListSection: View {
 
     struct Sea: Identifiable, Hashable, IDHashable {
         let id = UUID()
