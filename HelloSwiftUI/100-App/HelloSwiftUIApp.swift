@@ -45,6 +45,11 @@ struct HelloSwiftUIApp: App {
             Text("WindowGroup Demo")
         }
 
+        WindowGroup("Message Demo", id: "Message Demo", for: SimpleMessage.ID.self) { $id in
+            let message = SimpleMessage.messageById(id!)!
+            SimpleMessageView(message: message)
+        }
+
         Window("Window Demo", id: "Window Demo") {
             Text("Window Demo")
         }

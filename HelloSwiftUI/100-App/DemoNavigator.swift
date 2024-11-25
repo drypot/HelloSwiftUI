@@ -114,8 +114,8 @@ struct DemoNavigator: View {
         ),
     ]
 
-    @State var selectedSection = Self.demoSections[8]
-    @State var selectedDemo = Self.demoSections[8].demoList[4]
+    @State var selectedSection = Self.demoSections[0]
+    @State var selectedDemo = Self.demoSections[0].demoList[0]
 
     @State var searchText = ""
 
