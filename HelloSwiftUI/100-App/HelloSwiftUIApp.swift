@@ -125,14 +125,7 @@ struct DemoNavigator: View {
                 Demo(label: "List Hierarchical", view: AnyView(ListHierarchical())),
                 Demo(label: "List Styles", view: AnyView(ListStyles())),
                 Demo(label: "List Edit", view: AnyView(ListEditDemo())),
-                Demo(label: "ForEach", view: AnyView(ForEachDemo())),
                 Demo(label: "LazyVStack", view: AnyView(LazyVStackDemo())),
-            ]
-        ),
-        DemoSection(
-            label: "Custom List",
-            demoList: [
-                Demo(label: "Custom List", view: AnyView(CustomListDemo())),
             ]
         ),
         DemoSection(
@@ -155,6 +148,13 @@ struct DemoNavigator: View {
             demoList: [
                 Demo(label: "Group", view: AnyView(GroupDemo())),
                 Demo(label: "Section", view: AnyView(SectionDemo())),
+                Demo(label: "ForEach", view: AnyView(ForEachDemo())),
+            ]
+        ),
+        DemoSection(
+            label: "Custom List",
+            demoList: [
+                Demo(label: "Custom List", view: AnyView(CustomListDemo())),
             ]
         ),
         DemoSection(

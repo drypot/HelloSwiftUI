@@ -8,6 +8,7 @@
 import SwiftUI
 
 // https://developer.apple.com/documentation/swiftui/group/init(sections:transform:)
+// https://developer.apple.com/documentation/swiftui/group/init(subviews:transform:)
 
 struct CustomListDemo: View {
 
@@ -29,33 +30,74 @@ struct CustomListDemo: View {
     ]
 
     var body: some View {
-        CustomList {
-            ForEach(Self.products) { product in
-                Section(product.name) {
-                    ForEach(product.parts) { part in
-                        Text(part.name)
+        HStack {
+
+            CustomList {
+                ForEach(Self.products) { product in
+                    Section(product.name) {
+                        ForEach(product.parts) { part in
+                            Text(part.name)
+                        }
                     }
                 }
+                Section("Extra") {
+                    Text("P10")
+                    Text("P11")
+                    Text("P12")
+                }
             }
-            Section("Extra") {
-                Text("P10")
-                Text("P11")
-                Text("P12")
+
+            CustomListWithSection {
+                ForEach(Self.products) { product in
+                    Section(product.name) {
+                        ForEach(product.parts) { part in
+                            Text(part.name)
+                        }
+                    }
+                }
+                Section("Extra") {
+                    Text("P10")
+                    Text("P11")
+                    Text("P12")
+                }
             }
+
         }
     }
+
 
     struct CustomList<Content: View>: View {
         @ViewBuilder var content: Content
         var body: some View {
-            Group(sections: content) { sections in
-                ForEach(sections) { section in
-                    Divider()
-                    section.header
-                    ForEach(section.content) { subview in
-                        subview
+            VStack {
+                Group(subviews: content) { subviews in
+                    if let first = subviews.first {
+                        first
+                            .font(.largeTitle)
                     }
-                    section.footer
+                    if subviews.count >= 4 {
+                        subviews[1...3]
+                            .font(.headline)
+                    }
+                    subviews[4...]
+                }
+            }
+        }
+    }
+
+    struct CustomListWithSection<Content: View>: View {
+        @ViewBuilder var content: Content
+        var body: some View {
+            VStack {
+                Group(sections: content) { sections in
+                    ForEach(sections) { section in
+                        section.header
+                            .font(.headline)
+                        ForEach(section.content) { subview in
+                            subview
+                        }
+                        section.footer
+                    }
                 }
             }
         }

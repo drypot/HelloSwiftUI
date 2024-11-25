@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// https://developer.apple.com/documentation/swiftui/section
+
 struct SectionDemo: View {
 
     @State var isExpanded = true
