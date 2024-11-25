@@ -96,6 +96,7 @@ struct DemoNavigator: View {
                 Demo(label: "Group", view: AnyView(GroupDemo())),
                 Demo(label: "Section", view: AnyView(SectionDemo())),
                 Demo(label: "ForEach", view: AnyView(ForEachDemo())),
+                Demo(label: "GroupBox", view: AnyView(GroupBoxDemo())),
             ]
         ),
         DemoSection(
@@ -112,8 +113,8 @@ struct DemoNavigator: View {
         ),
     ]
 
-    @State var selectedSection = Self.demoSections[6]
-    @State var selectedDemo = Self.demoSections[6].demoList[0]
+    @State var selectedSection = Self.demoSections[8]
+    @State var selectedDemo = Self.demoSections[8].demoList[3]
 
     @State var searchText = ""
 
