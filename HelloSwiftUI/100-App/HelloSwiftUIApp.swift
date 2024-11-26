@@ -50,9 +50,52 @@ struct HelloSwiftUIApp: App {
             SimpleMessageView(message: message)
         }
 
+        
         Window("Window Demo", id: "Window Demo") {
             Text("Window Demo")
         }
+        .windowStyle(.automatic)
+
+        Window("Window Demo", id: "TitleBar Window Demo") {
+            Text("Window Demo")
+        }
+        .windowStyle(.titleBar)
+
+        Window("Window Demo", id: "HiddenTitleBar Window Demo") {
+            Text("Window Demo")
+        }
+        .windowStyle(.hiddenTitleBar)
+
+
+        Window("Window Demo", id: "DefaultSize Window Demo") {
+            Text("Window Demo")
+        }
+        .defaultSize(width: 400, height: 400)
+
+        Window("Window Demo", id: "ContentSize Window Demo") {
+            Text("Window Demo")
+                .frame(
+                    minWidth: 200, maxWidth: 400,
+                    minHeight: 200, maxHeight: 400
+                )
+        }
+        .windowResizability(.contentSize)
+
+        Window("Window Demo", id: "ContentMinSize Window Demo") {
+            Text("Window Demo")
+                .frame(
+                    minWidth: 200, maxWidth: 400,
+                    minHeight: 200, maxHeight: 400
+                )
+        }
+        .windowResizability(.contentMinSize)
+
+        Window("Window Demo", id: "BottomTrailing Window Demo") {
+            Text("Window Demo")
+        }
+        .defaultPosition(.bottomTrailing)
+        
+        //
 
         WindowGroup("NavigationSplitViewDemo", id: "NavigationSplitViewDemo") {
             NavigationSplitViewDemo()
