@@ -42,6 +42,11 @@
 			path = HelloSwiftUI;
 			sourceTree = "<group>";
 		};
+		009BF4E12CF6026700B38480 /* Images */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Images;
+			sourceTree = "<group>";
+		};
 		00DD6C882CBBF8E000E523B1 /* HelloSwftUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = HelloSwftUITests;
@@ -70,6 +75,7 @@
 		001133222C99B4E80099CB9B = {
 			isa = PBXGroup;
 			children = (
+				009BF4E12CF6026700B38480 /* Images */,
 				006BC3A42CBC4792005D5E31 /* LICENSE */,
 				006BC3A52CBC4792005D5E31 /* README.md */,
 				0011332D2C99B4E80099CB9B /* HelloSwiftUI */,
