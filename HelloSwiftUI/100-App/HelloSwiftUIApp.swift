@@ -24,7 +24,7 @@ struct HelloSwiftUIApp: App {
 
         // 각종 Scene 들은 View 트리의 루트가 된다.
 
-        WindowGroup("SwiftUI Demo") {
+        Window("SwiftUI Demo", id: "SwiftUI Demo") {
             DemoNavigator()
                 .useDisplayMode()
         }
@@ -94,7 +94,13 @@ struct HelloSwiftUIApp: App {
             Text("Window Demo")
         }
         .defaultPosition(.bottomTrailing)
-        
+
+        //
+
+        DocumentGroup(newDocument: SimpleFileDocument()) { file in
+            SimpleFileDocumentView(document: file.$document)
+        }
+
         //
 
         WindowGroup("NavigationSplitViewDemo", id: "NavigationSplitViewDemo") {

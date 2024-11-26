@@ -21,24 +21,6 @@ struct WindowDemo: View {
         VStack {
             Form {
                 Section {
-                    Button("Open WindowGroup") {
-                        openWindow(id: "WindowGroup Demo")
-                    }
-                }
-
-                Section {
-                    Button("Open Message1") {
-                        openWindow(id: "Message Demo", value: SimpleMessage.messages[0].id)
-                    }
-                    Button("Open Message2") {
-                        openWindow(id: "Message Demo", value: SimpleMessage.messages[1].id)
-                    }
-                    Button("Open Message3") {
-                        openWindow(id: "Message Demo", value: SimpleMessage.messages[2].id)
-                    }
-                }
-
-                Section {
                     Button("Open Window") {
                         openWindow(id: "Window Demo")
                     }

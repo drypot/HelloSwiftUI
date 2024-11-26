@@ -23,9 +23,11 @@ struct DemoNavigator: View {
 
     static let demoSections = [
         DemoSection(
-            label: "Window",
+            label: "Scene",
             demoList: [
                 Demo(label: "Window", view: AnyView(WindowDemo())),
+                Demo(label: "WindowGroup", view: AnyView(WindowGroupDemo())),
+                Demo(label: "DocumentGroup", view: AnyView(DocumentGroupDemo())),
             ]
         ),
         DemoSection(
@@ -115,7 +117,7 @@ struct DemoNavigator: View {
     ]
 
     @State var selectedSection = Self.demoSections[0]
-    @State var selectedDemo = Self.demoSections[0].demoList[0]
+    @State var selectedDemo = Self.demoSections[0].demoList[2]
 
     @State var searchText = ""
 
