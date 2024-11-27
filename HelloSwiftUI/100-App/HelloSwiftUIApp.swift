@@ -95,13 +95,12 @@ struct HelloSwiftUIApp: App {
         }
         .defaultPosition(.bottomTrailing)
 
-        //
+        // https://developer.apple.com/documentation/swiftui/documentgroup
+        // https://developer.apple.com/documentation/swiftui/filedocumentconfiguration
 
         DocumentGroup(newDocument: SimpleFileDocument()) { file in
             SimpleFileDocumentView(document: file.$document)
         }
-
-        //
 
         WindowGroup("NavigationSplitViewDemo", id: "NavigationSplitViewDemo") {
             NavigationSplitViewDemo()
