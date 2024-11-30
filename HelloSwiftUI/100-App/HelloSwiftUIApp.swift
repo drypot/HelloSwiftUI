@@ -98,8 +98,12 @@ struct HelloSwiftUIApp: App {
         // https://developer.apple.com/documentation/swiftui/documentgroup
         // https://developer.apple.com/documentation/swiftui/filedocumentconfiguration
 
-        DocumentGroup(newDocument: SimpleFileDocument()) { file in
-            SimpleFileDocumentView(document: file.$document)
+        DocumentGroup(newDocument: SimpleFileDocument()) { configuration in
+            SimpleFileDocumentView(document: configuration.$document)
+        }
+
+        DocumentGroup(newDocument: { JsonDocument() }) { configuration in
+            JsonDocumentView(document: configuration.document)
         }
 
         WindowGroup("NavigationSplitViewDemo", id: "NavigationSplitViewDemo") {

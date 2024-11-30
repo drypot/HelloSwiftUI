@@ -48,3 +48,15 @@ struct SimpleFileDocument: FileDocument {
         return FileWrapper(regularFileWithContents: data)
     }
 }
+
+struct SimpleFileDocumentView: View {
+
+    @Binding var document: SimpleFileDocument
+
+    var body: some View {
+        TextEditor(text: $document.content)
+            .font(.custom("HelveticaNeue", size: 18))
+            .lineSpacing(5)
+            .scenePadding()
+    }
+}
