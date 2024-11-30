@@ -38,6 +38,12 @@ struct DemoNavigator: View {
             ]
         ),
         DemoSection(
+            label: "Modal",
+            demoList: [
+                Demo(label: "ModalDemo", view: AnyView(ModalDemo())),
+            ]
+        ),
+        DemoSection(
             label: "DataStorage",
             demoList: [
                 Demo(label: "StateObject", view: AnyView(StateObjectDemo())),
@@ -116,8 +122,8 @@ struct DemoNavigator: View {
         ),
     ]
 
-    @State var selectedSection = Self.demoSections[0]
-    @State var selectedDemo = Self.demoSections[0].demoList[2]
+    @State var selectedSection = Self.demoSections[2]
+    @State var selectedDemo = Self.demoSections[2].demoList[0]
 
     @State var searchText = ""
 

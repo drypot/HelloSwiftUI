@@ -19,13 +19,14 @@ struct DocumentGroupDemo: View {
     @Environment(\.openDocument) private var openDocument
 
     var body: some View {
-        Button("New Text Document") {
-            let sampleString = "In an age of endless noise and fleeting moments, the rarest treasures are found in the quiet places where we reconnect with ourselves."
-            let document = SimpleFileDocument(content: sampleString)
-            newDocument(document)
-        }
-        Button("New Json Document") {
-            let sampleString = """
+        Form {
+            Button("New Text Document") {
+                let sampleString = "In an age of endless noise and fleeting moments, the rarest treasures are found in the quiet places where we reconnect with ourselves."
+                let document = SimpleFileDocument(content: sampleString)
+                newDocument(document)
+            }
+            Button("New Json Document") {
+                let sampleString = """
             {
                 "fruit": "Apple",
                 "size": "Large",
@@ -33,11 +34,13 @@ struct DocumentGroupDemo: View {
             }
             
             """
-            let document = JsonDocument(content: sampleString)
-            newDocument({ document })
+                let document = JsonDocument(content: sampleString)
+                newDocument({ document })
+            }
         }
-
+        .formStyle(.grouped)
     }
+    
 }
 
 #Preview {
