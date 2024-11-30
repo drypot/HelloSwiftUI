@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// 툴바 편집 기능은 다음에 정말 필요하면.
-// 다행이 그리 복잡해 보이진 않는다.
+// https://developer.apple.com/design/human-interface-guidelines/toolbars
+// https://developer.apple.com/documentation/swiftui/toolbars
 
 struct CustomToolbar: ToolbarContent {
 
