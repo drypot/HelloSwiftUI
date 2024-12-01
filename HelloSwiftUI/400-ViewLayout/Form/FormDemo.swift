@@ -58,6 +58,7 @@ struct FormDemo: View {
         @State var playNotificationSounds = true
         @State var sendReadReceipts = false
         @State var profileImageSize = ProfileImageSize.large
+        @State var message = ""
 
         var body: some View {
             Form {
@@ -76,6 +77,11 @@ struct FormDemo: View {
                     Text("Small").tag(ProfileImageSize.small)
                 }
                 .pickerStyle(.inline)
+
+                TextField(text: $message) {
+                    Text("Simple message")
+                }
+                .textFieldStyle(.roundedBorder)
 
                 LabeledContent("Some Label") {
                     Text("Some Contents")

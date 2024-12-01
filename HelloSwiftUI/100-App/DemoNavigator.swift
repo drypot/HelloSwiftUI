@@ -44,10 +44,10 @@ struct DemoNavigator: View {
             ]
         ),
         DemoSection(
-            label: "DataStorage",
+            label: "Model data",
             demoList: [
+                Demo(label: "State", view: AnyView(StateDemo())),
                 Demo(label: "StateObject", view: AnyView(StateObjectDemo())),
-                Demo(label: "StateLifeCylce", view: AnyView(StateLifeCylceDemo())),
                 Demo(label: "EnvironmentObject", view: AnyView(EnvironmentObjectDemo())),
                 Demo(label: "SceneObject", view: AnyView(SceneStorageDemo())),
                 Demo(label: "Observable", view: AnyView(ObservableDemo())),
@@ -72,6 +72,20 @@ struct DemoNavigator: View {
             ]
         ),
         DemoSection(
+            label: "Form",
+            demoList: [
+                Demo(label: "Form", view: AnyView(FormDemo())),
+            ]
+        ),
+        DemoSection(
+            label: "Grouping",
+            demoList: [
+                Demo(label: "Group", view: AnyView(GroupDemo())),
+                Demo(label: "Section", view: AnyView(SectionDemo())),
+                Demo(label: "GroupBox", view: AnyView(GroupBoxDemo())),
+            ]
+        ),
+        DemoSection(
             label: "List",
             demoList: [
                 Demo(label: "List Simple", view: AnyView(ListSimple())),
@@ -80,7 +94,14 @@ struct DemoNavigator: View {
                 Demo(label: "List Hierarchical", view: AnyView(ListHierarchical())),
                 Demo(label: "List Styles", view: AnyView(ListStyles())),
                 Demo(label: "List Edit", view: AnyView(ListEditDemo())),
+                Demo(label: "ForEach", view: AnyView(ForEachDemo())),
                 Demo(label: "LazyVStack", view: AnyView(LazyVStackDemo())),
+            ]
+        ),
+        DemoSection(
+            label: "Custom List",
+            demoList: [
+                Demo(label: "Custom List", view: AnyView(CustomListDemo())),
             ]
         ),
         DemoSection(
@@ -99,22 +120,6 @@ struct DemoNavigator: View {
             ]
         ),
         DemoSection(
-            label: "Grouping",
-            demoList: [
-                Demo(label: "Group", view: AnyView(GroupDemo())),
-                Demo(label: "Section", view: AnyView(SectionDemo())),
-                Demo(label: "ForEach", view: AnyView(ForEachDemo())),
-                Demo(label: "GroupBox", view: AnyView(GroupBoxDemo())),
-                Demo(label: "Form", view: AnyView(FormDemo())),
-            ]
-        ),
-        DemoSection(
-            label: "Custom List",
-            demoList: [
-                Demo(label: "Custom List", view: AnyView(CustomListDemo())),
-            ]
-        ),
-        DemoSection(
             label: "Task",
             demoList: [
                 Demo(label: "Task", view: AnyView(TaskDemo())),
@@ -122,8 +127,8 @@ struct DemoNavigator: View {
         ),
     ]
 
-    @State var selectedSection = Self.demoSections[2]
-    @State var selectedDemo = Self.demoSections[2].demoList[0]
+    @State var selectedSection = Self.demoSections[3]
+    @State var selectedDemo = Self.demoSections[3].demoList[0]
 
     @State var searchText = ""
 
