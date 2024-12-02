@@ -47,11 +47,11 @@ struct DemoNavigator: View {
             label: "Model data",
             demoList: [
                 Demo(label: "State", view: AnyView(StateDemo())),
-                Demo(label: "StateObject", view: AnyView(StateObjectDemo())),
+                Demo(label: "StateAnimation", view: AnyView(StateAnimationDemo())),
+                Demo(label: "Observable", view: AnyView(ObservableDemo())),
+                Demo(label: "ObservableObject", view: AnyView(ObservableObjectDemo())),
                 Demo(label: "EnvironmentObject", view: AnyView(EnvironmentObjectDemo())),
                 Demo(label: "SceneObject", view: AnyView(SceneStorageDemo())),
-                Demo(label: "Observable", view: AnyView(ObservableDemo())),
-                Demo(label: "StateAnimation", view: AnyView(StateAnimationDemo())),
             ]
         ),
         DemoSection(

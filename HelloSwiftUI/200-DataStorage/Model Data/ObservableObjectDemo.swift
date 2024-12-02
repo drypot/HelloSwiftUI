@@ -1,25 +1,23 @@
 //
-//  StateDemo.swift
+//  ObservableObjectDemo.swift
 //  HelloSwiftUI
 //
-//  Created by Kyuhyun Park on 11/17/24.
+//  Created by Kyuhyun Park on 10/17/24.
 //
 
 import SwiftUI
 
-// https://developer.apple.com/documentation/swiftui/state
+struct ObservableObjectDemo: View {
 
-struct StateDemo: View {
-
-    // @State 들은 private 으로 선언해서 실수로 memberwise initializer 들이 뷰 생성마다 초기화 하는 것을 방지한다.
+    class Model: ObservableObject {
+        @Published var counter = 0
+        @Published var name: String = ""
+    }
 
     @State private var isPresented = true
 
     var body: some View {
         VStack {
-
-            // View 를 날렸다 다시 만들면 @State data 가 초기화 됨을 확인한다.
-
             Button("Toggle View") {
                 isPresented.toggle()
             }
@@ -34,23 +32,26 @@ struct StateDemo: View {
     }
 
     struct BaseView: View {
-        @State private var counter = 0
-        @State private var name: String = ""
+        // ObservableObject 를 관리하기 위해선 @State 가 아닌 @StateObject 를 쓴다.
+        @StateObject private var model = Model()
 
         var body: some View {
             Form {
-                Text("State Demo")
+                Text("ObservableObject Demo")
                     .font(.title)
-                ReadOnlySubView(counter: counter, name: name)
-                BindingSubView(counter: $counter, name: $name)
+
+                ReadOnlySubView(model: model)
+
+                // @Bindable 에 넘길 때 $ 를 붙이지 않는다.
+                BindingSubView(model: model)
             }
             .formStyle(.grouped)
         }
     }
 
     struct ReadOnlySubView: View {
-        var counter: Int
-        var name: String
+        // read-only 로 쓴다고 해도 @ObservedObject 로 받아야 변경 사항이 업데이트 된다.
+        @ObservedObject var model: Model
 
         var body: some View {
             Section {
@@ -58,18 +59,17 @@ struct StateDemo: View {
                     .font(.headline)
                     .padding(4)
                 LabeledContent("Counter") {
-                    Text("\(counter)")
+                    Text("\(model.counter)")
                 }
                 LabeledContent("Name") {
-                    Text(name.isEmpty ? "---" : name)
+                    Text(model.name.isEmpty ? "---" : model.name)
                 }
             }
         }
     }
 
     struct BindingSubView: View {
-        @Binding var counter: Int
-        @Binding var name: String
+        @ObservedObject var model: Model
 
         var body: some View {
             Section {
@@ -78,10 +78,10 @@ struct StateDemo: View {
                     .padding(4)
                 LabeledContent("Counter") {
                     Button("Increment") {
-                        counter += 1
+                        model.counter += 1
                     }
                 }
-                TextField("Name", text: $name)
+                TextField("Name", text: $model.name)
                     .textFieldStyle(.roundedBorder)
             }
         }
@@ -90,5 +90,5 @@ struct StateDemo: View {
 }
 
 #Preview {
-    StateDemo()
+    ObservableObjectDemo()
 }
