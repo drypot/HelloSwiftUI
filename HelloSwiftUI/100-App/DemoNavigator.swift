@@ -51,6 +51,7 @@ struct DemoNavigator: View {
                 Demo(label: "EnvironmentObject", view: AnyView(EnvironmentObjectDemo())),
                 Demo(label: "SceneObject", view: AnyView(SceneStorageDemo())),
                 Demo(label: "Observable", view: AnyView(ObservableDemo())),
+                Demo(label: "StateAnimation", view: AnyView(StateAnimationDemo())),
             ]
         ),
         DemoSection(
