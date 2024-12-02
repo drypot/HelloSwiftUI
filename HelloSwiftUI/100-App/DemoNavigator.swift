@@ -126,10 +126,16 @@ struct DemoNavigator: View {
                 Demo(label: "Task", view: AnyView(TaskDemo())),
             ]
         ),
+        DemoSection(
+            label: "Combine",
+            demoList: [
+                Demo(label: "Combine", view: AnyView(CombineDemo())),
+            ]
+        ),
     ]
 
-    @State var selectedSection = Self.demoSections[3]
-    @State var selectedDemo = Self.demoSections[3].demoList[0]
+    @State var selectedSection = Self.demoSections[13]
+    @State var selectedDemo = Self.demoSections[13].demoList[0]
 
     @State var searchText = ""
 

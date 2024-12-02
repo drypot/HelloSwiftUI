@@ -73,6 +73,14 @@ struct ButtonDemo: View {
             .background(.blue)
             .cornerRadius(10)
             .buttonStyle(.plain)
+
+            Button("Button Modified") {
+                print("clicked")
+            }
+            .tint(.green)
+            .buttonStyle(.bordered)
+            .buttonBorderShape(.capsule)
+            .controlSize(.large)
         }
     }
 }
