@@ -50,8 +50,8 @@ struct DemoNavigator: View {
                 Demo(label: "StateAnimation", view: AnyView(StateAnimationDemo())),
                 Demo(label: "Observable", view: AnyView(ObservableDemo())),
                 Demo(label: "ObservableObject", view: AnyView(ObservableObjectDemo())),
-                Demo(label: "EnvironmentObject", view: AnyView(EnvironmentObjectDemo())),
                 Demo(label: "SceneObject", view: AnyView(SceneStorageDemo())),
+                Demo(label: "ViewID", view: AnyView(ViewIDDemo())),
             ]
         ),
         DemoSection(
@@ -134,8 +134,8 @@ struct DemoNavigator: View {
         ),
     ]
 
-    @State var selectedSection = Self.demoSections[13]
-    @State var selectedDemo = Self.demoSections[13].demoList[0]
+    @State var selectedSection = Self.demoSections[3]
+    @State var selectedDemo = Self.demoSections[3].demoList[0]
 
     @State var searchText = ""
 

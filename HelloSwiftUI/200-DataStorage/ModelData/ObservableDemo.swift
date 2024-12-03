@@ -59,7 +59,7 @@ struct ObservableDemo: View {
                 ReadOnlySubView(model: model)
 
                 // @Bindable 에 넘길 때 $ 를 붙이지 않는다.
-                BindingSubView(model: model)
+                ReadWriteSubView(model: model)
             }
             .formStyle(.grouped)
         }
@@ -80,7 +80,7 @@ struct ObservableDemo: View {
                 LabeledContent("Global Counter") {
                     Text("\(GlobalModel.shared.counter)")
                 }
-                LabeledContent("Global Counter") {
+                LabeledContent("Environment Counter") {
                     Text("\(environmentModel.counter)")
                 }
                 LabeledContent("Name") {
@@ -90,14 +90,14 @@ struct ObservableDemo: View {
         }
     }
 
-    struct BindingSubView: View {
+    struct ReadWriteSubView: View {
         // 서브 뷰로 바인딩이 필요하면 @Binging 대신 @Bindable 을 쓴다.
         @Bindable var model: Model
         @Environment(EnvironmentModel.self) private var environmentModel
 
         var body: some View {
             Section {
-                Text("Binding View")
+                Text("ReadWrite View")
                     .font(.headline)
                     .padding(4)
                 LabeledContent("Counter") {

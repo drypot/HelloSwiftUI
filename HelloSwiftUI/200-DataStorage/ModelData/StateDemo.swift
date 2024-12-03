@@ -42,7 +42,7 @@ struct StateDemo: View {
                 Text("State Demo")
                     .font(.title)
                 ReadOnlySubView(counter: counter, name: name)
-                BindingSubView(counter: $counter, name: $name)
+                ReadWriteSubView(counter: $counter, name: $name)
             }
             .formStyle(.grouped)
         }
@@ -67,13 +67,13 @@ struct StateDemo: View {
         }
     }
 
-    struct BindingSubView: View {
+    struct ReadWriteSubView: View {
         @Binding var counter: Int
         @Binding var name: String
 
         var body: some View {
             Section {
-                Text("Binding View")
+                Text("ReadWrite View")
                     .font(.headline)
                     .padding(4)
                 LabeledContent("Counter") {
