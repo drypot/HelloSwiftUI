@@ -45,6 +45,10 @@ import SwiftUI
 // 단, 서브 뷰에서 프로퍼티가 아니라 State 에 담긴 오브젝트 자체를 nil 로 날려야 할 때는 @Binding 을 붙인다.
 
 // ObservableObject
+// https://developer.apple.com/documentation/combine/observableobject
+
+// ObservableObject synthesizes an objectWillChange publisher
+// that emits the changed value before any of its @Published properties changes.
 
 // ObservableObject 오브젝트는 @State 가 아니라 @StateObject 로 관리한다.
 // 서브 뷰에 read-only 로 넘길 때도 @ObservedObject 프로퍼티를 만들어야 한다.

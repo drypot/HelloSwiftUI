@@ -83,34 +83,34 @@ private class SignUpFormViewModel: ObservableObject {
 
 // MARK: - View
 struct SignUpForm: View {
-    @StateObject private var model = SignUpFormViewModel()
+    @StateObject private var viewModel = SignUpFormViewModel()
 
     var body: some View {
         Form {
             Section {
-                TextField("Username", text: $model.username)
+                TextField("Username", text: $viewModel.username)
                     .disableAutocorrection(true)
                     .textFieldStyle(.roundedBorder)
             } footer: {
-                Text(model.usernameMessage)
+                Text(viewModel.usernameMessage)
                     .foregroundColor(.red)
             }
 
             Section {
-                SecureField("Password", text: $model.password)
+                SecureField("Password", text: $viewModel.password)
                     .textFieldStyle(.roundedBorder)
-                SecureField("Repeat password", text: $model.passwordConfirmation)
+                SecureField("Repeat password", text: $viewModel.passwordConfirmation)
                     .textFieldStyle(.roundedBorder)
             } footer: {
-                Text(model.passwordMessage)
+                Text(viewModel.passwordMessage)
                     .foregroundColor(.red)
             }
 
             Section {
                 Button("Sign up") {
-                    print("Signing up as \(model.username)")
+                    print("Signing up as \(viewModel.username)")
                 }
-                .disabled(!model.isValid)
+                .disabled(!viewModel.isValid)
             }
         }
         .formStyle(.grouped)
