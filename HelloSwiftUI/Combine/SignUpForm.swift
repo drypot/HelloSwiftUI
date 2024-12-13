@@ -60,6 +60,8 @@ private class SignUpFormViewModel: ObservableObject {
     }()
 
     init() {
+        // assign(to:) 는 Published.Publisher 를 인자로 받는다.
+        // 그러니 $ 를 넣어야 한다.
         isFormValidPublisher
             .assign(to: &$isValid)
 
