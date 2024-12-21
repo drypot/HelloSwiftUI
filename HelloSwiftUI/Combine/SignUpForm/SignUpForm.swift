@@ -9,7 +9,7 @@
 import SwiftUI
 import Combine
 
-// Asynchronous Programming with SwiftUI and Combine-Apress (2023), 8장
+// Asynchronous Programming with SwiftUI and Combine-Apress (2023), 8, 9, 10,
 
 // MARK: - View
 struct SignUpForm: View {
@@ -21,30 +21,9 @@ struct SignUpForm: View {
                 TextField("Username", text: $viewModel.username)
                     .disableAutocorrection(true)
                     .textFieldStyle(.roundedBorder)
-
-                // Check if username is availabel using closure.
-                // This can later be removed, it's just here for demonstation purposes.
-                Button("Check if username is available") {
-                    viewModel.isUsernameAvailable(username: viewModel.username)
-                }
             } footer: {
                 Text(viewModel.usernameMessage)
                     .foregroundColor(.red)
-            }
-
-            Section {
-                SecureField("Password", text: $viewModel.password)
-                    .textFieldStyle(.roundedBorder)
-                SecureField("Repeat password", text: $viewModel.passwordConfirmation)
-                    .textFieldStyle(.roundedBorder)
-            } footer: {
-                VStack(alignment: .leading) {
-                    ProgressView(value: viewModel.passwordStrengthValue, total: 1)
-                        .tint(viewModel.passwordStrengthColor)
-                        .progressViewStyle(.linear)
-                    Text(viewModel.passwordMessage)
-                        .foregroundColor(.red)
-                }
             }
 
             Section {
@@ -55,6 +34,15 @@ struct SignUpForm: View {
             }
         }
         .formStyle(.grouped)
+        // show update dialog
+        .alert("Please update", isPresented: $viewModel.showUpdateDialog, actions: {
+            Button("Upgrade") {
+                // open App Store listing page for the app
+            }
+            Button("Not now", role: .cancel) { }
+        }, message: {
+            Text("It looks like you're using an older version of this app. Please update your app.")
+        })
     }
 }
 
