@@ -121,6 +121,13 @@ struct DemoNavigator: View {
             ]
         ),
         DemoSection(
+            label: "AppKit",
+            demoList: [
+                Demo(label: "NSViewRepresentable", view: AnyView(NSViewRepresentableDemo())),
+                Demo(label: "Coordinator", view: AnyView(CoordinatorDemo())),
+            ]
+        ),
+        DemoSection(
             label: "Task",
             demoList: [
                 Demo(label: "Task", view: AnyView(TaskDemo())),
@@ -135,8 +142,8 @@ struct DemoNavigator: View {
         ),
     ]
 
-    @State var selectedSection = Self.demoSections[13]
-    @State var selectedDemo = Self.demoSections[13].demoList[1]
+    @State var selectedSection = Self.demoSections[12]
+    @State var selectedDemo = Self.demoSections[12].demoList[0]
 
     @State var searchText = ""
 
