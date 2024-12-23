@@ -1,5 +1,5 @@
 //
-//  RepresentableWithCoordinatorDemo.swift
+//  NSViewRepresentableCoordinatorDemo.swift
 //  HelloSwiftUI
 //
 //  Created by Kyuhyun Park on 12/20/24.
@@ -8,7 +8,7 @@
 import SwiftUI
 import AppKit
 
-struct RepresentableWithCoordinator: NSViewRepresentable {
+fileprivate struct Representable: NSViewRepresentable {
 
     // SwiftUI 와의 데이터 소통 창구
     @Binding var text: String
@@ -32,54 +32,51 @@ struct RepresentableWithCoordinator: NSViewRepresentable {
         return container
     }
 
-    // SwiftUI 데이터를 AppKit 데이터로.
+    // SwiftUI 데이터를 AppKit 으로.
     func updateNSView(_ nsView: NSView, context: Context) {
         guard let textView = nsView.subviews.first as? NSTextView else { fatalError() }
         textView.string = text
     }
 
-    // Implement this method if changes to your view might affect other parts of your app.
+    // AppKit 데이터를 SwiftUI 로.
+    func updateTextBinding(_ string: String) {
+        text = string
+    }
+
     func makeCoordinator() -> Coordinator {
-
-        // Coordinator 가 필요한 이유들.
-
-        // AppKit 은 delegate pattern 을 많이 사용한다.
-        // coordinator 를 delegate 로 쓰면 된다.
-
-        // UI 코드와 로직을 분리하는 용도로 써도 된다.
-
-        // AppKit 과 SwiftUI 간 커뮤니케이션에 사용한다.
-
-        Coordinator(text: $text)
+        Coordinator(host: self)
     }
 
     @MainActor
     class Coordinator: NSObject, NSTextViewDelegate {
-        var text: Binding<String>
+        var host: Representable
 
-        init(text: Binding<String>) {
-            self.text = text
+        init(host: Representable) {
+            self.host = host
         }
 
-        // AppKit 데이터를 SwiftUI 데이터로.
         func textDidChange(_ notification: Notification) {
             guard let textView = notification.object as? NSTextView else { return }
-            text.wrappedValue = textView.string
+            host.updateTextBinding(textView.string)
         }
     }
 
 }
 
-struct RepresentableWithCoordinatorDemo: View {
-    @State private var message = "Representable with Coordinator Demo"
+struct NSViewRepresentableCoordinatorDemo: View {
+    @State private var message = "hello"
 
     var body: some View {
         VStack {
-            Text(message)
+            Text("NSViewRepresentable with Coordinator Demo")
                 .font(.title)
                 .padding()
 
-            RepresentableWithCoordinator(text: $message)
+            Text(message)
+                .font(.title3)
+                .padding()
+
+            Representable(text: $message)
                 .frame(width: 200, height: 80)
         }
         .padding()
@@ -87,5 +84,5 @@ struct RepresentableWithCoordinatorDemo: View {
 }
 
 #Preview {
-    RepresentableWithCoordinatorDemo()
+    NSViewRepresentableCoordinatorDemo()
 }

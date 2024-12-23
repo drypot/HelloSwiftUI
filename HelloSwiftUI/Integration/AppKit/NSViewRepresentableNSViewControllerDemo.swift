@@ -1,5 +1,5 @@
 //
-//  RepresentableWithController.swift
+//  NSViewRepresentableNSViewControllerDemo.swift
 //  HelloSwiftUI
 //
 //  Created by Kyuhyun Park on 12/23/24.
@@ -8,7 +8,7 @@
 import SwiftUI
 import AppKit
 
-struct RepresentableWithController: NSViewRepresentable {
+fileprivate struct Representable: NSViewRepresentable {
 
     // SwiftUI 와의 데이터 소통 창구
     @Binding var text: String
@@ -49,6 +49,10 @@ struct RepresentableWithController: NSViewRepresentable {
             super.init(nibName: nil, bundle: nil)
         }
 
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+
         override func loadView() {
             let container = NSView()
 
@@ -68,10 +72,6 @@ struct RepresentableWithController: NSViewRepresentable {
             self.view = container
         }
 
-        required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
-        
         // AppKit 데이터를 SwiftUI 데이터로.
         func textDidChange(_ notification: Notification) {
             guard let textView = notification.object as? NSTextView else { return }
@@ -81,8 +81,8 @@ struct RepresentableWithController: NSViewRepresentable {
 
 }
 
-struct RepresentableWithControllerDemo: View {
-    @State private var message = "Representable with Controller Demo"
+struct NSViewRepresentableNSViewControllerDemo: View {
+    @State private var message = "NSViewRepresentable with NSViewController Coordinator Demo"
 
     var body: some View {
         VStack {
@@ -90,7 +90,7 @@ struct RepresentableWithControllerDemo: View {
                 .font(.title)
                 .padding()
 
-            RepresentableWithCoordinator(text: $message)
+            Representable(text: $message)
                 .frame(width: 200, height: 80)
         }
         .padding()
@@ -98,5 +98,5 @@ struct RepresentableWithControllerDemo: View {
 }
 
 #Preview {
-    RepresentableWithControllerDemo()
+    NSViewRepresentableNSViewControllerDemo()
 }

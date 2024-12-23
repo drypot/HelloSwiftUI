@@ -1,5 +1,5 @@
 //
-//  NSButtonRepresentableDemo.swift
+//  NSViewRepresentableDemo.swift
 //  HelloSwiftUI
 //
 //  Created by Kyuhyun Park on 12/20/24.
@@ -8,7 +8,7 @@
 import SwiftUI
 import AppKit
 
-struct NSButtonRepresentable: NSViewRepresentable {
+fileprivate struct Representable: NSViewRepresentable {
 
     // NSButtonView 초기화 할때 클로져를 붙이는데
     // 이게 struct 첫번째 변수인 onButtonClick 에 대입된다.
@@ -52,9 +52,9 @@ struct NSButtonRepresentable: NSViewRepresentable {
 
     @MainActor
     class Coordinator: NSObject {
-        var parent: NSButtonRepresentable
+        var parent: Representable
 
-        init(parent: NSButtonRepresentable) {
+        init(parent: Representable) {
             self.parent = parent
         }
 
@@ -65,7 +65,7 @@ struct NSButtonRepresentable: NSViewRepresentable {
 
 }
 
-struct NSButtonRepresentableDemo: View {
+struct NSViewRepresentableDemo: View {
     @State private var dayOrNight = true
 
     var body: some View {
@@ -76,7 +76,7 @@ struct NSButtonRepresentableDemo: View {
                 .frame(width: 100, height: 100)
                 .padding()
 
-            NSButtonRepresentable {
+            Representable {
                 dayOrNight.toggle()
             }
             .frame(width: 200, height: 80)
@@ -86,5 +86,5 @@ struct NSButtonRepresentableDemo: View {
 }
 
 #Preview {
-    NSButtonRepresentableDemo()
+    NSViewRepresentableDemo()
 }
