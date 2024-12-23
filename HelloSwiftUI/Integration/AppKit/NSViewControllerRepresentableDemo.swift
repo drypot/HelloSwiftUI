@@ -8,26 +8,32 @@
 import SwiftUI
 import AppKit
 
+@Observable fileprivate class Model {
+    var message: String
+
+    init(message: String) {
+        self.message = message
+    }
+}
+
 fileprivate struct Representable: NSViewControllerRepresentable {
 
     // SwiftUI 와의 데이터 소통 창구
-    @Binding var text: String
+    let model: Model
 
     func makeNSViewController(context: Context) -> Controller {
-        return Controller(host: self /*text: $text*/)
+        return Controller(host: self)
     }
 
     func updateNSViewController(_ controller: Controller, context: Context) {
-        controller.updateText(host: self)
+        controller.updateText()
     }
 
     class Controller: NSViewController, NSTextViewDelegate {
         let host: Representable
-        //var text: Binding<String>
 
-        init(host: Representable /*, text: Binding<String>*/) {
+        init(host: Representable) {
             self.host = host
-            //self.text = text
             super.init(nibName: nil, bundle: nil)
         }
 
@@ -55,23 +61,20 @@ fileprivate struct Representable: NSViewControllerRepresentable {
         }
 
         // SwiftUI 데이터를 AppKit 데이터로.
-        func updateText(host: Representable) {
+        func updateText() {
+
+            // controller 초기화할 때 받아두었던 host 에는 당시 value 들이 저장되어 있다.
+            // 업데이트된 value 들을 사용하려면 host 를 새로 받아야 한다.
+            // 이런 문제 피하려면 value 타입과 @Bingding 쓰지 말고 class 모델을 쓰자.
+
             guard let textView = self.view.subviews.first as? NSTextView else { fatalError() }
-//            textView.textStorage?.beginEditing()
-//            print("aaa: \(text.wrappedValue)")
-//            textView.string = text.wrappedValue
-            print("aaa: \(host.text)")
-            textView.string = host.text
-//            textView.textStorage?.endEditing()
+            textView.string = host.model.message
         }
 
         // AppKit 데이터를 SwiftUI 데이터로.
         func textDidChange(_ notification: Notification) {
             guard let textView = notification.object as? NSTextView else { return }
-//            text.wrappedValue = textView.string
-//            print("bbb: \(text.wrappedValue)")
-            host.text = textView.string
-            print("bbb: \(host.text)")
+            host.model.message = textView.string
         }
     }
 
@@ -90,7 +93,7 @@ fileprivate struct Representable: NSViewControllerRepresentable {
 }
 
 struct NSViewControllerRepresentableDemo: View {
-    @State private var message = "hello"
+    @State private var model = Model(message: "hello")
 
     var body: some View {
         VStack {
@@ -98,11 +101,11 @@ struct NSViewControllerRepresentableDemo: View {
                 .font(.title)
                 .padding()
 
-            Text(message)
+            Text(model.message)
                 .font(.title3)
                 .padding()
 
-            Representable(text: $message)
+            Representable(model: model)
                 .frame(width: 200, height: 80)
         }
         .padding()
