@@ -14,18 +14,20 @@ fileprivate struct Representable: NSViewControllerRepresentable {
     @Binding var text: String
 
     func makeNSViewController(context: Context) -> Controller {
-        return Controller(text: $text)
+        return Controller(host: self /*text: $text*/)
     }
 
     func updateNSViewController(_ controller: Controller, context: Context) {
-        controller.updateText()
+        controller.updateText(host: self)
     }
 
     class Controller: NSViewController, NSTextViewDelegate {
-        var text: Binding<String>
+        let host: Representable
+        //var text: Binding<String>
 
-        init(text: Binding<String>) {
-            self.text = text
+        init(host: Representable /*, text: Binding<String>*/) {
+            self.host = host
+            //self.text = text
             super.init(nibName: nil, bundle: nil)
         }
 
@@ -53,19 +55,23 @@ fileprivate struct Representable: NSViewControllerRepresentable {
         }
 
         // SwiftUI 데이터를 AppKit 데이터로.
-        func updateText() {
+        func updateText(host: Representable) {
             guard let textView = self.view.subviews.first as? NSTextView else { fatalError() }
-            textView.textStorage?.beginEditing()
-            print("aaa: \(text.wrappedValue)")
-            textView.string = text.wrappedValue
-            textView.textStorage?.endEditing()
+//            textView.textStorage?.beginEditing()
+//            print("aaa: \(text.wrappedValue)")
+//            textView.string = text.wrappedValue
+            print("aaa: \(host.text)")
+            textView.string = host.text
+//            textView.textStorage?.endEditing()
         }
 
         // AppKit 데이터를 SwiftUI 데이터로.
         func textDidChange(_ notification: Notification) {
             guard let textView = notification.object as? NSTextView else { return }
-            text.wrappedValue = textView.string
-            print("bbb: \(text.wrappedValue)")
+//            text.wrappedValue = textView.string
+//            print("bbb: \(text.wrappedValue)")
+            host.text = textView.string
+            print("bbb: \(host.text)")
         }
     }
 
