@@ -1,5 +1,5 @@
 //
-//  CoordinatorDemo.swift
+//  RepresentableWithCoordinatorDemo.swift
 //  HelloSwiftUI
 //
 //  Created by Kyuhyun Park on 12/20/24.
@@ -8,7 +8,7 @@
 import SwiftUI
 import AppKit
 
-struct NSTextViewRepresent: NSViewRepresentable {
+struct RepresentableWithCoordinator: NSViewRepresentable {
 
     // SwiftUI 와의 데이터 소통 창구
     @Binding var text: String
@@ -50,28 +50,28 @@ struct NSTextViewRepresent: NSViewRepresentable {
 
         // AppKit 과 SwiftUI 간 커뮤니케이션에 사용한다.
 
-        Coordinator(parent: self)
+        Coordinator(text: $text)
     }
 
     @MainActor
     class Coordinator: NSObject, NSTextViewDelegate {
-        var parent: NSTextViewRepresent
+        var text: Binding<String>
 
-        init(parent: NSTextViewRepresent) {
-            self.parent = parent
+        init(text: Binding<String>) {
+            self.text = text
         }
 
         // AppKit 데이터를 SwiftUI 데이터로.
         func textDidChange(_ notification: Notification) {
             guard let textView = notification.object as? NSTextView else { return }
-            parent.text = textView.string
+            text.wrappedValue = textView.string
         }
     }
 
 }
 
-struct CoordinatorDemo: View {
-    @State private var message = "Good day"
+struct RepresentableWithCoordinatorDemo: View {
+    @State private var message = "Representable with Coordinator Demo"
 
     var body: some View {
         VStack {
@@ -79,7 +79,7 @@ struct CoordinatorDemo: View {
                 .font(.title)
                 .padding()
 
-            NSTextViewRepresent(text: $message)
+            RepresentableWithCoordinator(text: $message)
                 .frame(width: 200, height: 80)
         }
         .padding()
@@ -87,5 +87,5 @@ struct CoordinatorDemo: View {
 }
 
 #Preview {
-    NSViewRepresentableDemo()
+    RepresentableWithCoordinatorDemo()
 }
