@@ -65,7 +65,7 @@ fileprivate struct Representable: NSViewControllerRepresentable {
 
             // controller 초기화할 때 받아두었던 host 에는 당시 value 들이 저장되어 있다.
             // 업데이트된 value 들을 사용하려면 host 를 새로 받아야 한다.
-            // 이런 문제 피하려면 value 타입과 @Bingding 쓰지 말고 class 모델을 쓰자.
+            // 이런 문제 피하려면 value 타입과 @Binding 쓰지 말고 class 모델을 쓰자.
 
             guard let textView = self.view.subviews.first as? NSTextView else { fatalError() }
             textView.string = host.model.message
