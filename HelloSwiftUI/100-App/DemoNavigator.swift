@@ -117,6 +117,8 @@ struct DemoNavigator: View {
             label: "Table",
             demoList: [
                 Demo(label: "Table", view: AnyView(TableDemo())),
+                Demo(label: "Outline", view: AnyView(OutlineViewDemo())),
+                Demo(label: "Outline Col", view: AnyView(OutlineViewWithColumnsDemo()))
             ]
         ),
         DemoSection(
@@ -142,8 +144,8 @@ struct DemoNavigator: View {
         ),
     ]
 
-    @State var selectedSection = Self.demoSections[12]
-    @State var selectedDemo = Self.demoSections[12].demoList[0]
+    @State var selectedSection = Self.demoSections[11]
+    @State var selectedDemo = Self.demoSections[11].demoList[2]
 
     @State var searchText = ""
 
