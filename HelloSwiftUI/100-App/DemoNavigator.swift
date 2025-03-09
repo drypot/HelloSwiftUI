@@ -23,6 +23,16 @@ struct DemoNavigator: View {
 
     static let demoSections = [
         DemoSection(
+            label: "State",
+            demoList: [
+                Demo(label: "State 2024", view: AnyView(State2024Demo())),
+                Demo(label: "StateAnimation", view: AnyView(StateAnimationDemo())),
+                Demo(label: "ObservableObject", view: AnyView(ObservableObjectDemo())),
+                Demo(label: "SceneObject", view: AnyView(SceneStorageDemo())),
+                Demo(label: "ViewID", view: AnyView(ViewIDDemo())),
+            ]
+        ),
+        DemoSection(
             label: "Scene",
             demoList: [
                 Demo(label: "Window", view: AnyView(WindowDemo())),
@@ -41,17 +51,6 @@ struct DemoNavigator: View {
             label: "Modal",
             demoList: [
                 Demo(label: "ModalDemo", view: AnyView(ModalDemo())),
-            ]
-        ),
-        DemoSection(
-            label: "Model data",
-            demoList: [
-                Demo(label: "State", view: AnyView(StateDemo())),
-                Demo(label: "StateAnimation", view: AnyView(StateAnimationDemo())),
-                Demo(label: "Observable", view: AnyView(ObservableDemo())),
-                Demo(label: "ObservableObject", view: AnyView(ObservableObjectDemo())),
-                Demo(label: "SceneObject", view: AnyView(SceneStorageDemo())),
-                Demo(label: "ViewID", view: AnyView(ViewIDDemo())),
             ]
         ),
         DemoSection(
