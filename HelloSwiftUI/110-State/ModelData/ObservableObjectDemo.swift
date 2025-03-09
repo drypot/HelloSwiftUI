@@ -1,35 +1,29 @@
 //
-//  State2024Demo.swift
+//  ObservableObjectDemo.swift
 //  HelloSwiftUI
 //
-//  Created by Kyuhyun Park on 11/17/24.
+//  Created by Kyuhyun Park on 10/17/24.
 //
 
 import SwiftUI
+import Combine
 
-// https://developer.apple.com/documentation/swiftui/state
+struct ObservableObjectDemo: View {
 
-@Observable fileprivate class GlobalModel {
-    var counter = 0
-
-    @MainActor static let shared = GlobalModel()
-}
-
-struct State2024Demo: View {
-
-    // @State 들은 private 으로 선언해서 실수로 memberwise initializer 들이 뷰 생성마다 초기화 하는 것을 방지한다.
-
-    @Observable class Model {
-        var counter = 0
-    }
-
-    @Observable class EnvironmentModel {
-        var counter = 0
+    class Model: ObservableObject {
+        @Published var counter = 0
     }
 
     @State private var isPresented = true
-    @State private var environmentModel = EnvironmentModel()
+    @StateObject private var envModel = Model()
 
+    init() {
+        // @StateObject 를 수작업으로 초기화할 수도 있다.
+        // 단 이런저런 이유로 View instance 가 새로 만들어 지더라도
+        // wrappedValue 로 넘어간 초기화용 autoclosure 는 맨 처음, 단 한번만 실행됨을 유의해야 한다.
+        _envModel = StateObject(wrappedValue: Model())
+    }
+    
     var body: some View {
         VStack {
 
@@ -43,7 +37,7 @@ struct State2024Demo: View {
 
             if isPresented {
                 BaseView()
-                    .environment(environmentModel)
+                    .environmentObject(envModel)
             } else {
                 Spacer()
             }
@@ -53,16 +47,17 @@ struct State2024Demo: View {
     struct BaseView: View {
         @State private var counter = 0
 
-        // @Observable 상태관리에는 @StateObject 대신 걍 @State 를 쓴다.
-        @State private var model = Model()
+        // ObservableObject 를 관리하기 위해선 @State 가 아닌 @StateObject 를 쓴다.
+        @StateObject private var model = Model()
 
         var body: some View {
             Form {
-                Text("State 2024 Demo")
+                Text("ObservableObject Demo")
                     .font(.title)
+
                 ReadOnlySubView(counter: counter, model: model)
 
-                // @Bindable 에 넘길 때 $ 를 붙이지 않는다.
+                // @ObservedObject 에 넘길 때 $ 를 붙이지 않는다.
                 ReadWriteSubView(counter: $counter, model: model)
             }
             .formStyle(.grouped)
@@ -71,8 +66,11 @@ struct State2024Demo: View {
 
     struct ReadOnlySubView: View {
         var counter: Int
-        let model: Model
-        @Environment(EnvironmentModel.self) private var environmentModel
+
+        // read-only 로 쓴다고 해도 @ObservedObject 로 받아야 변경 사항이 업데이트 된다.
+        @ObservedObject var model: Model
+
+        @EnvironmentObject var envModel: Model
 
         var body: some View {
             Section {
@@ -85,11 +83,8 @@ struct State2024Demo: View {
                 LabeledContent("model.counter") {
                     Text("\(model.counter)")
                 }
-                LabeledContent("environmentModel.counter") {
-                    Text("\(environmentModel.counter)")
-                }
-                LabeledContent("GlobalModel.shared.counter") {
-                    Text("\(GlobalModel.shared.counter)")
+                LabeledContent("environment model.counter") {
+                    Text("\(envModel.counter)")
                 }
             }
         }
@@ -97,9 +92,10 @@ struct State2024Demo: View {
 
     struct ReadWriteSubView: View {
         @Binding var counter: Int
-        // 서브 뷰로 바인딩이 필요하면 @Binging 대신 @Bindable 을 쓴다.
-        @Bindable var model: Model
-        @Environment(EnvironmentModel.self) private var environmentModel
+
+        @ObservedObject var model: Model
+
+        @EnvironmentObject var envModel: Model
 
         var body: some View {
             Section {
@@ -116,14 +112,9 @@ struct State2024Demo: View {
                         model.counter += 1
                     }
                 }
-                LabeledContent("environmentModel.counter") {
+                LabeledContent("environment model.counter") {
                     Button("Increment") {
-                        environmentModel.counter += 1
-                    }
-                }
-                LabeledContent("GlobalModel.shared.counter") {
-                    Button("Increment") {
-                        GlobalModel.shared.counter += 1
+                        envModel.counter += 1
                     }
                 }
             }
@@ -133,5 +124,5 @@ struct State2024Demo: View {
 }
 
 #Preview {
-    State2024Demo()
+    ObservableObjectDemo()
 }

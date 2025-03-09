@@ -25,11 +25,11 @@ struct DemoNavigator: View {
         DemoSection(
             label: "State",
             demoList: [
-                Demo(label: "State 2024", view: AnyView(State2024Demo())),
-                Demo(label: "StateAnimation", view: AnyView(StateAnimationDemo())),
+                Demo(label: "Observable", view: AnyView(ObservableDemo())),
                 Demo(label: "ObservableObject", view: AnyView(ObservableObjectDemo())),
                 Demo(label: "SceneObject", view: AnyView(SceneStorageDemo())),
                 Demo(label: "ViewID", view: AnyView(ViewIDDemo())),
+                Demo(label: "StateAnimation", view: AnyView(StateAnimationDemo())),
             ]
         ),
         DemoSection(
@@ -184,6 +184,7 @@ struct DemoNavigator: View {
                     Text("Item 3")
                 }
             }
+            .frame(minWidth: 200, idealWidth: 250, maxWidth: 300)
             .onChange(of: selectedSection) { oldValue, newValue in
                 let index = Self.demoSections.firstIndex(of: newValue)!
                 UserDefaults.standard.set(index, forKey: UserDefaultKeys.sectionIndex.rawValue)
