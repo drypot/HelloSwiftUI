@@ -9,16 +9,16 @@ import SwiftUI
 
 struct DemoNavigator: View {
 
-    struct Demo: Identifiable, Hashable, IDHashable {
-        let id = UUID()
-        let label: String
-        let view: AnyView
-    }
-
     struct DemoSection: Identifiable, Hashable, IDHashable {
         let id = UUID()
         let label: String
         let demoList: [Demo]
+    }
+
+    struct Demo: Identifiable, Hashable, IDHashable {
+        let id = UUID()
+        let label: String
+        let view: AnyView
     }
 
     static let demoSections = [
@@ -144,12 +144,29 @@ struct DemoNavigator: View {
         ),
     ]
 
-    @State var selectedSection = Self.demoSections[11]
-    @State var selectedDemo = Self.demoSections[11].demoList[2]
+    enum UserDefaultKeys: String {
+        case sectionIndex
+        case subSectionIndex
+    }
+
+    @State var selectedSection = Self.demoSections[0]
+    @State var selectedDemo = Self.demoSections[0].demoList[0]
 
     @State var searchText = ""
 
     @State var isExpanded = true
+
+    init() {
+        let userDefaults = UserDefaults.standard
+        let sectionIndex = userDefaults.integer(forKey: UserDefaultKeys.sectionIndex.rawValue)
+        let subSectionIndex = userDefaults.integer(forKey: UserDefaultKeys.subSectionIndex.rawValue)
+        if Self.demoSections.indices.contains(sectionIndex) {
+            if Self.demoSections[sectionIndex].demoList.indices.contains(subSectionIndex) {
+                _selectedSection = State(initialValue: Self.demoSections[sectionIndex])
+                _selectedDemo = State(initialValue: selectedSection.demoList[subSectionIndex])
+            }
+        }
+    }
 
     var body: some View {
         NavigationSplitView {
@@ -168,11 +185,17 @@ struct DemoNavigator: View {
                 }
             }
             .onChange(of: selectedSection) { oldValue, newValue in
+                let index = Self.demoSections.firstIndex(of: newValue)!
+                UserDefaults.standard.set(index, forKey: UserDefaultKeys.sectionIndex.rawValue)
                 selectedDemo = newValue.demoList[0]
             }
         } content: {
             List(selectedSection.demoList, selection: $selectedDemo) { demo in
                 NavigationLink(demo.label, value: demo)
+            }
+            .onChange(of: selectedDemo) { oldValue, newValue in
+                let index = selectedSection.demoList.firstIndex(of: newValue)!
+                UserDefaults.standard.set(index, forKey: UserDefaultKeys.subSectionIndex.rawValue)
             }
         } detail: {
             selectedDemo.view
