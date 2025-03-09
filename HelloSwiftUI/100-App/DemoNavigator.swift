@@ -125,7 +125,7 @@ struct DemoNavigator: View {
             label: "AppKit",
             demoList: [
                 Demo(label: "NSViewRepresentable", view: AnyView(NSViewRepresentableDemo())),
-                Demo(label: "Coordinator", view: AnyView(NSViewRepresentableCoordinatorDemo())),
+                Demo(label: "NSViewRepresentable2", view: AnyView(NSViewRepresentableDemo2())),
                 Demo(label: "NSViewControllerRepresentable", view: AnyView(NSViewControllerRepresentableDemo())),
             ]
         ),

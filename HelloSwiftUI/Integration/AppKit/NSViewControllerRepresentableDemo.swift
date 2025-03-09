@@ -16,6 +16,27 @@ import AppKit
     }
 }
 
+struct NSViewControllerRepresentableDemo: View {
+
+    @State private var model = Model(message: "hello")
+
+    var body: some View {
+        VStack {
+            Text("NSViewControllerRepresentable Demo")
+                .font(.title)
+                .padding()
+
+            Text("Output: \(model.message)")
+                .font(.title3)
+                .padding()
+
+            Representable(model: model)
+                .frame(width: 200, height: 80)
+        }
+        .padding()
+    }
+}
+
 fileprivate struct Representable: NSViewControllerRepresentable {
 
     // SwiftUI 와의 데이터 소통 창구
@@ -42,22 +63,23 @@ fileprivate struct Representable: NSViewControllerRepresentable {
         }
 
         override func loadView() {
-            let container = NSView()
+            let view = NSView()
+            view.translatesAutoresizingMaskIntoConstraints = false
 
             let textView = NSTextView()
             textView.translatesAutoresizingMaskIntoConstraints = false
             textView.delegate = self
 
-            container.addSubview(textView)
+            view.addSubview(textView)
 
             NSLayoutConstraint.activate([
-                textView.leadingAnchor.constraint(equalTo: container.leadingAnchor),
-                textView.trailingAnchor.constraint(equalTo: container.trailingAnchor),
-                textView.topAnchor.constraint(equalTo: container.topAnchor),
-                textView.bottomAnchor.constraint(equalTo: container.bottomAnchor)
+                textView.topAnchor.constraint(equalTo: view.topAnchor),
+                textView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                textView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                textView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
             ])
 
-            self.view = container
+            self.view = view
         }
 
         // SwiftUI 데이터를 AppKit 데이터로.
@@ -79,36 +101,16 @@ fileprivate struct Representable: NSViewControllerRepresentable {
     }
 
     func makeCoordinator() -> Coordinator {
-        Coordinator(parent: self)
+        Coordinator(host: self)
     }
 
     @MainActor
     class Coordinator: NSObject {
-        var parent: Representable
+        var host: Representable
 
-        init(parent: Representable) {
-            self.parent = parent
+        init(host: Representable) {
+            self.host = host
         }
-    }
-}
-
-struct NSViewControllerRepresentableDemo: View {
-    @State private var model = Model(message: "hello")
-
-    var body: some View {
-        VStack {
-            Text("NSViewControllerRepresentable Demo")
-                .font(.title)
-                .padding()
-
-            Text(model.message)
-                .font(.title3)
-                .padding()
-
-            Representable(model: model)
-                .frame(width: 200, height: 80)
-        }
-        .padding()
     }
 }
 

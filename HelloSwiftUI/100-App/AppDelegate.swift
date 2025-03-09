@@ -14,7 +14,7 @@ import AppKit
 class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
 
     func applicationWillFinishLaunching(_ notification: Notification) {
-        print("AppDelegate applicationWillFinishLaunching")
+        print("applicationWillFinishLaunching")
 #if DEV
         print("Compiler flag DEV defined")
 #else
@@ -23,11 +23,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        print("AppDelegate applicationDidFinishLaunching")
+        print("applicationDidFinishLaunching")
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        print("AppDelegate applicationWillTerminate")
+        print("applicationWillTerminate")
     }
 
 //    func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
