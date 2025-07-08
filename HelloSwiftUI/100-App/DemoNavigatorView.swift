@@ -1,5 +1,5 @@
 //
-//  DemoNavigator.swift
+//  DemoNavigatorView.swift
 //  HelloSwiftUI
 //
 //  Created by Kyuhyun Park on 9/17/24.
@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct DemoNavigator: View {
+struct DemoNavigatorView: View {
 
     struct DemoSection: Identifiable, Hashable, IDHashable {
         let id = UUID()
         let label: String
-        let demoList: [Demo]
+        let demos: [Demo]
     }
 
     struct Demo: Identifiable, Hashable, IDHashable {
@@ -24,7 +24,7 @@ struct DemoNavigator: View {
     static let demoSections = [
         DemoSection(
             label: "State",
-            demoList: [
+            demos: [
                 Demo(label: "Observable", view: AnyView(ObservableDemo())),
                 Demo(label: "ObservableObject", view: AnyView(ObservableObjectDemo())),
                 Demo(label: "SceneObject", view: AnyView(SceneStorageDemo())),
@@ -34,7 +34,7 @@ struct DemoNavigator: View {
         ),
         DemoSection(
             label: "Scene",
-            demoList: [
+            demos: [
                 Demo(label: "Window", view: AnyView(WindowDemo())),
                 Demo(label: "WindowGroup", view: AnyView(WindowGroupDemo())),
                 Demo(label: "DocumentGroup", view: AnyView(DocumentGroupDemo())),
@@ -42,20 +42,20 @@ struct DemoNavigator: View {
         ),
         DemoSection(
             label: "Navigation",
-            demoList: [
+            demos: [
                 Demo(label: "NavigationSplitView", view: AnyView(NavigationSplitViewDemoPlaceholder())),
                 Demo(label: "TabView", view: AnyView(TabViewDemo())),
             ]
         ),
         DemoSection(
             label: "Modal",
-            demoList: [
+            demos: [
                 Demo(label: "ModalDemo", view: AnyView(ModalDemo())),
             ]
         ),
         DemoSection(
             label: "View",
-            demoList: [
+            demos: [
                 Demo(label: "Text", view: AnyView(TextDemo())),
                 Demo(label: "TextField", view: AnyView(TextFieldDemo())),
                 Demo(label: "Button", view: AnyView(ButtonDemo())),
@@ -66,20 +66,20 @@ struct DemoNavigator: View {
         ),
         DemoSection(
             label: "Command",
-            demoList: [
+            demos: [
                 Demo(label: "Command", view: AnyView(CommandDemo())),
                 Demo(label: "Context Menu", view: AnyView(ContextMenuDemo())),
             ]
         ),
         DemoSection(
             label: "Form",
-            demoList: [
+            demos: [
                 Demo(label: "Form", view: AnyView(FormDemo())),
             ]
         ),
         DemoSection(
             label: "Grouping",
-            demoList: [
+            demos: [
                 Demo(label: "Group", view: AnyView(GroupDemo())),
                 Demo(label: "Section", view: AnyView(SectionDemo())),
                 Demo(label: "GroupBox", view: AnyView(GroupBoxDemo())),
@@ -87,7 +87,7 @@ struct DemoNavigator: View {
         ),
         DemoSection(
             label: "List",
-            demoList: [
+            demos: [
                 Demo(label: "List Simple", view: AnyView(ListSimple())),
                 Demo(label: "List Loop", view: AnyView(ListLoop())),
                 Demo(label: "List Section", view: AnyView(ListSection())),
@@ -100,13 +100,13 @@ struct DemoNavigator: View {
         ),
         DemoSection(
             label: "Custom List",
-            demoList: [
+            demos: [
                 Demo(label: "Custom List", view: AnyView(CustomListDemo())),
             ]
         ),
         DemoSection(
             label: "Grid",
-            demoList: [
+            demos: [
                 Demo(label: "GridView", view: AnyView(GridViewDemo())),
                 Demo(label: "GridViewDivider", view: AnyView(GridViewDividerDemo())),
                 Demo(label: "LazyGridView", view: AnyView(LazyGridViewDemo())),
@@ -115,7 +115,7 @@ struct DemoNavigator: View {
         ),
         DemoSection(
             label: "Table",
-            demoList: [
+            demos: [
                 Demo(label: "Table", view: AnyView(TableDemo())),
                 Demo(label: "Outline", view: AnyView(OutlineViewDemo())),
                 Demo(label: "Outline Col", view: AnyView(OutlineViewWithColumnsDemo()))
@@ -123,7 +123,7 @@ struct DemoNavigator: View {
         ),
         DemoSection(
             label: "AppKit",
-            demoList: [
+            demos: [
                 Demo(label: "NSViewRepresentable", view: AnyView(NSViewRepresentableDemo())),
                 Demo(label: "NSViewRepresentable2", view: AnyView(NSViewRepresentableDemo2())),
                 Demo(label: "NSViewControllerRepresentable", view: AnyView(NSViewControllerRepresentableDemo())),
@@ -131,13 +131,13 @@ struct DemoNavigator: View {
         ),
         DemoSection(
             label: "Task",
-            demoList: [
+            demos: [
                 Demo(label: "Task", view: AnyView(TaskDemo())),
             ]
         ),
         DemoSection(
             label: "Combine",
-            demoList: [
+            demos: [
                 Demo(label: "Combine", view: AnyView(CombineDemo())),
                 Demo(label: "SignUpForm", view: AnyView(SignUpForm())),
             ]
@@ -150,7 +150,7 @@ struct DemoNavigator: View {
     }
 
     @State var selectedSection = Self.demoSections[0]
-    @State var selectedDemo = Self.demoSections[0].demoList[0]
+    @State var selectedDemo = Self.demoSections[0].demos[0]
 
     @State var searchText = ""
 
@@ -161,9 +161,9 @@ struct DemoNavigator: View {
         let sectionIndex = userDefaults.integer(forKey: UserDefaultKeys.sectionIndex.rawValue)
         let subSectionIndex = userDefaults.integer(forKey: UserDefaultKeys.subSectionIndex.rawValue)
         if Self.demoSections.indices.contains(sectionIndex) {
-            if Self.demoSections[sectionIndex].demoList.indices.contains(subSectionIndex) {
+            if Self.demoSections[sectionIndex].demos.indices.contains(subSectionIndex) {
                 _selectedSection = State(initialValue: Self.demoSections[sectionIndex])
-                _selectedDemo = State(initialValue: selectedSection.demoList[subSectionIndex])
+                _selectedDemo = State(initialValue: selectedSection.demos[subSectionIndex])
             }
         }
     }
@@ -188,14 +188,14 @@ struct DemoNavigator: View {
             .onChange(of: selectedSection) { oldValue, newValue in
                 let index = Self.demoSections.firstIndex(of: newValue)!
                 UserDefaults.standard.set(index, forKey: UserDefaultKeys.sectionIndex.rawValue)
-                selectedDemo = newValue.demoList[0]
+                selectedDemo = newValue.demos[0]
             }
         } content: {
-            List(selectedSection.demoList, selection: $selectedDemo) { demo in
+            List(selectedSection.demos, selection: $selectedDemo) { demo in
                 NavigationLink(demo.label, value: demo)
             }
             .onChange(of: selectedDemo) { oldValue, newValue in
-                let index = selectedSection.demoList.firstIndex(of: newValue)!
+                let index = selectedSection.demos.firstIndex(of: newValue)!
                 UserDefaults.standard.set(index, forKey: UserDefaultKeys.subSectionIndex.rawValue)
             }
         } detail: {

@@ -25,7 +25,7 @@ struct HelloSwiftUIApp: App {
         // 각종 Scene 들은 View 트리의 루트가 된다.
 
         Window("SwiftUI Demo", id: "SwiftUI Demo") {
-            DemoNavigator()
+            DemoNavigatorView()
                 .useDisplayMode()
         }
         .commands {
