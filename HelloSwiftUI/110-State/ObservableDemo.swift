@@ -17,11 +17,16 @@ import SwiftUI
 
 struct ObservableDemo: View {
 
-    // @State 들은 private 으로 선언해서 실수로 memberwise initializer 들이 뷰 생성마다 초기화 하는 것을 방지한다.
+    // ObservableObject는 전체 객체에 대해 View가 갱신된다.
+    // Observable은 변경된 속성만 추적하여 더 정밀한 View 업데이트 가능.
 
     @Observable class Model {
         var counter = 0
     }
+
+    // @State 들은 private 으로 선언한다.
+    // private 이 없어서 실수로 memberwise initializer 를 넣으면
+    // 뷰 생성마다 State 가 초기화된다.
 
     @State private var isPresented = true
     @State private var envModel = Model()
