@@ -149,23 +149,21 @@ struct DemoNavigatorView: View {
         case subSectionIndex
     }
 
-    @State var selectedSection = Self.demoSections[0]
-    @State var selectedDemo = Self.demoSections[0].demos[0]
+    @State var selectedSection: DemoSection
+    @State var selectedDemo: Demo
 
     @State var searchText = ""
 
     @State var isExpanded = true
 
     init() {
-        let userDefaults = UserDefaults.standard
-        let sectionIndex = userDefaults.integer(forKey: UserDefaultKeys.sectionIndex.rawValue)
-        let subSectionIndex = userDefaults.integer(forKey: UserDefaultKeys.subSectionIndex.rawValue)
-        if Self.demoSections.indices.contains(sectionIndex) {
-            if Self.demoSections[sectionIndex].demos.indices.contains(subSectionIndex) {
-                _selectedSection = State(initialValue: Self.demoSections[sectionIndex])
-                _selectedDemo = State(initialValue: selectedSection.demos[subSectionIndex])
-            }
-        }
+        let defaults = UserDefaults.standard
+        let sectionIndex = defaults.integer(forKey: UserDefaultKeys.sectionIndex.rawValue)
+        let subSectionIndex = defaults.integer(forKey: UserDefaultKeys.subSectionIndex.rawValue)
+        let section = Self.demoSections.element(at: sectionIndex, default: Self.demoSections.first!)
+        let demo = section.demos.element(at: subSectionIndex, default: section.demos.first!)
+        _selectedSection = State(initialValue: section)
+        _selectedDemo = State(initialValue: demo)
     }
 
     var body: some View {
