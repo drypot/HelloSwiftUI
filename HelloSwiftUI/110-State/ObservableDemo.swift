@@ -131,7 +131,7 @@ struct ObservableDemo: View {
     }
 
     struct ReadWriteSubView: View {
-        // @Observable 이 아닌 @State 에 대한 바인딩이 필요하면 @Binging 으로 받는다.
+        // @Observable 이 아닌 @State 에 대한 바인딩이 필요하면 @Binding 으로 받는다.
         @Binding var counter: Int
         // @Observable @State 에 대한 바인딩이 필요하면 @Binging 대신 @Bindable 로 받는다.
         @Bindable var model: Model
