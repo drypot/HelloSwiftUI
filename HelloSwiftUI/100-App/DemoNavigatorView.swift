@@ -122,7 +122,7 @@ struct DemoNavigatorView: View {
             ]
         ),
         DemoSection(
-            label: "AppKit",
+            label: "NSViewRepresentable",
             demos: [
                 Demo(label: "NSViewRepresentable", view: AnyView(NSViewRepresentableDemo())),
                 Demo(label: "NSViewRepresentable2", view: AnyView(NSViewRepresentableDemo2())),
