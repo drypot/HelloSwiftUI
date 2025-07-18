@@ -41,48 +41,16 @@ struct DemoNavigatorView: View {
             ]
         ),
         DemoSection(
-            label: "Navigation",
-            demos: [
-                Demo(label: "NavigationSplitView", view: AnyView(NavigationSplitViewDemoPlaceholder())),
-                Demo(label: "TabView", view: AnyView(TabViewDemo())),
-            ]
-        ),
-        DemoSection(
-            label: "Modal",
-            demos: [
-                Demo(label: "ModalDemo", view: AnyView(ModalDemo())),
-            ]
-        ),
-        DemoSection(
             label: "View",
+            demos: [
+                Demo(label: "View", view: AnyView(ViewDemo())),
+            ]
+        ),
+        DemoSection(
+            label: "Text",
             demos: [
                 Demo(label: "Text", view: AnyView(TextDemo())),
                 Demo(label: "TextField", view: AnyView(TextFieldDemo())),
-                Demo(label: "Button", view: AnyView(ButtonDemo())),
-                Demo(label: "Link", view: AnyView(LinkDemo())),
-                Demo(label: "Menu", view: AnyView(MenuDemo())),
-                Demo(label: "DatePicker", view: AnyView(DatePickerDemo())),
-            ]
-        ),
-        DemoSection(
-            label: "Command",
-            demos: [
-                Demo(label: "Command", view: AnyView(CommandDemo())),
-                Demo(label: "Context Menu", view: AnyView(ContextMenuDemo())),
-            ]
-        ),
-        DemoSection(
-            label: "Form",
-            demos: [
-                Demo(label: "Form", view: AnyView(FormDemo())),
-            ]
-        ),
-        DemoSection(
-            label: "Grouping",
-            demos: [
-                Demo(label: "Group", view: AnyView(GroupDemo())),
-                Demo(label: "Section", view: AnyView(SectionDemo())),
-                Demo(label: "GroupBox", view: AnyView(GroupBoxDemo())),
             ]
         ),
         DemoSection(
@@ -119,6 +87,49 @@ struct DemoNavigatorView: View {
                 Demo(label: "Table", view: AnyView(TableDemo())),
                 Demo(label: "Outline", view: AnyView(OutlineViewDemo())),
                 Demo(label: "Outline Col", view: AnyView(OutlineViewWithColumnsDemo()))
+            ]
+        ),
+        DemoSection(
+            label: "Controls",
+            demos: [
+                Demo(label: "Button", view: AnyView(ButtonDemo())),
+                Demo(label: "Link", view: AnyView(LinkDemo())),
+                Demo(label: "DatePicker", view: AnyView(DatePickerDemo())),
+                Demo(label: "Menu", view: AnyView(MenuDemo())),
+            ]
+        ),
+        DemoSection(
+            label: "Form",
+            demos: [
+                Demo(label: "Form", view: AnyView(FormDemo())),
+            ]
+        ),
+        DemoSection(
+            label: "Grouping",
+            demos: [
+                Demo(label: "Group", view: AnyView(GroupDemo())),
+                Demo(label: "Section", view: AnyView(SectionDemo())),
+                Demo(label: "GroupBox", view: AnyView(GroupBoxDemo())),
+            ]
+        ),
+        DemoSection(
+            label: "Navigation",
+            demos: [
+                Demo(label: "NavigationSplitView", view: AnyView(NavigationSplitViewDemoPlaceholder())),
+                Demo(label: "TabView", view: AnyView(TabViewDemo())),
+            ]
+        ),
+        DemoSection(
+            label: "Modal",
+            demos: [
+                Demo(label: "ModalDemo", view: AnyView(ModalDemo())),
+            ]
+        ),
+        DemoSection(
+            label: "Command",
+            demos: [
+                Demo(label: "Command", view: AnyView(CommandDemo())),
+                Demo(label: "Context Menu", view: AnyView(ContextMenuDemo())),
             ]
         ),
         DemoSection(
