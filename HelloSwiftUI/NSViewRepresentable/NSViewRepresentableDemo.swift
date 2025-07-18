@@ -20,6 +20,9 @@ struct NSViewRepresentableDemo: View {
                 .frame(width: 100, height: 100)
                 .padding()
 
+            // Representable 초기화 할때 클로져를 붙이는데
+            // 이게 첫번째 프로퍼티인 onButtonClick 에 대입된다.
+
             Representable {
                 dayOrNight.toggle()
             }
@@ -31,9 +34,6 @@ struct NSViewRepresentableDemo: View {
 
 fileprivate struct Representable: NSViewRepresentable {
 
-    // NSButtonView 초기화 할때 클로져를 붙이는데
-    // 이게 struct 첫번째 변수인 onButtonClick 에 대입된다.
-    
     var onButtonClick: () -> Void
 
     func makeNSView(context: Context) -> NSView {
@@ -63,7 +63,7 @@ fileprivate struct Representable: NSViewRepresentable {
 
         // Coordinator 가 필요한 이유들.
 
-        // NSViewRepresentableDemo struct 라
+        // NSViewRepresentable 은 struct 라
         // AppKit 기반 코드에서 불러쓰기가 힘들다.
         // Coordinator 는 class 다.
 

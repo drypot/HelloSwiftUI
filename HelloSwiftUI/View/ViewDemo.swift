@@ -8,8 +8,19 @@
 import SwiftUI
 
 struct ViewDemo: View {
+    @State private var message = "Hello, SwiftUI!"
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(spacing: 20) {
+            Text(message)
+                .font(.title)
+
+            Button("Change Message") {
+                message = "You tapped the button!"
+            }
+            .padding()
+        }
+        .padding()
     }
 }
 
