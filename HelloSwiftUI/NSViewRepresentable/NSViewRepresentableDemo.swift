@@ -20,10 +20,10 @@ struct NSViewRepresentableDemo: View {
                 .frame(width: 100, height: 100)
                 .padding()
 
-            // Representable 초기화 할때 클로져를 붙이는데
+            // CustomButton 초기화 할때 클로져를 붙이는데
             // 이게 첫번째 프로퍼티인 onButtonClick 에 대입된다.
 
-            Representable {
+            CustomView {
                 dayOrNight.toggle()
             }
             .frame(width: 200, height: 80)
@@ -32,7 +32,7 @@ struct NSViewRepresentableDemo: View {
     }
 }
 
-fileprivate struct Representable: NSViewRepresentable {
+fileprivate struct CustomView: NSViewRepresentable {
 
     var onButtonClick: () -> Void
 
@@ -50,8 +50,13 @@ fileprivate struct Representable: NSViewRepresentable {
         )
         button.translatesAutoresizingMaskIntoConstraints = false
         button.bezelStyle = .rounded
-        button.frame = NSRect(x: 50, y: 20, width: 100, height: 40)
         view.addSubview(button)
+
+        NSLayoutConstraint.activate([
+            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            button.widthAnchor.constraint(equalToConstant: 100),
+            button.heightAnchor.constraint(equalToConstant: 40)
+        ])
 
         return view
     }
@@ -61,27 +66,28 @@ fileprivate struct Representable: NSViewRepresentable {
 
     func makeCoordinator() -> Coordinator {
 
-        // Coordinator 가 필요한 이유들.
+        // Creates the custom Coordinator instance
+        // to communicate changes from your view
+        // to other parts of your SwiftUI interface.
 
-        // NSViewRepresentable 은 struct 라
-        // AppKit 기반 코드에서 불러쓰기가 힘들다.
+        // NSViewRepresentable 은 struct 다.
+        // 잠깐 만들어졌다 파괴된다.
+        // AppKit Object 기반 코드에서 불러쓸 수 없다.
+
         // Coordinator 는 class 다.
-
-        // AppKit 은 delegate pattern 을 많이 사용한다.
-        // coordinator 를 delegate 로 쓰면 된다.
+        // NSView 에서 이벤트를 전달할 수 있다.
+        // Delegate 로 쓸 수도 있다.
 
         // UI 코드와 로직을 분리하는 용도로 써도 된다.
-
-        // AppKit 과 SwiftUI 간 커뮤니케이션에 사용한다.
 
         Coordinator(host: self)
     }
 
     @MainActor
     class Coordinator: NSObject {
-        var host: Representable
+        var host: CustomView
 
-        init(host: Representable) {
+        init(host: CustomView) {
             self.host = host
         }
 

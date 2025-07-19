@@ -22,22 +22,18 @@ struct NSViewRepresentableDemo2: View {
 
     var body: some View {
         VStack {
-            Text("NSViewRepresentable Demo")
-                .font(.title)
-                .padding()
-
             Text("Output: \(model.message)")
                 .font(.title3)
                 .padding()
 
-            Representable(model: model)
+            CustomView(model: model)
                 .frame(width: 200, height: 80)
         }
         .padding()
     }
 }
 
-fileprivate struct Representable: NSViewRepresentable {
+fileprivate struct CustomView: NSViewRepresentable {
 
     // SwiftUI 와의 데이터 소통 창구
     let model: Model
@@ -72,9 +68,9 @@ fileprivate struct Representable: NSViewRepresentable {
 
     @MainActor
     class Coordinator: NSObject, NSTextViewDelegate {
-        var host: Representable
+        var host: CustomView
 
-        init(host: Representable) {
+        init(host: CustomView) {
             self.host = host
         }
 
