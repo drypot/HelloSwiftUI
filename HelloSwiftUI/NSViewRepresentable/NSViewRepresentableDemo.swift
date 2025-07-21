@@ -8,23 +8,31 @@
 import SwiftUI
 import AppKit
 
+@Observable fileprivate class Model {
+    var text: String
+
+    init(text: String) {
+        self.text = text
+    }
+}
+
 struct NSViewRepresentableDemo: View {
 
-    @State private var dayOrNight = true
+    @State private var model = Model(text: "Hello, World!")
 
     var body: some View {
         VStack {
-            Image(systemName: dayOrNight ? "sun.max" : "moon.circle.fill")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 100, height: 100)
+            Text("\(model.text)")
+                .font(.title3)
                 .padding()
+                .frame(width: 200, height: 120, alignment: .topLeading)
+                .border(Color.gray, width: 1)
 
-            // CustomButton 초기화 할때 클로져를 붙이는데
-            // 이게 첫번째 프로퍼티인 onButtonClick 에 대입된다.
+            CustomTextView(model: model)
+                .frame(width: 200, height: 120)
 
-            CustomView {
-                dayOrNight.toggle()
+            CustomButton("Reset") {
+                model.text = "Hello, World!"
             }
             .frame(width: 200, height: 80)
         }
@@ -32,9 +40,9 @@ struct NSViewRepresentableDemo: View {
     }
 }
 
-fileprivate struct CustomView: NSViewRepresentable {
+fileprivate struct CustomTextView: NSViewRepresentable {
 
-    var onButtonClick: () -> Void
+    let model: Model
 
     func makeNSView(context: Context) -> NSView {
 
@@ -43,25 +51,27 @@ fileprivate struct CustomView: NSViewRepresentable {
         let view = NSView()
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        let button = NSButton(
-            title: "Click Me",
-            target: context.coordinator,
-            action: #selector(Coordinator.buttonClicked)
-        )
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.bezelStyle = .rounded
-        view.addSubview(button)
+        let textView = NSTextView()
+        textView.font = .preferredFont(forTextStyle: .title3)
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.delegate = context.coordinator // Coordinator 를 이벤트 핸들러로 지정
+
+        view.addSubview(textView)
 
         NSLayoutConstraint.activate([
-            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            button.widthAnchor.constraint(equalToConstant: 100),
-            button.heightAnchor.constraint(equalToConstant: 40)
+            textView.topAnchor.constraint(equalTo: view.topAnchor),
+            textView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            textView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            textView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
 
         return view
     }
 
+    // SwiftUI 데이터를 AppKit View 에 업데이트.
     func updateNSView(_ nsView: NSView, context: Context) {
+        guard let textView = nsView.subviews.first as? NSTextView else { fatalError() }
+        textView.string = model.text
     }
 
     func makeCoordinator() -> Coordinator {
@@ -84,15 +94,69 @@ fileprivate struct CustomView: NSViewRepresentable {
     }
 
     @MainActor
-    class Coordinator: NSObject {
-        var host: CustomView
+    class Coordinator: NSObject, NSTextViewDelegate {
+        var host: CustomTextView
 
-        init(host: CustomView) {
+        init(host: CustomTextView) {
             self.host = host
         }
 
-        @objc func buttonClicked() {
-            host.onButtonClick()
+        // AppKit View 데이터를 SwiftUI 에 업데이트.
+        func textDidChange(_ notification: Notification) {
+            guard let textView = notification.object as? NSTextView else { return }
+            host.model.text = textView.string
+        }
+    }
+
+}
+
+fileprivate struct CustomButton: NSViewRepresentable {
+    var title: String
+    var action: () -> Void
+
+    init(_ title: String, action: @escaping () -> Void) {
+        self.title = title
+        self.action = action
+    }
+
+    func makeNSView(context: Context) -> NSView {
+        let view = NSView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        let button = NSButton(
+            title: title,
+            target: context.coordinator,
+            action: #selector(Coordinator.action)
+        )
+        button.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(button)
+
+        NSLayoutConstraint.activate([
+            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            button.widthAnchor.constraint(equalToConstant: 100),
+            button.heightAnchor.constraint(equalToConstant: 40)
+        ])
+
+        return view
+    }
+
+    func updateNSView(_ nsView: NSView, context: Context) {
+    }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(host: self)
+    }
+
+    @MainActor
+    class Coordinator: NSObject {
+        var host: CustomButton
+
+        init(host: CustomButton) {
+            self.host = host
+        }
+
+        @objc func action() {
+            host.action()
         }
     }
 
