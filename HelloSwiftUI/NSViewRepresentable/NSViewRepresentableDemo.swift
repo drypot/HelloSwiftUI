@@ -5,6 +5,7 @@
 //  Created by Kyuhyun Park on 12/20/24.
 //
 
+
 import SwiftUI
 import AppKit
 
@@ -18,7 +19,7 @@ import AppKit
 
 struct NSViewRepresentableDemo: View {
 
-    @State private var model = Model(text: "Hello, World!")
+    @State private var model = Model(text: "Hello")
 
     var body: some View {
         VStack {
@@ -32,7 +33,7 @@ struct NSViewRepresentableDemo: View {
                 .frame(width: 200, height: 120)
 
             CustomButton("Reset") {
-                model.text = "Hello, World!"
+                model.text = "Hello"
             }
             .frame(width: 200, height: 80)
         }
