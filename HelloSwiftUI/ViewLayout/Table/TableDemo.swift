@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TableDemo: View {
 
-    struct Person: Identifiable {
+    nonisolated struct Person: Identifiable {
         var id = UUID()
         var name: String
         var age: Int

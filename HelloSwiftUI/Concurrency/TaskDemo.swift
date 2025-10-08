@@ -20,7 +20,7 @@ fileprivate func assertMainThreadSync() {
     assert(Thread.isMainThread)
 }
 
-fileprivate func assertBackgroundThreadSync() {
+fileprivate nonisolated func assertBackgroundThreadSync() {
     print("assert background thread sync")
     assert(!Thread.isMainThread)
 }
