@@ -108,7 +108,6 @@ fileprivate struct CustomView: NSViewControllerRepresentable {
         Coordinator(host: self)
     }
 
-    @MainActor
     class Coordinator: NSObject {
         var host: CustomView
 

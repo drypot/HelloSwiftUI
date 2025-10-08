@@ -12,7 +12,6 @@ import SwiftUI
 struct ObservableDemo: View {
 
     @Observable
-    @MainActor
     class Model {
         var counter = 0
 

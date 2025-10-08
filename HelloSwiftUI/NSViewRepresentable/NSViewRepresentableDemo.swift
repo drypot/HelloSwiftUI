@@ -94,7 +94,6 @@ fileprivate struct CustomTextView: NSViewRepresentable {
         Coordinator(host: self)
     }
 
-    @MainActor
     class Coordinator: NSObject, NSTextViewDelegate {
         var host: CustomTextView
 
@@ -148,7 +147,6 @@ fileprivate struct CustomButton: NSViewRepresentable {
         Coordinator(host: self)
     }
 
-    @MainActor
     class Coordinator: NSObject {
         var host: CustomButton
 

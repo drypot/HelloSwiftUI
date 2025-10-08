@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol IDHashable: Identifiable, Hashable {
+nonisolated protocol IDHashable: Identifiable, Hashable {
 }
 
 extension IDHashable {

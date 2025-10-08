@@ -12,7 +12,7 @@ enum DisplayMode: String, CaseIterable {
     case dark = "Dark"
     case auto = "Auto"
 
-    @MainActor static func changeDisplayMode(to mode: DisplayMode) {
+    static func changeDisplayMode(to mode: DisplayMode) {
         @AppStorage("displayMode") var displayMode = DisplayMode.auto
         displayMode = mode
 

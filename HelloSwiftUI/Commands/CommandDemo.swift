@@ -16,7 +16,7 @@ struct CommandDemo: View {
     var body: some View {
         Text("화면 상단 Custom 메뉴를 사용해 본다")
         Spacer().frame(height: 20)
-        Text("Show Totals: \(showTotals)")
+        Text("Show Totals: \(showTotals)".debugDescription)
     }
 }
 struct CustomCommands: Commands {
