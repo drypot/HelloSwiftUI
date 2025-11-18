@@ -25,6 +25,7 @@ struct DemoNavigatorView: View {
         DemoSection(
             label: "State",
             demos: [
+                Demo(label: "StateLifecycle", view: AnyView(StateLifecycleDemo())),
                 Demo(label: "Observable", view: AnyView(ObservableDemo())),
                 Demo(label: "ObservableObject", view: AnyView(ObservableObjectDemo())),
                 Demo(label: "SceneObject", view: AnyView(SceneStorageDemo())),
