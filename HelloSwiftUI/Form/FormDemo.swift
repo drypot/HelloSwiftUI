@@ -19,31 +19,33 @@ struct FormDemo: View {
     }
 
     var body: some View {
-        VStack {
-            TabView {
-                Tab {
-                    SampleForm()
-                        .formStyle(.grouped)
-                } label: {
-                    Text("Grouped")
-                }
-                Tab {
-                    SampleForm()
-                        .formStyle(CustomFormStyle())
-                    Spacer()
-                } label: {
-                    Text("Custom")
-                }
-                Tab {
-                    SampleForm()
-                        .padding()
-                    Spacer()
-                } label: {
-                    Text("Default")
+        ScrollView {
+            VStack {
+                TabView {
+                    Tab {
+                        SampleForm()
+                            .formStyle(.grouped)
+                    } label: {
+                        Text("Grouped")
+                    }
+                    Tab {
+                        SampleForm()
+                            .formStyle(CustomFormStyle())
+                        Spacer()
+                    } label: {
+                        Text("Custom")
+                    }
+                    Tab {
+                        SampleForm()
+                            .padding()
+                        Spacer()
+                    } label: {
+                        Text("Default")
+                    }
                 }
             }
+            .padding()
         }
-        .padding()
     }
 
     struct SampleForm: View {
@@ -93,6 +95,10 @@ struct FormDemo: View {
                     print("Button2 clicked")
                 } label: {
                     Text("Button2")
+                }
+
+                Button("Button3", role: .destructive) {
+                    print("Button3 clicked")
                 }
 
                 do {
@@ -151,7 +157,9 @@ struct FormDemo: View {
                 DatePicker("DatePicker1", selection: $datePicker1)
                     .datePickerStyle(.stepperField)
                 DatePicker("DatePicker1", selection: $datePicker1, displayedComponents: .date)
-                    .datePickerStyle(.graphical)
+                    .datePickerStyle(.stepperField)
+                DatePicker("DatePicker1", selection: $datePicker1, displayedComponents: .hourAndMinute)
+                    .datePickerStyle(.stepperField)
             }
         }
     }
