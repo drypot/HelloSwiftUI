@@ -95,8 +95,6 @@ struct DemoNavigatorView: View {
             demos: [
                 Demo(label: "Form", view: AnyView(FormDemo())),
                 Demo(label: "Button", view: AnyView(ButtonDemo())),
-                Demo(label: "Link", view: AnyView(LinkDemo())),
-                Demo(label: "DatePicker", view: AnyView(DatePickerDemo())),
                 Demo(label: "Menu", view: AnyView(MenuDemo())),
             ]
         ),
