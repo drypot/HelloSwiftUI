@@ -50,8 +50,9 @@ struct DemoNavigatorView: View {
         DemoSection(
             label: "Text",
             demos: [
-                Demo(label: "Text", view: AnyView(TextDemo())),
-                Demo(label: "TextField", view: AnyView(TextFieldDemo())),
+                Demo(label: "Font", view: AnyView(FontDemo())),
+                Demo(label: "ForegroundStyle", view: AnyView(ForegroundStyleDemo())),
+                Demo(label: "Background", view: AnyView(BackgroundDemo())),
             ]
         ),
         DemoSection(
