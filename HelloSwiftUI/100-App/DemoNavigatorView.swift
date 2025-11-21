@@ -56,6 +56,15 @@ struct DemoNavigatorView: View {
             ]
         ),
         DemoSection(
+            label: "Form",
+            demos: [
+                Demo(label: "Form", view: AnyView(FormDemo())),
+                Demo(label: "Controls", view: AnyView(ControlsDemo())),
+                Demo(label: "Button", view: AnyView(ButtonDemo())),
+                Demo(label: "Menu", view: AnyView(MenuDemo())),
+            ]
+        ),
+        DemoSection(
             label: "List",
             demos: [
                 Demo(label: "List Simple", view: AnyView(ListSimple())),
@@ -89,14 +98,6 @@ struct DemoNavigatorView: View {
                 Demo(label: "Table", view: AnyView(TableDemo())),
                 Demo(label: "Outline", view: AnyView(OutlineViewDemo())),
                 Demo(label: "Outline Col", view: AnyView(OutlineViewWithColumnsDemo()))
-            ]
-        ),
-        DemoSection(
-            label: "Form",
-            demos: [
-                Demo(label: "Form", view: AnyView(FormDemo())),
-                Demo(label: "Button", view: AnyView(ButtonDemo())),
-                Demo(label: "Menu", view: AnyView(MenuDemo())),
             ]
         ),
         DemoSection(
