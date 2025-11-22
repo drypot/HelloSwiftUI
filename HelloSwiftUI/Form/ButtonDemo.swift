@@ -10,6 +10,9 @@ import SwiftUI
 struct ButtonDemo: View {
     var body: some View {
         VStack(alignment: .leading) {
+            Text("Labeled Buttons")
+                .font(.title)
+
             Button("Button") {
                 print("clicked")
             }
@@ -39,30 +42,46 @@ struct ButtonDemo: View {
                 }
             }
 
-            Button ("Button Style Automatic") {
+            Spacer()
+                .frame(height: 32)
+
+            Text("Styled Buttons")
+                .font(.title)
+
+            Button ("Unstyled") {
                 print("clicked")
             }
-            .buttonStyle(.automatic)
 
-            Button ("Button Style Plain") {
+            Button ("Plain") {
                 print("clicked")
             }
             .buttonStyle(.plain)
 
-            Button ("Button Style Bordered") {
+            Button ("Automatic") {
+                print("clicked")
+            }
+            .buttonStyle(.automatic)
+
+            Button ("Bordered") {
                 print("clicked")
             }
             .buttonStyle(.bordered)
 
-            Button ("Button Style BorderedProminent") {
+            Button ("Borderless") {
+                print("clicked")
+            }
+            .buttonStyle(.borderless)
+
+            Button ("BorderedProminent") {
                 print("clicked")
             }
             .buttonStyle(.borderedProminent)
 
-            Button ("Button Style Borderless") {
-                print("clicked")
-            }
-            .buttonStyle(.borderless)
+            Spacer()
+                .frame(height: 32)
+
+            Text("Modified Buttons")
+                .font(.title)
 
             Button ("Button Modified") {
                 print("clicked")
@@ -82,6 +101,7 @@ struct ButtonDemo: View {
             .buttonBorderShape(.capsule)
             .controlSize(.large)
         }
+        .padding()
     }
 }
 

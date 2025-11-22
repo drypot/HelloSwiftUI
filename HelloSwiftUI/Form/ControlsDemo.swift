@@ -50,55 +50,49 @@ struct ControlsDemo: View {
 
     struct SampleForm: View {
 
-        @State var textField1 = ""
-        @State var textField2 = ""
-        @State var toggle1 = true
-        @State var toggle2 = false
-        @State var picker1 = PickerItems.large
-        @State var picker2 = PickerItems.large
+        @State var textField = ""
+        @State var toggle = true
+        @State var picker = PickerItems.large
         @State var slider1: Double = 6
         @State var slider2: Double = 0.5
-        @State var datePicker1 = Date()
+        @State var datePicker = Date()
 
         var body: some View {
             Form {
-                TextField(text: $textField1) {
-                    Text("TextField1")
+                TextField(text: $textField) {
+                    Text("TextField")
                 }
                 .onSubmit {
-                    print("TextField1: \(textField1)")
+                    print("TextField: \(textField)")
                 }
 
-                TextField(text: $textField2, prompt: Text("Prompt2")) {
-                    Text("TextField2")
-                }
-                .onSubmit {
-                    print("TextField2: \(textField2)")
+                TextField(text: $textField, prompt: Text("Prompt")) {
+                    Text("TextField")
                 }
                 .textFieldStyle(.roundedBorder)
 
-                LabeledContent("Label1") {
+                LabeledContent("Label") {
                     Text("Contents")
                 }
 
                 LabeledContent(
-                    "Label2",
+                    "Label",
                     value: Measurement<UnitLength>(value: 171, unit: .centimeters),
                     format: .measurement(width: .abbreviated, usage: .personHeight)
                 )
 
-                Button("Button1") {
-                    print("Button1 clicked")
+                Button("Button") {
+                    print("Button clicked")
                 }
 
                 Button() {
-                    print("Button2 clicked")
+                    print("Button clicked")
                 } label: {
-                    Text("Button2")
+                    Text("Button")
                 }
 
-                Button("Button3", role: .destructive) {
-                    print("Button3 clicked")
+                Button("Button", role: .destructive) {
+                    print("Button clicked")
                 }
 
                 do {
@@ -118,20 +112,27 @@ struct ControlsDemo: View {
                     NSWorkspace.shared.open(url)
                 }
 
-                Toggle("Toggle1", isOn: $toggle1)
-                Toggle("Toggle2", isOn: $toggle2)
+                Toggle("Toggle", isOn: $toggle)
 
-                Picker("Picker1", selection: $picker1) {
+                Picker("Picker", selection: $picker) {
                     Text("Large").tag(PickerItems.large)
                     Text("Medium").tag(PickerItems.medium)
                     Text("Small").tag(PickerItems.small)
                 }
-                Picker("Picker2", selection: $picker2) {
+
+                Picker("Picker", selection: $picker) {
                     Text("Large").tag(PickerItems.large)
                     Text("Medium").tag(PickerItems.medium)
                     Text("Small").tag(PickerItems.small)
                 }
                 .pickerStyle(.inline)
+
+                Picker("Picker", selection: $picker) {
+                    Text("Large").tag(PickerItems.large)
+                    Text("Medium").tag(PickerItems.medium)
+                    Text("Small").tag(PickerItems.small)
+                }
+                .pickerStyle(.segmented)
 
                 Slider(value: $slider1, in: 1...10, step: 1.0) {
                     Text("Slider1")
@@ -153,12 +154,15 @@ struct ControlsDemo: View {
                     print("\(slider2), \(isEditing)")
                 }
 
-                Text("Selected Date: \(datePicker1, style: .date)")
-                DatePicker("DatePicker1", selection: $datePicker1)
+                Text("Selected Date: \(datePicker, style: .date)")
+
+                DatePicker("DatePicker", selection: $datePicker)
                     .datePickerStyle(.stepperField)
-                DatePicker("DatePicker1", selection: $datePicker1, displayedComponents: .date)
+
+                DatePicker("DatePicker", selection: $datePicker, displayedComponents: .date)
                     .datePickerStyle(.stepperField)
-                DatePicker("DatePicker1", selection: $datePicker1, displayedComponents: .hourAndMinute)
+
+                DatePicker("DatePicker", selection: $datePicker, displayedComponents: .hourAndMinute)
                     .datePickerStyle(.stepperField)
             }
         }
