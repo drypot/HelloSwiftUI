@@ -8,17 +8,11 @@
 import SwiftUI
 
 struct ViewDemo: View {
-    @State private var message = "Hello, SwiftUI!"
-
     var body: some View {
         VStack(spacing: 20) {
-            Text(message)
+            Text("Hello, SwiftUI!")
                 .font(.title)
-
-            Button("Change Message") {
-                message = "You tapped the button!"
-            }
-            .padding()
+                .padding(EdgeInsets(top: 40, leading: 40, bottom: 40, trailing: 40))
         }
         .padding()
     }

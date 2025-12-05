@@ -12,7 +12,7 @@ struct ForegroundStyleDemo: View {
     var body: some View {
         HStack(alignment: .top, spacing: 36) {
             VStack(spacing: 18) {
-                Text(".foregroundStyle(...)")
+                Text("foregroundStyle(...)")
                 Text("foreground")
                     .foregroundStyle(.foreground)
                 Text("background")
@@ -39,7 +39,7 @@ struct ForegroundStyleDemo: View {
             .font(.title)
 
             VStack(spacing: 18) {
-                Text(".foregroundStyle(...)")
+                Text("foregroundStyle(...)")
                 Text("primary")
                     .foregroundStyle(.primary)
                 Text("secondary")
@@ -54,7 +54,7 @@ struct ForegroundStyleDemo: View {
             .font(.title)
 
             VStack(spacing: 9) {
-                Text(".foregroundStyle(...)")
+                Text("foregroundStyle(...)")
                 Text("black")
                     .foregroundStyle(.black)
                 Text("blue")

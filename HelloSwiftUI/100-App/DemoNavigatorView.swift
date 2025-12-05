@@ -23,14 +23,19 @@ struct DemoNavigatorView: View {
 
     static let demoSections = [
         DemoSection(
-            label: "State",
+            label: "View",
             demos: [
-                Demo(label: "StateLifecycle", view: AnyView(StateLifecycleDemo())),
-                Demo(label: "Observable", view: AnyView(ObservableDemo())),
-                Demo(label: "ObservableObject", view: AnyView(ObservableObjectDemo())),
-                Demo(label: "SceneObject", view: AnyView(SceneStorageDemo())),
-                Demo(label: "ViewID", view: AnyView(ViewIDDemo())),
-                Demo(label: "StateAnimation", view: AnyView(StateAnimationDemo())),
+                Demo(label: "View", view: AnyView(ViewDemo())),
+                Demo(label: "Color", view: AnyView(ColorDemo())),
+                Demo(label: "Background", view: AnyView(BackgroundDemo())),
+            ]
+        ),
+        DemoSection(
+            label: "Text",
+            demos: [
+                Demo(label: "Font", view: AnyView(FontDemo())),
+                Demo(label: "FontWeight", view: AnyView(FontWeightDemo())),
+                Demo(label: "ForegroundStyle", view: AnyView(ForegroundStyleDemo())),
             ]
         ),
         DemoSection(
@@ -42,17 +47,14 @@ struct DemoNavigatorView: View {
             ]
         ),
         DemoSection(
-            label: "View",
+            label: "State",
             demos: [
-                Demo(label: "View", view: AnyView(ViewDemo())),
-                Demo(label: "Background", view: AnyView(BackgroundDemo())),
-            ]
-        ),
-        DemoSection(
-            label: "Text",
-            demos: [
-                Demo(label: "Font", view: AnyView(FontDemo())),
-                Demo(label: "ForegroundStyle", view: AnyView(ForegroundStyleDemo())),
+                Demo(label: "StateLifecycle", view: AnyView(StateLifecycleDemo())),
+                Demo(label: "Observable", view: AnyView(ObservableDemo())),
+                Demo(label: "ObservableObject", view: AnyView(ObservableObjectDemo())),
+                Demo(label: "SceneObject", view: AnyView(SceneStorageDemo())),
+                Demo(label: "ViewID", view: AnyView(ViewIDDemo())),
+                Demo(label: "StateAnimation", view: AnyView(StateAnimationDemo())),
             ]
         ),
         DemoSection(

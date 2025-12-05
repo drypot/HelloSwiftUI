@@ -11,13 +11,15 @@ struct BackgroundDemo: View {
     var body: some View {
         HStack(alignment: .top, spacing: 36) {
             VStack(spacing: 18) {
-                Text(".yellow")
+                Text("background(...)")
+                    .font(.title)
+                Text("yellow")
                     .padding(4)
                     .background(.yellow)
-                Text(".yellow.gradient")
+                Text("yellow.gradient")
                     .padding(4)
                     .background(.yellow.gradient)
-                Text(".ultraThinMaterial")
+                Text("ultraThinMaterial")
                     .padding(4)
                     .background(.ultraThinMaterial)
                 Text("in: Capsule()")
