@@ -45,6 +45,7 @@ struct DemoNavigatorView: View {
             label: "View",
             demos: [
                 Demo(label: "View", view: AnyView(ViewDemo())),
+                Demo(label: "Background", view: AnyView(BackgroundDemo())),
             ]
         ),
         DemoSection(
@@ -52,7 +53,6 @@ struct DemoNavigatorView: View {
             demos: [
                 Demo(label: "Font", view: AnyView(FontDemo())),
                 Demo(label: "ForegroundStyle", view: AnyView(ForegroundStyleDemo())),
-                Demo(label: "Background", view: AnyView(BackgroundDemo())),
             ]
         ),
         DemoSection(
