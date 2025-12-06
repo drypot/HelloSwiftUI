@@ -99,8 +99,9 @@ struct DemoNavigatorView: View {
                 Demo(label: "Grid Alignment", view: AnyView(GridAlignmentDemo())),
                 Demo(label: "Grid Anchor", view: AnyView(GridAnchorDemo())),
                 Demo(label: "Grid Divider", view: AnyView(GridDividerDemo())),
-                Demo(label: "LazyGridView", view: AnyView(LazyGridDemo())),
-                Demo(label: "LazyGridView2", view: AnyView(LazyGridDemo2())),
+                Demo(label: "LazyGrid Icons", view: AnyView(LazyGridIconsDemo())),
+                Demo(label: "LazyGrid", view: AnyView(LazyGridDemo())),
+                Demo(label: "LazyGrid 2", view: AnyView(LazyGridDemo2())),
             ]
         ),
         DemoSection(
