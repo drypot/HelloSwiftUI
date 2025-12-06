@@ -94,8 +94,11 @@ struct DemoNavigatorView: View {
         DemoSection(
             label: "Grid",
             demos: [
-                Demo(label: "GridView", view: AnyView(GridViewDemo())),
-                Demo(label: "GridViewDivider", view: AnyView(GridViewDividerDemo())),
+                Demo(label: "Grid", view: AnyView(GridDemo())),
+                Demo(label: "Grid Span", view: AnyView(GridSpanDemo())),
+                Demo(label: "Grid Alignment", view: AnyView(GridAlignmentDemo())),
+                Demo(label: "Grid Anchor", view: AnyView(GridAnchorDemo())),
+                Demo(label: "Grid Divider", view: AnyView(GridDividerDemo())),
                 Demo(label: "LazyGridView", view: AnyView(LazyGridViewDemo())),
                 Demo(label: "LazyGridView2", view: AnyView(LazyGridViewDemo2())),
             ]
@@ -196,7 +199,7 @@ struct DemoNavigatorView: View {
                     Text("Item 3")
                 }
             }
-            .frame(minWidth: 200, idealWidth: 250, maxWidth: 300)
+            .navigationSplitViewColumnWidth(min: 200, ideal: 200, max: 300)
             .onChange(of: selectedSection) { oldValue, newValue in
                 let index = Self.demoSections.firstIndex(of: newValue)!
                 UserDefaults.standard.set(index, forKey: UserDefaultKeys.sectionIndex.rawValue)
@@ -206,12 +209,15 @@ struct DemoNavigatorView: View {
             List(selectedSection.demos, selection: $selectedDemo) { demo in
                 NavigationLink(demo.label, value: demo)
             }
+            .navigationSplitViewColumnWidth(min: 200, ideal: 200, max: 300)
             .onChange(of: selectedDemo) { oldValue, newValue in
                 let index = selectedSection.demos.firstIndex(of: newValue)!
                 UserDefaults.standard.set(index, forKey: UserDefaultKeys.subSectionIndex.rawValue)
             }
         } detail: {
             selectedDemo.view
+//                .navigationSplitViewColumnWidth(min: 200, ideal: 250, max: 300)
+
         }
         .toolbar {
             CustomToolbar() // ToolbarDemo
