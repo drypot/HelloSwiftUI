@@ -9,7 +9,6 @@ import SwiftUI
 
 // https://rohit-13.medium.com/exploring-the-swiftuis-grid-view-lazyvgrid-griditem-and-grid-gridrow-888fca958b0f
 
-
 struct GridDemo: View {
     var body: some View {
         VStack {

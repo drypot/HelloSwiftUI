@@ -1,5 +1,5 @@
 //
-//  LazyGridViewDemo.swift
+//  LazyGridDemo.swift
 //  HelloSwiftUI
 //
 //  Created by Kyuhyun Park on 10/21/24.
@@ -9,7 +9,7 @@ import SwiftUI
 
 // https://rohit-13.medium.com/exploring-the-swiftuis-grid-view-lazyvgrid-griditem-and-grid-gridrow-888fca958b0f
 
-struct LazyGridViewDemo: View {
+struct LazyGridDemo: View {
     let data = Array(1...100)
 
     var columns: [GridItem] = [
@@ -76,5 +76,5 @@ struct LazyGridViewDemo: View {
 }
 
 #Preview {
-    LazyGridViewDemo()
+    LazyGridDemo()
 }
