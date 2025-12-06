@@ -39,6 +39,12 @@ struct DemoNavigatorView: View {
             ]
         ),
         DemoSection(
+            label: "Image",
+            demos: [
+                Demo(label: "Image", view: AnyView(ImageDemo())),
+            ]
+        ),
+        DemoSection(
             label: "Scene",
             demos: [
                 Demo(label: "Window", view: AnyView(WindowDemo())),

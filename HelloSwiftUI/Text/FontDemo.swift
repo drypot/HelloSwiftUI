@@ -12,6 +12,8 @@ struct FontDemo: View {
         VStack(spacing: 18) {
             Text("font(...)")
                 .font(.title)
+            Text("system 32 bold default")
+                .font(.system(size: 32, weight: .bold, design: .default))
             Text("largeTitle")
                 .font(.largeTitle)
             Text("title")
