@@ -9,31 +9,23 @@
 import SwiftUI
 import AppKit
 
-@Observable fileprivate class Model {
-    var text: String
-
-    init(text: String) {
-        self.text = text
-    }
-}
-
 struct NSViewRepresentableDemo: View {
 
-    @State private var model = Model(text: "Hello")
+    @State private var message = "Hello"
 
     var body: some View {
         VStack {
-            Text("\(model.text)")
+            TextEditor(text: $message)
                 .font(.title3)
-                .padding()
-                .frame(width: 200, height: 120, alignment: .topLeading)
+                .frame(width: 200, height: 120)
                 .border(Color.gray, width: 1)
 
-            CustomTextView(model: model)
+            CustomTextView(message: $message)
                 .frame(width: 200, height: 120)
+                .border(Color.gray, width: 1)
 
             CustomButton("Reset") {
-                model.text = "Hello"
+                message = "Hello"
             }
             .frame(width: 200, height: 80)
         }
@@ -43,7 +35,7 @@ struct NSViewRepresentableDemo: View {
 
 fileprivate struct CustomTextView: NSViewRepresentable {
 
-    let model: Model
+    @Binding var message: String
 
     func makeNSView(context: Context) -> NSView {
 
@@ -55,7 +47,7 @@ fileprivate struct CustomTextView: NSViewRepresentable {
         let textView = NSTextView()
         textView.font = .preferredFont(forTextStyle: .title3)
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.delegate = context.coordinator // Coordinator 를 이벤트 핸들러로 지정
+        textView.delegate = context.coordinator // Coordinator 를 delegate handler 로 사용
 
         view.addSubview(textView)
 
@@ -72,7 +64,7 @@ fileprivate struct CustomTextView: NSViewRepresentable {
     // SwiftUI 데이터를 AppKit View 에 업데이트.
     func updateNSView(_ nsView: NSView, context: Context) {
         guard let textView = nsView.subviews.first as? NSTextView else { fatalError() }
-        textView.string = model.text
+        textView.string = message
     }
 
     func makeCoordinator() -> Coordinator {
@@ -104,7 +96,7 @@ fileprivate struct CustomTextView: NSViewRepresentable {
         // AppKit View 데이터를 SwiftUI 에 업데이트.
         func textDidChange(_ notification: Notification) {
             guard let textView = notification.object as? NSTextView else { return }
-            host.model.text = textView.string
+            host.message = textView.string
         }
     }
 
