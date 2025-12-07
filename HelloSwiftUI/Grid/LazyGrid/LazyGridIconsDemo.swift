@@ -24,16 +24,7 @@ struct LazyGridIconsDemo: View {
                 LazyVGrid(columns: columns) {
                     ForEach(data, id: \.self) { number in
                         VStack {
-                            Image(systemName: "car.fill")
-                                .symbolRenderingMode(.multicolor)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 100, height: 100)
-                            Text("\(number)")
-                                .font(.title2)
-                                .fontWeight(.semibold)
-                                .scaledToFit()
-                                .minimumScaleFactor(0.6)
+                            GridItemView(imageName: "car.fill", title: "\(number)")
                         }
                     }
                 }
@@ -41,6 +32,25 @@ struct LazyGridIconsDemo: View {
             .padding()
         }
     }
+}
+
+fileprivate struct GridItemView: View {
+    let imageName: String
+    let title: String
+
+    var body: some View {
+        Image(systemName: "car.fill")
+            .symbolRenderingMode(.multicolor)
+            .resizable()
+            .scaledToFit()
+            .frame(width: 100, height: 100)
+        Text("\(title)")
+            .font(.title2)
+            .fontWeight(.semibold)
+            .scaledToFit()
+            .minimumScaleFactor(0.6)
+    }
+
 }
 
 #Preview {
