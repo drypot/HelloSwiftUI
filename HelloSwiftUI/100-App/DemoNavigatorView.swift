@@ -42,6 +42,7 @@ struct DemoNavigatorView: View {
             label: "Image",
             demos: [
                 Demo(label: "Image", view: AnyView(ImageDemo())),
+                Demo(label: "DismissButton", view: AnyView(DismissButtonDemo())),
             ]
         ),
         DemoSection(

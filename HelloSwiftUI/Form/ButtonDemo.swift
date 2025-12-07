@@ -11,7 +11,7 @@ struct ButtonDemo: View {
     var body: some View {
         ScrollView {
             Form {
-                Section("Labeled Buttons") {
+                Section("Labeled") {
                     Button("Button") {
                         print("clicked")
                     }
@@ -42,38 +42,50 @@ struct ButtonDemo: View {
                     }
                 }
 
-                Section("Styled Buttons") {
-                    Button ("Unstyled") {
+                Section("Labeled + Styled") {
+                    Button {
                         print("clicked")
+                    } label: {
+                        Label("Unstyled", systemImage: "2.square.fill")
                     }
 
-                    Button ("Plain") {
+                    Button {
                         print("clicked")
+                    } label: {
+                        Label("Plain", systemImage: "2.square.fill")
                     }
                     .buttonStyle(.plain)
 
-                    Button ("Automatic") {
+                    Button {
                         print("clicked")
+                    } label: {
+                        Label("Automatic", systemImage: "2.square.fill")
                     }
                     .buttonStyle(.automatic)
 
-                    Button ("Bordered") {
+                    Button {
                         print("clicked")
+                    } label: {
+                        Label("Bordered", systemImage: "2.square.fill")
                     }
                     .buttonStyle(.bordered)
 
-                    Button ("Borderless") {
+                    Button {
                         print("clicked")
+                    } label: {
+                        Label("Borderless", systemImage: "2.square.fill")
                     }
                     .buttonStyle(.borderless)
 
-                    Button ("BorderedProminent") {
+                    Button {
                         print("clicked")
+                    } label: {
+                        Label("BorderedProminent", systemImage: "2.square.fill")
                     }
                     .buttonStyle(.borderedProminent)
                 }
 
-                Section("Modified Buttons") {
+                Section("Modified") {
                     Button ("Modified") {
                         print("clicked")
                     }
@@ -81,8 +93,8 @@ struct ButtonDemo: View {
                     .font(.title)
                     .foregroundColor(.white)
                     .background(.blue)
-                    .cornerRadius(10)
                     .buttonStyle(.plain)
+                    .cornerRadius(10)
 
                     Button("Modified") {
                         print("clicked")
