@@ -151,6 +151,7 @@ struct DemoNavigatorView: View {
         DemoSection(
             label: "Task",
             demos: [
+                Demo(label: "Callback", view: AnyView(CallbackDemo())),
                 Demo(label: "Task", view: AnyView(TaskDemo())),
             ]
         ),
