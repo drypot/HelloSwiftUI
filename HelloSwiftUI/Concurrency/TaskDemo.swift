@@ -26,7 +26,6 @@ struct TaskDemo: View {
 
             Button("Call task") {
                 Task {
-                    assert(Thread.isMainThread)
                     await fetchData()
                     counter += 1
                 }
@@ -34,8 +33,7 @@ struct TaskDemo: View {
 
             Button("Call detached task") {
                 Task.detached {
-                    assert(!Thread.isMainThread)
-                    await fetchData()
+                    await fetchDataConcurrent()
                     await MainActor.run {
                         counter += 1
                     }
@@ -44,8 +42,14 @@ struct TaskDemo: View {
         }
     }
 
-    nonisolated func fetchData() async {
+    func fetchData() async {
+        assert(Thread.isMainThread)
         print("fetchData: ...")
+    }
+
+    @concurrent func fetchDataConcurrent() async {
+        assert(!Thread.isMainThread)
+        print("fetchDataConcurrent: ...")
     }
 }
 
