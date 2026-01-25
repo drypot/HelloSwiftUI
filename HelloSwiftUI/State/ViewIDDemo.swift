@@ -9,8 +9,8 @@ import SwiftUI
 
 struct ViewIDDemo: View {
 
-    @State var value1 = 10
-    @State var value2 = 10
+    @State var value = 10
+    @State var id = 10
 
     var body: some View {
         Form {
@@ -20,14 +20,14 @@ struct ViewIDDemo: View {
             // SubView init 의 value 인자에 새로운 값을 전달해도 State 는 새로 만들어지지 않는다.
             // 정 새로 만들고 싶으면 뷰의 id 를 변경해야 한다.
 
-            SubView(value: value1).id(value2)
-            Button("Increase Value1") {
-                value1 += 1
-                print("value1: \(value1), value2: \(value2)")
+            SubView(value: value).id(id)
+            Button("Increase value") {
+                value += 1
+                print("value: \(value), id: \(id)")
             }
-            Button("Increase Value2") {
-                value2 += 1
-                print("value1: \(value1), value2: \(value2)")
+            Button("Increase id") {
+                id += 1
+                print("value: \(value), id: \(id)")
             }
         }
         .formStyle(.grouped)
@@ -38,10 +38,11 @@ struct ViewIDDemo: View {
 
         init(value: Int) {
             self.value = value
-            print("SubView created: \(value), \(self.value)")
+            print("SubView created: \(self.value)")
         }
 
         var body: some View {
+            let _ = Self._printChanges()
             Text("SubView: \(value)")
         }
     }
