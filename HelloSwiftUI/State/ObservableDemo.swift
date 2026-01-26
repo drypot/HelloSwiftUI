@@ -14,7 +14,8 @@ struct ObservableDemo: View {
     // 다음과 같은 구조.
     // ObservableDemo -> ParentView -> ReadOnlySubView | ReadWriteSubView
 
-    @Observable class Model {
+    @Observable
+    class Model {
         var counter = 0
 
         static let shared = Model()
@@ -35,13 +36,13 @@ struct ObservableDemo: View {
             Text("Observable Demo")
                 .font(.title)
 
-            ParentView()
+            BaseView()
                 .environment(envObject)
         }
         .formStyle(.grouped)
     }
 
-    struct ParentView: View {
+    struct BaseView: View {
         @State private var counter = 0
 
         // @Observable 저장에는 @StateObject 대신 걍 @State 를 쓴다.
@@ -69,22 +70,16 @@ struct ObservableDemo: View {
                         Text("\(object.counter)")
                     }
                 }
-                // @Environment 는 $ 프로젝션을 제공하지 않아서 Binding을 수동으로 만들어줘야 한다.
+                // $ 프로젝션을 제공받지 못하는 경우엔 Bindable을 수동으로 만들어줘야 한다.
                 LabeledContent("environment object") {
-                    let binding = Binding(
-                        get: { envObject.counter },
-                        set: { envObject.counter = $0 }
-                    )
-                    Stepper(value: binding) {
+                    @Bindable var envObject = envObject
+                    Stepper(value: $envObject.counter) {
                         Text("\(envObject.counter)")
                     }
                 }
                 LabeledContent("global object") {
-                    let binding = Binding(
-                        get: { globalObject.counter },
-                        set: { globalObject.counter = $0 }
-                    )
-                    Stepper(value: binding) {
+                    @Bindable var globalObject = globalObject
+                    Stepper(value: $globalObject.counter) {
                         Text("\(globalObject.counter)")
                     }
                 }
@@ -150,22 +145,16 @@ struct ObservableDemo: View {
                         Text("\(object.counter)")
                     }
                 }
-                // @Environment 는 $ 프로젝션을 제공하지 않아서 Binding을 수동으로 만들어줘야 한다.
+                // $ 프로젝션을 제공받지 못하는 경우엔 Bindable을 수동으로 만들어줘야 한다.
                 LabeledContent("environment object") {
-                    let binding = Binding(
-                        get: { envObject.counter },
-                        set: { envObject.counter = $0 }
-                    )
-                    Stepper(value: binding) {
+                    @Bindable var envObject = envObject
+                    Stepper(value: $envObject.counter) {
                         Text("\(envObject.counter)")
                     }
                 }
                 LabeledContent("global object") {
-                    let binding = Binding(
-                        get: { globalObject.counter },
-                        set: { globalObject.counter = $0 }
-                    )
-                    Stepper(value: binding) {
+                    @Bindable var globalObject = globalObject
+                    Stepper(value: $globalObject.counter) {
                         Text("\(globalObject.counter)")
                     }
                 }

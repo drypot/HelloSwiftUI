@@ -60,7 +60,8 @@ struct DemoNavigatorView: View {
                 Demo(label: "Observable", view: AnyView(ObservableDemo())),
                 Demo(label: "ObservableObject", view: AnyView(ObservableObjectDemo())),
                 Demo(label: "SceneObject", view: AnyView(SceneStorageDemo())),
-                Demo(label: "ViewID", view: AnyView(ViewIDDemo())),
+                Demo(label: "StateInit", view: AnyView(StateInitDemo())),
+                Demo(label: "StateInit2", view: AnyView(StateInitDemo2())),
                 Demo(label: "StateAnimation", view: AnyView(StateAnimationDemo())),
             ]
         ),
