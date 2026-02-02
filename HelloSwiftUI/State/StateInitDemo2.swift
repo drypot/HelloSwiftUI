@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Observation
 
 // https://developer.apple.com/documentation/swiftui/state
 
