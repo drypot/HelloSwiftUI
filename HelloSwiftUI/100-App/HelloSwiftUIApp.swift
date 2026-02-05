@@ -17,7 +17,6 @@ struct HelloSwiftUIApp: App {
     // Scene 의 라이프 사이클과 관계없이 계속 보존해야 하는 state 들은 App 에 정의한다.
 
     @NSApplicationDelegateAdaptor var appDelegate: AppDelegate
-    @StateObject var appState = AppState()
     @Environment(\.scenePhase) var scenePhase
 
     var body: some Scene {
@@ -106,8 +105,8 @@ struct HelloSwiftUIApp: App {
             JsonDocumentView(document: configuration.document)
         }
 
-        WindowGroup("NavigationSplitViewDemo", id: "NavigationSplitViewDemo") {
-            NavigationSplitViewDemo()
+        WindowGroup("NavigationSplitDemo", id: "NavigationSplitDemo") {
+            NavigationSplitDemo()
         }
 
         WindowGroup("SceneStorage Demo", id: "SceneStorage Demo") {

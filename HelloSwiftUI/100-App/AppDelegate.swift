@@ -14,20 +14,20 @@ import AppKit
 class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
 
     func applicationWillFinishLaunching(_ notification: Notification) {
-        print("applicationWillFinishLaunching")
-#if DEV
-        print("Compiler flag DEV defined")
-#else
-        print("Compiler flag DEV not defined")
-#endif
+//        print("applicationWillFinishLaunching")
+//#if DEV
+//        print("Compiler flag DEV defined")
+//#else
+//        print("Compiler flag DEV not defined")
+//#endif
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        print("applicationDidFinishLaunching")
+//        print("applicationDidFinishLaunching")
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        print("applicationWillTerminate")
+//        print("applicationWillTerminate")
     }
 
 //    func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
