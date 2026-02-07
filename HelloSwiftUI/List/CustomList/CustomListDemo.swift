@@ -12,12 +12,12 @@ import SwiftUI
 
 struct CustomListDemo: View {
 
-    struct Part: Identifiable, Hashable, IDHashable {
+    struct Part: Identifiable, Hashable {
         let id = UUID()
         let name: String
     }
 
-    struct Product: Identifiable, Hashable, IDHashable {
+    struct Product: Identifiable, Hashable {
         let id = UUID()
         let name: String
         let parts: [Part]

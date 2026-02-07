@@ -12,7 +12,7 @@ import SwiftUI
 
 struct ForEachDemo: View {
 
-    struct Item: Identifiable, Hashable, IDHashable {
+    struct Item: Identifiable, Hashable {
         let id = UUID()
         let name: String
     }

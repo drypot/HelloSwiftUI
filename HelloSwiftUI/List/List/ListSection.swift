@@ -9,12 +9,12 @@ import SwiftUI
 
 struct ListSection: View {
 
-    struct Sea: Identifiable, Hashable, IDHashable {
+    struct Sea: Identifiable, Hashable {
         let id = UUID()
         let name: String
     }
 
-    struct Ocean: Identifiable, Hashable, IDHashable {
+    struct Ocean: Identifiable, Hashable {
         let id = UUID()
         let name: String
         let seas: [Sea]

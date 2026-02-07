@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ListHierarchical: View {
 
-    struct FileItem: Identifiable, Hashable, IDHashable, CustomStringConvertible {
+    struct FileItem: Identifiable, Hashable, CustomStringConvertible {
         var id = UUID()
         var name: String
         var children: [FileItem]? = nil

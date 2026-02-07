@@ -59,7 +59,7 @@ struct NavigationSplitByAnyTypeIDDemo: View {
 
     // Box
 
-    struct Box: IDHashable {
+    struct Box: Identifiable, Hashable {
         let id: String
 
         var name: String {
