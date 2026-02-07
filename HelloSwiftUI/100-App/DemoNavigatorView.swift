@@ -125,7 +125,7 @@ struct DemoNavigatorView: View {
         DemoSection(
             label: "Navigation",
             demos: [
-                Demo(label: "NavigationSplitView", view: AnyView(NavigationSplitViewDemoPlaceholder())),
+                Demo(label: "NavigationSplitView", view: AnyView(NavigationSplitDemoLauncher())),
                 Demo(label: "TabView", view: AnyView(TabViewDemo())),
             ]
         ),

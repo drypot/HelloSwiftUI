@@ -105,8 +105,24 @@ struct HelloSwiftUIApp: App {
             JsonDocumentView(document: configuration.document)
         }
 
-        WindowGroup("NavigationSplitDemo", id: "NavigationSplitDemo") {
-            NavigationSplitDemo()
+        WindowGroup("NavigationSplit Demo", id: "NavigationSplit by ID Demo") {
+            NavigationSplitByIDDemo()
+        }
+
+        WindowGroup("NavigationSplit Demo", id: "NavigationSplit by Value Demo") {
+            NavigationSplitByValueDemo()
+        }
+
+        WindowGroup("NavigationSplit Demo", id: "NavigationSplit by Block Demo") {
+            NavigationSplitByBlockDemo()
+        }
+
+        WindowGroup("NavigationSplit Demo", id: "NavigationSplit by AnyTypeID Demo") {
+            NavigationSplitByAnyTypeIDDemo()
+        }
+
+        WindowGroup("NavigationSplit Demo", id: "NavigationSplit by AnyTypeValue Demo") {
+            NavigationSplitByAnyTypeValueDemo()
         }
 
         WindowGroup("SceneStorage Demo", id: "SceneStorage Demo") {
