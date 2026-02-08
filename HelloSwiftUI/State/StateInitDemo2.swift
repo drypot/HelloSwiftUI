@@ -29,7 +29,7 @@ struct StateInitDemo2: View {
     @State private var counter = 0
 
     init() {
-        print("StateInitDemo2 created")
+        //print("StateInitDemo2 created")
     }
 
     var body: some View {

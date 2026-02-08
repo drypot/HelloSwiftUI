@@ -31,7 +31,7 @@ struct HelloSwiftUIApp: App {
             CustomCommands()
         }
         .onChange(of: scenePhase) { oldScenePhase, newScenePhase in
-            print("scenePhase: \(scenePhase)")
+            //print("scenePhase: \(scenePhase)")
         }
 
         #if os(macOS)

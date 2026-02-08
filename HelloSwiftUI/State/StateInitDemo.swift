@@ -33,7 +33,7 @@ struct StateInitDemo: View {
     @State var id = 10
 
     init() {
-        print("Demo init.")
+        //print("StateInitDemo init.")
     }
 
     var body: some View {
