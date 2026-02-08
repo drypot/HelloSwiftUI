@@ -9,43 +9,41 @@ import SwiftUI
 
 // https://developer.apple.com/documentation/swiftui/state
 
-struct ObservableDemo: View {
+struct ObservableGlobalDemo: View {
 
     @Observable
     class Model {
         var counter = 0
+
+        static let shared = Model()
     }
 
-    // @Observable에는 @StateObject 대신 @State 를 쓴다.
-    @State private var model = Model()
+    private var model = Model.shared
 
     var body: some View {
         VStack(alignment: .leading, spacing: 32) {
-            Text("Observable Demo")
+            Text("Observable Global Demo")
                 .font(.title)
 
             VStack(alignment: .leading, spacing: 8) {
                 Text("Demo")
                     .font(.title2)
                 Text("counter: \(model.counter)")
-                Button("Increase counter") {
-                    model.counter += 1
-                }
-                Stepper(value: $model.counter) {
-                    Text("Stepper")
+                HStack {
+                    Button("Increase counter") {
+                        model.counter += 1
+                    }
                 }
             }
 
-            // @Bindable 에 넘길 때 $ 붙이지 않는다..
-            EditView(model: model, bindableModel: model)
+            EditView()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .padding(32)
     }
 
     struct EditView: View {
-        let model: Model
-        @Bindable var bindableModel: Model
+        private var model = Model.shared
 
         var body: some View {
             VStack(alignment: .leading, spacing: 8) {
@@ -55,8 +53,12 @@ struct ObservableDemo: View {
                 Button("Increase counter") {
                     model.counter += 1
                 }
-                Stepper(value: $bindableModel.counter) {
-                    Text("Stepper")
+                do {
+                    // 일반 오브젝트는 @Bindable을 수동으로 만들어줘야 한다.
+                    @Bindable var model = model
+                    Stepper(value: $model.counter) {
+                        Text("Stepper")
+                    }
                 }
             }
         }
@@ -65,5 +67,5 @@ struct ObservableDemo: View {
 }
 
 #Preview {
-    ObservableDemo()
+    ObservableGlobalDemo()
 }

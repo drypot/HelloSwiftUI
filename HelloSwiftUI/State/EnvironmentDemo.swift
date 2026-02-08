@@ -1,51 +1,46 @@
 //
-//  ObservableDemo.swift
+//  EnviromentDemo.swift
 //  HelloSwiftUI
 //
-//  Created by Kyuhyun Park on 11/17/24.
+//  Created by Kyuhyun Park on 12/3/24.
 //
 
 import SwiftUI
 
-// https://developer.apple.com/documentation/swiftui/state
-
-struct ObservableDemo: View {
+struct EnvironmentDemo: View {
 
     @Observable
     class Model {
         var counter = 0
     }
 
-    // @Observable에는 @StateObject 대신 @State 를 쓴다.
     @State private var model = Model()
 
     var body: some View {
         VStack(alignment: .leading, spacing: 32) {
-            Text("Observable Demo")
+            Text("Enviroment Demo")
                 .font(.title)
 
             VStack(alignment: .leading, spacing: 8) {
                 Text("Demo")
                     .font(.title2)
                 Text("counter: \(model.counter)")
-                Button("Increase counter") {
-                    model.counter += 1
-                }
-                Stepper(value: $model.counter) {
-                    Text("Stepper")
+                HStack {
+                    Button("Increase counter") {
+                        model.counter += 1
+                    }
                 }
             }
 
-            // @Bindable 에 넘길 때 $ 붙이지 않는다..
-            EditView(model: model, bindableModel: model)
+            EditView()
+                .environment(model)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .padding(32)
     }
 
     struct EditView: View {
-        let model: Model
-        @Bindable var bindableModel: Model
+        @Environment(Model.self) private var model
 
         var body: some View {
             VStack(alignment: .leading, spacing: 8) {
@@ -55,8 +50,13 @@ struct ObservableDemo: View {
                 Button("Increase counter") {
                     model.counter += 1
                 }
-                Stepper(value: $bindableModel.counter) {
-                    Text("Stepper")
+                do {
+                    // @Environment 로 받은 변수는 $ 프로젝션을 제공하지 않는다.
+                    // @Bindable을 수동으로 만들어줘야 한다.
+                    @Bindable var model = model
+                    Stepper(value: $model.counter) {
+                        Text("Stepper")
+                    }
                 }
             }
         }
@@ -65,5 +65,5 @@ struct ObservableDemo: View {
 }
 
 #Preview {
-    ObservableDemo()
+    EnvironmentDemo()
 }

@@ -39,30 +39,25 @@ struct DemoNavigatorView: View {
             ]
         ),
         DemoSection(
+            label: "State",
+            demos: [
+                Demo(label: "State", view: AnyView(StateDemo())),
+                Demo(label: "StateViewID", view: AnyView(StateViewIDDemo())),
+                Demo(label: "StateToggle", view: AnyView(StateToggleDemo())),
+                Demo(label: "StateAnimation", view: AnyView(StateAnimationDemo())),
+                Demo(label: "Observable", view: AnyView(ObservableDemo())),
+                Demo(label: "Observable Global", view: AnyView(ObservableGlobalDemo())),
+                Demo(label: "Environment", view: AnyView(EnvironmentDemo())),
+                Demo(label: "SceneStorage", view: AnyView(SceneStorageDemo())),
+                Demo(label: "ObservableObject", view: AnyView(ObservableObjectDemo())),
+            ]
+        ),
+
+        DemoSection(
             label: "Image",
             demos: [
                 Demo(label: "Image", view: AnyView(ImageDemo())),
                 Demo(label: "DismissButton", view: AnyView(DismissButtonDemo())),
-            ]
-        ),
-        DemoSection(
-            label: "Scene",
-            demos: [
-                Demo(label: "Window", view: AnyView(WindowDemo())),
-                Demo(label: "WindowGroup", view: AnyView(WindowGroupDemo())),
-                Demo(label: "DocumentGroup", view: AnyView(DocumentGroupDemo())),
-            ]
-        ),
-        DemoSection(
-            label: "State",
-            demos: [
-                Demo(label: "StateLifecycle", view: AnyView(StateLifecycleDemo())),
-                Demo(label: "Observable", view: AnyView(ObservableDemo())),
-                Demo(label: "ObservableObject", view: AnyView(ObservableObjectDemo())),
-                Demo(label: "SceneObject", view: AnyView(SceneStorageDemo())),
-                Demo(label: "StateInit", view: AnyView(StateInitDemo())),
-                Demo(label: "StateInit2", view: AnyView(StateInitDemo2())),
-                Demo(label: "StateAnimation", view: AnyView(StateAnimationDemo())),
             ]
         ),
         DemoSection(
@@ -154,6 +149,14 @@ struct DemoNavigatorView: View {
             demos: [
                 Demo(label: "Callback", view: AnyView(CallbackDemo())),
                 Demo(label: "Task", view: AnyView(TaskDemo())),
+            ]
+        ),
+        DemoSection(
+            label: "Scene",
+            demos: [
+                Demo(label: "Window", view: AnyView(WindowDemo())),
+                Demo(label: "WindowGroup", view: AnyView(WindowGroupDemo())),
+                Demo(label: "DocumentGroup", view: AnyView(DocumentGroupDemo())),
             ]
         ),
         DemoSection(

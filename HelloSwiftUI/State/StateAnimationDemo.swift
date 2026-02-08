@@ -13,9 +13,7 @@ struct StateAnimationDemo: View {
 
     var body: some View {
         Button("Toggle") {
-
             // withAnimation 안에서 변경되는 값에 영향받는 모든 View 변화가 애니메이션 된다.
-
             withAnimation(.easeInOut(duration: 1)) {
                 isPlaying.toggle()
             }
