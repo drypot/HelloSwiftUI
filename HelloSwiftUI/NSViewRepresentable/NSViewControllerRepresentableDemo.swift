@@ -38,18 +38,33 @@ fileprivate struct CustomTextView: NSViewControllerRepresentable {
     @Binding var message: String
 
     func makeNSViewController(context: Context) -> Controller {
-        return Controller(host: self)
+
+        // context 는 environmentValues 나 coordinator 를 받기 위해 필요하다.
+
+        // NSViewRepresentable 은 struct 다.
+        // AppKit 에서 콜할 수 없다.
+
+        // AppKit 에서 보내는 이벤트는 모두 Coordinator 에서 받는다.
+        // Coordinator 는 class 다.
+
+        // 여기서는 Controller 를 내가 만들어서 간편하게 coordinator 를 바로 넘겨 데모를 만들었는데,
+        // Controller 를 내가 손댈 수 없는 경우는 controller 의 delegate 등에 연결해야 한다.
+        // 사용할 Controller 에 따라 임기응변으로 대응한다;
+
+        return Controller(context.coordinator)
     }
 
+    // SwiftUI -> AppKit
     func updateNSViewController(_ controller: Controller, context: Context) {
-        controller.updateViews(host: self)
+        controller.updateTextView(message)
     }
 
     class Controller: NSViewController, NSTextViewDelegate {
-        let host: CustomTextView
 
-        init(host: CustomTextView) {
-            self.host = host
+        var coordinator: Coordinator
+
+        init(_ coordinator: Coordinator) {
+            self.coordinator = coordinator
             super.init(nibName: nil, bundle: nil)
         }
 
@@ -64,7 +79,7 @@ fileprivate struct CustomTextView: NSViewControllerRepresentable {
             let textView = NSTextView()
             textView.font = .preferredFont(forTextStyle: .title3)
             textView.translatesAutoresizingMaskIntoConstraints = false
-            textView.delegate = self // Coordinator 없이 컨트롤러 스스로 이벤트를 핸들링
+            textView.delegate = coordinator // ***
 
             view.addSubview(textView)
 
@@ -78,34 +93,30 @@ fileprivate struct CustomTextView: NSViewControllerRepresentable {
             self.view = view
         }
 
-        // SwiftUI 데이터를 AppKit 데이터로.
-        func updateViews(host: CustomTextView) {
-
-            // controller 초기화할 때 받아두었던 host 에는 당시 value 들이 저장되어 있다.
-            // 업데이트된 value 들을 사용하려면 host 를 새로 받아야 한다.
-
+        func updateTextView(_ message: String) {
             guard let textView = self.view.subviews.first as? NSTextView else { fatalError() }
-            textView.string = host.message
+            textView.string = message
         }
 
-        // AppKit View 데이터를 SwiftUI 에 업데이트.
-        func textDidChange(_ notification: Notification) {
-            guard let textView = notification.object as? NSTextView else { return }
-            host.message = textView.string
-        }
     }
 
-//    func makeCoordinator() -> Coordinator {
-//        Coordinator(host: self)
-//    }
-//
-//    class Coordinator: NSObject {
-//        var host: CustomTextView
-//
-//        init(host: CustomTextView) {
-//            self.host = host
-//        }
-//    }
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+
+    // AppKit -> SwiftUI
+    class Coordinator: NSObject, NSTextViewDelegate {
+        var parent: CustomTextView
+
+        init(_ parent: CustomTextView) {
+            self.parent = parent
+        }
+
+        func textDidChange(_ notification: Notification) {
+            guard let textView = notification.object as? NSTextView else { return }
+            parent.message = textView.string
+        }
+    }
     
 }
 
