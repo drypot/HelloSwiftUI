@@ -16,7 +16,7 @@ struct ObservableDemo: View {
         var counter = 0
     }
 
-    // @Observable에는 @StateObject 대신 @State 를 쓴다.
+    // @Observable에는 @State 를 쓴다. @StateObject 아니다.
     @State private var model = Model()
 
     var body: some View {
@@ -36,7 +36,8 @@ struct ObservableDemo: View {
                 }
             }
 
-            // @Bindable 에 넘길 때 $ 붙이지 않는다..
+            // 1. Subview 에 @Bindable 없이 그냥 넘겨도 Subview 에서 업데이트할 수 있다.
+            // 2. @Bindable 에 넘길 때도 그냥 넘긴다. $ 붙이지 않는다.
             EditView(model: model, bindableModel: model)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
