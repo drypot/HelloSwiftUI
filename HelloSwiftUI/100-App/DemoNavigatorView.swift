@@ -23,19 +23,19 @@ struct DemoNavigatorView: View {
 
     static let demoSections = [
         DemoSection(
+            label: "Text",
+            demos: [
+                Demo(label: "font", view: AnyView(FontDemo())),
+                Demo(label: "fontWeight", view: AnyView(FontWeightDemo())),
+                Demo(label: "ShapeStyle", view: AnyView(ShapeStyleForTextDemo())),
+                Demo(label: "NSColor", view: AnyView(NSColorForTextDemo())),
+            ]
+        ),
+        DemoSection(
             label: "View",
             demos: [
                 Demo(label: "View", view: AnyView(ViewDemo())),
                 Demo(label: "Color", view: AnyView(ColorDemo())),
-                Demo(label: "Background", view: AnyView(BackgroundDemo())),
-            ]
-        ),
-        DemoSection(
-            label: "Text",
-            demos: [
-                Demo(label: "Font", view: AnyView(FontDemo())),
-                Demo(label: "FontWeight", view: AnyView(FontWeightDemo())),
-                Demo(label: "ForegroundStyle", view: AnyView(ForegroundStyleDemo())),
             ]
         ),
         DemoSection(

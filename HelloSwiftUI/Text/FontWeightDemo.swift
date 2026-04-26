@@ -10,7 +10,18 @@ import SwiftUI
 struct FontWeightDemo: View {
 
     var body: some View {
-        VStack(spacing: 18) {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 48) {
+                fontWeightList
+            }
+            .font(.title)
+            .padding(32)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        }
+    }
+
+    var fontWeightList: some View {
+        VStack(alignment: .leading, spacing: 8) {
             Text("fontWeight(...)")
             Text("black")
                 .fontWeight(.black)
@@ -31,7 +42,6 @@ struct FontWeightDemo: View {
             Text("ultraLight")
                 .fontWeight(.ultraLight)
         }
-        .font(.title)
     }
 }
 

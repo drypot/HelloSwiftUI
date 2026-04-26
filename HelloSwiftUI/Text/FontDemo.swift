@@ -9,7 +9,18 @@ import SwiftUI
 
 struct FontDemo: View {
     var body: some View {
-        VStack(spacing: 18) {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 48) {
+                fontList
+            }
+//            .font(.title)
+            .padding(32)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        }
+    }
+
+    var fontList: some View {
+        VStack(alignment: .leading, spacing: 8) {
             Text("font(...)")
                 .font(.title)
             Text("system 32 bold default")
@@ -31,6 +42,7 @@ struct FontDemo: View {
             Text("callout")
                 .font(.callout)
         }
+
     }
 }
 
