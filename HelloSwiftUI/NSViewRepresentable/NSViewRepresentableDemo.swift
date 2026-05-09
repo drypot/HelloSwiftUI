@@ -37,15 +37,16 @@ fileprivate struct CustomTextView: NSViewRepresentable {
 
     @Binding var message: String
 
-    func makeNSView(context: Context) -> NSView {
+    func makeCoordinator() -> Coordinator {
+        print("makeCoordinator: CustomTextView")
+        return Coordinator(self)
+    }
 
+    func makeNSView(context: Context) -> NSView {
         // context 는 environmentValues 나 coordinator 를 받기 위해 필요하다.
 
-        // NSViewRepresentable 은 struct 다.
-        // AppKit 에서 콜할 수 없다.
-
-        // AppKit 에서 보내는 이벤트는 모두 Coordinator 에서 받는다.
-        // Coordinator 는 class 다.
+        // NSViewRepresentable 은 struct 라 AppKit 에서 콜할 수 없다.
+        // AppKit 에서 보내는 이벤트는 모두 Coordinator class 에서 받는다.
 
         let view = NSView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -64,6 +65,7 @@ fileprivate struct CustomTextView: NSViewRepresentable {
             textView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
 
+        print("makeNSView: CustomTextView")
         return view
     }
 
@@ -72,10 +74,7 @@ fileprivate struct CustomTextView: NSViewRepresentable {
     func updateNSView(_ nsView: NSView, context: Context) {
         guard let textView = nsView.subviews.first as? NSTextView else { fatalError() }
         textView.string = message
-    }
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
+        print("updateNSView: CustomTextView")
     }
 
     class Coordinator: NSObject, NSTextViewDelegate {
@@ -88,6 +87,7 @@ fileprivate struct CustomTextView: NSViewRepresentable {
         func textDidChange(_ notification: Notification) {
             guard let textView = notification.object as? NSTextView else { return }
             parent.message = textView.string
+            print("textDidChange: Coordinator")
         }
     }
 
