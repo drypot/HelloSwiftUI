@@ -46,6 +46,7 @@ struct DemoNavigatorView: View {
                 Demo(label: "StateToggle", view: AnyView(StateToggleDemo())),
                 Demo(label: "StateAnimation", view: AnyView(StateAnimationDemo())),
                 Demo(label: "Observable", view: AnyView(ObservableDemo())),
+                Demo(label: "Observable HasError", view: AnyView(ObservableHasErrorDemo())),
                 Demo(label: "Observable Global", view: AnyView(ObservableGlobalDemo())),
                 Demo(label: "Environment", view: AnyView(EnvironmentDemo())),
                 Demo(label: "SceneStorage", view: AnyView(SceneStorageDemo())),
