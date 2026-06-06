@@ -1,8 +1,8 @@
 //
-//  ObservableDemo.swift
+//  ObservableHasErrorDemo.swift
 //  HelloSwiftUI
 //
-//  Created by Kyuhyun Park on 11/17/24.
+//  Created by Kyuhyun Park on 5/9/26.
 //
 
 import SwiftUI
